@@ -33,5 +33,6 @@ https://www.cnblogs.com/SunshineKimi/p/14140900.html
 ### 常见问题
 
 多对多的查询可通过related_name别名查询
+join查询
 
 

@@ -9,7 +9,8 @@ from myapp.serializers import CommentSerializer
 @api_view(['GET'])
 def list_api(request):
     if request.method == 'GET':
-        comments = Comment.objects.all()
+        comments = Comment.objects.select_related("book").all().order_by('-comment_time')
+        print(comments)
         serializer = CommentSerializer(comments, many=True)
         return APIResponse(code=0, msg='查询成功', data=serializer.data)
 
@@ -21,6 +22,8 @@ def create(request):
     if serializer.is_valid():
         serializer.save()
         return APIResponse(code=0, msg='创建成功', data=serializer.data)
+    else:
+        print(serializer.errors)
 
     return APIResponse(code=1, msg='创建失败')
 

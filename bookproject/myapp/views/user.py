@@ -10,7 +10,8 @@ from myapp.serializers import UserSerializer
 @api_view(['GET'])
 def list_api(request):
     if request.method == 'GET':
-        users = User.objects.all()
+        keyword = request.GET.get("keyword", '')
+        users = User.objects.filter(username__contains=keyword).order_by('-create_time')
         serializer = UserSerializer(users, many=True)
         return APIResponse(code=0, msg='查询成功', data=serializer.data)
 
@@ -30,6 +31,8 @@ def create(request):
     if serializer.is_valid():
         serializer.save()
         return APIResponse(code=0, msg='创建成功', data=serializer.data)
+    else:
+        print(serializer.errors)
 
     return APIResponse(code=1, msg='创建失败')
 

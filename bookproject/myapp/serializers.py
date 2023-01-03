@@ -22,12 +22,16 @@ class TagSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    create_time = serializers.DateTimeField(format='%Y-%m-%d %H:%M:%S', required=False)
+
     class Meta:
         model = User
         fields = '__all__'
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    comment_time = serializers.DateTimeField(format='%Y-%m-%d %H:%M:%S', required=False)
+
     class Meta:
         model = Comment
         fields = '__all__'

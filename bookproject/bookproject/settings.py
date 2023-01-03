@@ -124,6 +124,10 @@ USE_L10N = True
 
 USE_TZ = False
 
+# 日期时间格式
+DATE_FORMAT = 'Y-m-d'
+DATETIME_FORMAT = 'Y-m-d H:i:s'
+
 # 上传文件路径
 # 并在urls.py配置+static
 MEDIA_ROOT = os.path.join(BASE_DIR, 'upload/')
