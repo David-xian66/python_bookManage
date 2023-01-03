@@ -44,6 +44,11 @@ const constantRouterMap = [
     component: () => import('@/views/exception/500')
   },
   {
+    path: '/login2',
+    name: 'login2',
+    component: () => import('@/views/admin/login2')
+  },
+  {
     path: '/admin',
     name: 'admin',
     redirect: '/admin/overview',
