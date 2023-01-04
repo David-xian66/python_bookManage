@@ -34,5 +34,7 @@ https://www.cnblogs.com/SunshineKimi/p/14140900.html
 
 多对多的查询可通过related_name别名查询
 join查询
+ForeignKey的时候字段会自动加_id后缀
+学习SerializerMethodField
 
 

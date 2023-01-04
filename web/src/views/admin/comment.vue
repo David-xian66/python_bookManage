@@ -47,6 +47,16 @@ const columns = [
     width: 60
   },
   {
+    title: '用户',
+    dataIndex: 'username',
+    key: 'username'
+  },
+  {
+    title: '书名',
+    dataIndex: 'title',
+    key: 'title'
+  },
+  {
     title: '评论内容',
     dataIndex: 'content',
     key: 'content'

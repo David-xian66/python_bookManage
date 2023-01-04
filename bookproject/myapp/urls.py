@@ -3,6 +3,7 @@ from myapp import views
 
 app_name = 'myapp'
 urlpatterns = [
+    path('overview/count', views.overview.count),
     path('book/list', views.book.list_api),
     path('book/detail', views.book.detail),
     path('book/create', views.book.create),

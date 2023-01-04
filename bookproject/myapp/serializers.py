@@ -31,10 +31,13 @@ class UserSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     comment_time = serializers.DateTimeField(format='%Y-%m-%d %H:%M:%S', required=False)
+    # 额外字段
+    title = serializers.ReadOnlyField(source='book.title')
+    username = serializers.ReadOnlyField(source='user.username')
 
     class Meta:
         model = Comment
-        fields = '__all__'
+        fields = ['id', 'content', 'comment_time', 'book', 'user', 'title', 'username']
 
 
 class RecordSerializer(serializers.ModelSerializer):
