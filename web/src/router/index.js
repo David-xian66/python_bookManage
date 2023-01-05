@@ -75,9 +75,19 @@ const constantRouterMap = [
         component: () => import('@/views/admin/tag')
       },
       {
+        path: 'loginLog',
+        name: 'loginLog',
+        component: () => import('@/views/admin/login-log')
+      },
+      {
         path: 'comment',
         name: 'comment',
         component: () => import('@/views/admin/comment')
+      },
+      {
+        path: 'role',
+        name: 'role',
+        component: () => import('@/views/admin/role')
       },
       {
         path: 'user',

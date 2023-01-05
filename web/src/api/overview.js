@@ -4,7 +4,7 @@
 import axios from '@/utils/request.js'
 
 const api = {
-  listApi: 'https://fanyi.baidu.com/pcnewcollection'
+  listApi: '/myapp/overview/count'
 }
 
 /**

@@ -9,7 +9,7 @@
     >
       <template v-for="item in menuData">
         <a-menu-item v-if="!item.children" :key="item.key">
-          <a-icon type="pie-chart" />
+          <a-icon type="appstore" />
           <span>{{ item.title }}</span>
         </a-menu-item>
         <sub-menu v-else :key="item.key" :menu-info="item" />
@@ -27,11 +27,11 @@ const SubMenu = {
   template: `
       <a-sub-menu :key="menuInfo.key" v-bind="$props" v-on="$listeners">
         <span slot="title">
-          <a-icon type="mail" /><span>{{ menuInfo.title }}</span>
+          <a-icon type="folder" /><span>{{ menuInfo.title }}</span>
         </span>
         <template v-for="item in menuInfo.children">
           <a-menu-item v-if="!item.children" :key="item.key">
-            <a-icon type="pie-chart" />
+            <a-icon type="appstore" />
             <span>{{ item.title }}</span>
           </a-menu-item>
           <sub-menu v-else :key="item.key" :menu-info="item" />
@@ -79,20 +79,20 @@ export default {
           title: '评论管理'
         },
         {
-          key: '/admin/user',
-          title: '用户管理'
-        },
-        {
-          key: '3',
-          title: 'Navigation 3',
+          key: '',
+          title: '系统管理',
           children: [
             {
-              key: '3.1',
-              title: 'Navigation 3.1'
+              key: '/admin/user',
+              title: '用户管理'
             },
             {
-              key: '3.2',
-              title: 'Navigation 3.2'
+              key: '/admin/role',
+              title: '角色管理'
+            },
+            {
+              key: '/admin/loginLog',
+              title: '登录日志'
             }
           ]
         }

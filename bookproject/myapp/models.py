@@ -1,6 +1,16 @@
 from django.db import models
 
 
+class Role(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    title = models.CharField(max_length=100, blank=True, null=True)
+    remark = models.CharField(max_length=100, blank=True, null=True)
+    create_time = models.DateTimeField(auto_now_add=True, null=True)
+
+    class Meta:
+        db_table = "b_role"
+
+
 class User(models.Model):
     GENDER_CHOICES = (
         ('M', '男'),
@@ -17,7 +27,7 @@ class User(models.Model):
     id = models.BigAutoField(primary_key=True)
     username = models.CharField(max_length=50, null=True)
     password = models.CharField(max_length=50, null=True)
-    role = models.CharField(max_length=1, choices=ROLE_CHOICES, default='1')
+    role = models.ForeignKey(Role, on_delete=models.SET_NULL, blank=True, null=True, related_name='role_user')
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='0')
     nickname = models.CharField(blank=True, null=True, max_length=20)
     avatar = models.FileField(upload_to='avatar/', null=True)
@@ -59,7 +69,8 @@ class Book(models.Model):
         ('1', '下架'),
     )
     id = models.BigAutoField(primary_key=True)
-    classification = models.ForeignKey(Classification, on_delete=models.CASCADE, blank=True, null=True, related_name='classification_book')
+    classification = models.ForeignKey(Classification, on_delete=models.CASCADE, blank=True, null=True,
+                                       related_name='classification_book')
     tag = models.ManyToManyField(Tag, blank=True)
     title = models.CharField(max_length=100, blank=True, null=True)
     original_title = models.CharField(max_length=100, blank=True, null=True)
@@ -101,8 +112,19 @@ class Record(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='user_record')
     book = models.ForeignKey(Book, on_delete=models.CASCADE, null=True, related_name='book_record')
     title = models.CharField(max_length=100, blank=True, null=True)
-    classification = models.ForeignKey(Classification, on_delete=models.CASCADE, null=True, related_name='classification')
+    classification = models.ForeignKey(Classification, on_delete=models.CASCADE, null=True,
+                                       related_name='classification')
     record_time = models.DateTimeField(auto_now_add=True, null=True)
 
     class Meta:
         db_table = "b_record"
+
+
+class LoginLog(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='user_login_log')
+    ip = models.CharField(max_length=100, blank=True, null=True)
+    log_time = models.DateTimeField(auto_now_add=True, null=True)
+
+    class Meta:
+        db_table = "b_login_log"

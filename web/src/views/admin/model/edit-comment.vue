@@ -29,14 +29,6 @@ import {createApi, updateApi} from '@/api/comment'
 export default {
   name: 'EditComment',
   props: {
-    // modifyFlag: {
-    //   type: Boolean,
-    //   default: () => false
-    // },
-    // comment: {
-    //   type: Object,
-    //   default: () => {}
-    // }
   },
   data () {
     return {

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from myapp.models import Book, Classification, Tag, User, Comment, Record
+from myapp.models import Book, Classification, Tag, User, Comment, Record, LoginLog, Role
 
 
 class BookSerializer(serializers.ModelSerializer):
@@ -18,6 +18,14 @@ class ClassificationSerializer(serializers.ModelSerializer):
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
+        fields = '__all__'
+
+
+class RoleSerializer(serializers.ModelSerializer):
+    create_time = serializers.DateTimeField(format='%Y-%m-%d %H:%M:%S', required=False)
+
+    class Meta:
+        model = Role
         fields = '__all__'
 
 
@@ -43,4 +51,13 @@ class CommentSerializer(serializers.ModelSerializer):
 class RecordSerializer(serializers.ModelSerializer):
     class Meta:
         model = Record
+        fields = '__all__'
+
+
+class LoginLogSerializer(serializers.ModelSerializer):
+    log_time = serializers.DateTimeField(format='%Y-%m-%d %H:%M:%S', required=False)
+    username = serializers.ReadOnlyField(source='user.username')
+
+    class Meta:
+        model = LoginLog
         fields = '__all__'
