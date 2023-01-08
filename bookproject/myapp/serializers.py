@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from myapp.models import Book, Classification, Tag, User, Comment, Record, LoginLog, Role
+from myapp.models import Book, Classification, Tag, User, Comment, Record, LoginLog, Role, Borrow, BorrowLog
 
 
 class BookSerializer(serializers.ModelSerializer):
@@ -60,4 +60,23 @@ class LoginLogSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = LoginLog
+        fields = '__all__'
+
+
+class BorrowSerializer(serializers.ModelSerializer):
+    borrow_time = serializers.DateTimeField(format='%Y-%m-%d %H:%M:%S', required=False)
+    expect_time = serializers.DateTimeField(format='%Y-%m-%d %H:%M:%S', required=False)
+    return_time = serializers.DateTimeField(format='%Y-%m-%d %H:%M:%S', required=False)
+    # extra
+    username = serializers.ReadOnlyField(source='user.username')
+    title = serializers.ReadOnlyField(source='book.title')
+
+    class Meta:
+        model = Borrow
+        fields = '__all__'
+
+
+class BorrowLogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BorrowLog
         fields = '__all__'

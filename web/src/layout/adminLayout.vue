@@ -46,8 +46,7 @@ export default {
 }
 
 #components-layout-demo-custom-trigger .logo {
-  height: 32px;
-  background: rgba(255, 255, 255, 0.2);
+  height: 8px;
   margin: 16px;
 }
 </style>

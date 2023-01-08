@@ -79,7 +79,21 @@ export default {
           title: '评论管理'
         },
         {
-          key: '',
+          key: '/admin/borrow',
+          title: '借阅管理',
+          children: [
+            {
+              key: '/admin/borrow',
+              title: '借阅管理'
+            },
+            {
+              key: '/admin/borrowLog',
+              title: '借阅日志'
+            }
+          ]
+        },
+        {
+          key: '/admin/user',
           title: '系统管理',
           children: [
             {

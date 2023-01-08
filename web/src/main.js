@@ -11,6 +11,10 @@ import bootstrap from './core/bootstrap'
 import Dialog from '@/components/Dialog'
 import './permission'
 import './style/index.less' // 全局样式
+import moment from 'moment'
+import 'moment/locale/zh-cn'
+moment.locale('zh-cn')
+Vue.prototype.$moment = moment
 
 Vue.config.productionTip = true
 Vue.use(Antd)

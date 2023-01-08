@@ -52,7 +52,7 @@ const constantRouterMap = [
     path: '/admin',
     name: 'admin',
     redirect: '/admin/overview',
-    component: () => import('@/layout/basicLayout'),
+    component: () => import('@/layout/adminLayout'),
     children: [
       {
         path: 'overview',
@@ -88,6 +88,11 @@ const constantRouterMap = [
         path: 'role',
         name: 'role',
         component: () => import('@/views/admin/role')
+      },
+      {
+        path: 'borrow',
+        name: 'borrow',
+        component: () => import('@/views/admin/borrow')
       },
       {
         path: 'user',

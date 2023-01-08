@@ -87,7 +87,7 @@
       </a-col>
       <a-col span="12">
         <a-form-model-item label="出版日期">
-          <a-input placeholder="请输入" v-model="form.pub_date"></a-input>
+          <a-date-picker style="width:100%;" placeholder="请输入" v-model="form.pub_date"/>
         </a-form-model-item>
       </a-col>
       <a-col span="12">
@@ -196,9 +196,6 @@ export default {
         formData.append('isbn', this.form.isbn || '')
         formData.append('price', this.form.price || '')
         formData.append('press', this.form.press || '')
-        if (this.form.pub_date) {
-          formData.append('pub_date', this.form.pub_date)
-        }
         if (this.form.layout) {
           formData.append('layout', this.form.layout)
         }
@@ -210,6 +207,9 @@ export default {
         }
         if (this.form.status) {
           formData.append('status', this.form.status)
+        }
+        if (this.form.pub_date) {
+          formData.append('pub_date', this.$moment(this.form.pub_date).format('YYYY-MM-DD'))
         }
         this.$refs.myform.validate(valid => {
           if (valid) {

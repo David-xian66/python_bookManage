@@ -22,8 +22,9 @@
       <a-col span="24">
         <a-form-model-item label="角色" prop="role">
           <a-select placeholder="请选择" allowClear v-model="form.role">
-            <a-select-option key="0" value="0">管理员</a-select-option>
-            <a-select-option key="1" value="1">普通用户</a-select-option>
+            <template v-for="item in roleData">
+              <a-select-option :key="item.id" :value="item.id">{{item.title}}</a-select-option>
+            </template>
           </a-select>
         </a-form-model-item>
       </a-col>
@@ -51,6 +52,7 @@
 
 <script>
 import {createApi, updateApi} from '@/api/user'
+import {listApi as listRoleData} from '@/api/role'
 
 export default {
   name: 'EditUser',
@@ -66,7 +68,9 @@ export default {
   },
   data () {
     return {
+      roleData: [],
       form: {
+        role: undefined
       },
       rules: {
         username: [{ required: true, message: '请输入用户名', trigger: 'change' }],
@@ -76,8 +80,14 @@ export default {
   },
   created () {
     if (this.modifyFlag) {
-      this.form = this.user
+      console.log(this.user)
+      for (const key in this.user) {
+        if (this.user[key]) {
+          this.form[key] = this.user[key]
+        }
+      }
     }
+    this.getRoleData()
   },
   methods: {
     onOk () {
@@ -111,7 +121,9 @@ export default {
       })
     },
     getRoleData () {
-      // todo ....
+      listRoleData().then(res => {
+        this.roleData = res.data
+      })
     }
   }
 }

@@ -128,3 +128,28 @@ class LoginLog(models.Model):
 
     class Meta:
         db_table = "b_login_log"
+
+
+class Borrow(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='user_borrow')
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, null=True, related_name='book_borrow')
+    status = models.CharField(max_length=2, blank=True, null=True)  # 1借出 2已还
+    borrow_time = models.DateTimeField(auto_now_add=True, null=True)
+    expect_time = models.DateTimeField(null=True)  # 应还时间
+    return_time = models.DateTimeField(null=True)
+    delayed = models.BooleanField(blank=True, null=True, default=False)  # 是否延期
+
+    class Meta:
+        db_table = "b_borrow"
+
+
+class BorrowLog(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='user_borrow_log')
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, null=True, related_name='book_borrow_log')
+    action = models.CharField(max_length=2, blank=True, null=True)
+    log_time = models.DateTimeField(auto_now_add=True, null=True)
+
+    class Meta:
+        db_table = "b_borrow_log"
