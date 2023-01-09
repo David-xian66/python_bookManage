@@ -15,20 +15,20 @@
       </a-col>
       <a-col :span="6">
         <div class="box" style="background-color: #1890ff;">
-          <div>分类总数</div>
-          <div><span class="box-value">{{ data.classification_count }}</span>本</div>
+          <div>在借书籍</div>
+          <div><span class="box-value">{{ data.borrow_count }}</span>本</div>
         </div>
       </a-col>
       <a-col :span="6">
         <div class="box" style="background-color: #2a9a44;">
-          <div>标签总数</div>
-          <div><span class="box-value">{{ data.tag_count }}</span>本</div>
+          <div>已还书籍</div>
+          <div><span class="box-value">{{ data.return_count }}</span>本</div>
         </div>
       </a-col>
       <a-col :span="6">
         <div class="box" style="background-color: #0EC885;">
-          <div>标签总数</div>
-          <div><span class="box-value">{{ data.tag_count }}</span>本</div>
+          <div>逾期未还</div>
+          <div><span class="box-value">{{ data.overdue_count }}</span>本</div>
         </div>
       </a-col>
     </a-row>
@@ -94,8 +94,14 @@ export default {
       })
     },
     initBarChart () {
-      const xData = ['遥远的救世主', '平凡的世界', '测试书籍12', '测试书籍13', '测试书籍14', '测试书籍15', '测试书籍16', '测试书籍17']
-      const yData = [220, 200, 180, 150, 130, 110, 100, 80]
+      let xData = []
+      let yData = []
+      this.data.borrow_rank_data.forEach((item, index) => {
+        xData.push(item.title)
+        yData.push(item.count)
+      })
+      // const xData = ['遥远的救世主', '平凡的世界', '测试书籍12', '测试书籍13', '测试书籍14', '测试书籍15', '测试书籍16', '测试书籍17']
+      // const yData = [220, 200, 180, 150, 130, 110, 100, 80]
       this.barChart = echarts.init(this.$refs.barChart)
       let option = {
         title: {
@@ -155,6 +161,10 @@ export default {
       this.barChart.setOption(option)
     },
     initPieChart () {
+      let pieData = []
+      this.data.classification_rank_data.forEach((item, index) => {
+        pieData.push({name:item.title, value:item.count})
+      })
       this.pieChart = echarts.init(this.$refs.pieChart)
       const option = {
         title: {
@@ -182,20 +192,14 @@ export default {
             emphasis: {
               label: {
                 show: true,
-                fontSize: 40,
+                fontSize: 20,
                 fontWeight: 'bold'
               }
             },
             labelLine: {
               show: false
             },
-            data: [
-              {value: 1048, name: '计算机'},
-              {value: 735, name: '文学'},
-              {value: 580, name: '财经'},
-              {value: 484, name: '小说'},
-              {value: 300, name: '教育'}
-            ]
+            data: pieData
           }
         ]
       }
