@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from myapp.models import Book, Classification, Tag, User, Comment, Record, LoginLog, Role, Borrow, BorrowLog
+from myapp.models import Book, Classification, Tag, User, Comment, Record, LoginLog, Borrow, BorrowLog
 
 
 class BookSerializer(serializers.ModelSerializer):
@@ -18,14 +18,6 @@ class ClassificationSerializer(serializers.ModelSerializer):
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
-        fields = '__all__'
-
-
-class RoleSerializer(serializers.ModelSerializer):
-    create_time = serializers.DateTimeField(format='%Y-%m-%d %H:%M:%S', required=False)
-
-    class Meta:
-        model = Role
         fields = '__all__'
 
 

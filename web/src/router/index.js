@@ -4,55 +4,36 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const constantRouterMap = [
+  // ************* 前台路由 **************
   {
-    path: '/portal',
-    name: 'portal',
-    component: () => import('@/views/index/portal')
+    path: '/index',
+    name: 'index',
+    redirect: '/index/portal',
+    component: () => import('@/layout/index/indexLayout'),
+    children: [
+      {
+        path: 'portal',
+        name: 'portal',
+        component: () => import('@/views/index/portal')
+      },
+      {
+        path: 'detail',
+        name: 'detail',
+        component: () => import('@/views/index/detail')
+      },
+      {
+        path: 'list',
+        name: 'list',
+        component: () => import('@/views/index/list')
+      }
+    ]
   },
-  {
-    path: '/detail',
-    name: 'detail',
-    component: () => import('@/views/index/detail')
-  },
-  {
-    path: '/list',
-    name: 'list',
-    component: () => import('@/views/index/list')
-  },
-  {
-    path: '/',
-    redirect: '/admin'
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import('@/views/admin/login')
-  },
-  {
-    path: '/403',
-    name: '403',
-    component: () => import('@/views/exception/403')
-  },
-  {
-    path: '/404',
-    name: '404',
-    component: () => import('@/views/exception/404')
-  },
-  {
-    path: '/500',
-    name: '500',
-    component: () => import('@/views/exception/500')
-  },
-  {
-    path: '/login2',
-    name: 'login2',
-    component: () => import('@/views/admin/login2')
-  },
+  // ************* 后台路由 **************
   {
     path: '/admin',
     name: 'admin',
     redirect: '/admin/overview',
-    component: () => import('@/layout/adminLayout'),
+    component: () => import('@/layout/admin/adminLayout'),
     children: [
       {
         path: 'overview',
@@ -100,6 +81,11 @@ const constantRouterMap = [
         component: () => import('@/views/admin/user')
       }
     ]
+  },
+  {
+    path: '/admin-login',
+    name: 'admin-login',
+    component: () => import('@/views/admin/admin-login')
   }
 ]
 

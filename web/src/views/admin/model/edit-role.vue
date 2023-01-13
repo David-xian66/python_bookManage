@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import {createApi, updateApi} from '@/api/role'
+import {createApi, updateApi} from '@/api/admin/role'
 
 export default {
   name: 'EditRole',

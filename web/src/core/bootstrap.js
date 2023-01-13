@@ -1,14 +1,12 @@
 import store from '@/store'
 import storage from 'store'
 import {
-  ACCESS_TOKEN,
-  USER_NAME
+  ADMIN_TOKEN
 } from '@/store/constants'
 
 export default function Initializer () {
   // storage.remove('Show-header')
-  store.commit('SET_TOKEN', storage.get(ACCESS_TOKEN))
-  store.commit('SET_NAME', storage.get(USER_NAME))
+  store.commit('SET_ADMINTOKEN', storage.get(ADMIN_TOKEN))
 
   // store.dispatch('setLang', storage.get(APP_LANGUAGE, 'zh-CN'))
 }

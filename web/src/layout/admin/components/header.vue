@@ -3,7 +3,7 @@
     <img class="header-logo" src="@/assets/logo.png" alt="">
     <span class="header-title">图书后台管理</span>
     <div class="empty"></div>
-    <span>管理员[admin]</span>
+    <span>管理员[{{username}}]</span>
     <a class="header-quit" @click="handleLogout">退出</a>
   </div>
 </template>
@@ -13,13 +13,16 @@ export default {
   name: 'Header',
   data () {
     return {
-      img: require('@/assets/logo.png')
+      username: ''
     }
+  },
+  mounted () {
+    this.username = this.$store.state.user.name
   },
   methods: {
     handleLogout () {
-      this.$store.dispatch('Logout').then(res => {
-        this.$router.push({name: 'login'})
+      this.$store.dispatch('AdminLogout').then(res => {
+        this.$router.push({path: '/admin-login'})
       })
     }
   }

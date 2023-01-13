@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import {listApi, deleteApi} from '@/api/classification'
+import {listApi, deleteApi} from '@/api/admin/classification'
 import EditClassification from '@/views/admin/model/edit-classification'
 
 const columns = [

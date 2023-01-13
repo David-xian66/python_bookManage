@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import {listApi, deleteApi} from '@/api/book'
+import {listApi, deleteApi} from '@/api/admin/book'
 import EditBook from '@/views/admin/model/edit-book'
 
 const columns = [

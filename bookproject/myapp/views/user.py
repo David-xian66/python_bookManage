@@ -1,11 +1,37 @@
 # Create your views here.
+import datetime
+
 from rest_framework.decorators import api_view
 
 from myapp import utils
 from myapp.handler import APIResponse
 from myapp.models import User
 from myapp.serializers import UserSerializer
+from myapp.utils import md5value
 
+
+@api_view(['POST'])
+def admin_login(request):
+    username = request.data['username']
+    password = request.data['password']
+
+    users = User.objects.filter(username=username, password=password)
+    if len(users) > 0:
+        user = users[0]
+        datetime.datetime.now() + datetime.timedelta(days=60)
+        data = {
+            'username': username,
+            'password': password,
+            'admin_token': md5value(username)  # 生成令牌
+        }
+        serializer = UserSerializer(user, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return APIResponse(code=0, msg='登录成功', data=serializer.data)
+        else:
+            print(serializer.errors)
+
+    return APIResponse(code=1, msg='用户名或密码错误')
 
 @api_view(['GET'])
 def list_api(request):

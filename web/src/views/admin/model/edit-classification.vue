@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import {createApi, updateApi} from '@/api/classification'
+import {createApi, updateApi} from '@/api/admin/classification'
 
 export default {
   name: 'EditClassification',

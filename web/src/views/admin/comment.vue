@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import {listApi, deleteApi} from '@/api/comment'
+import {listApi, deleteApi} from '@/api/admin/comment'
 import EditComment from '@/views/admin/model/edit-comment'
 
 const columns = [

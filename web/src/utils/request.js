@@ -2,25 +2,26 @@ import axios from 'axios'
 import store from '@/store'
 import storage from 'store'
 import notification from 'ant-design-vue/es/notification'
-import { ACCESS_TOKEN, BASE_URL } from '@/store/constants'
+import {ADMIN_TOKEN, BASE_URL, TOKEN} from '@/store/constants'
 
 // 创建 axios 实例
 const request = axios.create({
-  // API 请求的默认前缀
   baseURL: BASE_URL,
-  timeout: 180000 // 请求超时时间
+  timeout: 180000
 })
 
 // 异常拦截处理器
 const errorHandler = (error) => {
+  console.log('error--->' + error)
   if (error.response) {
     const data = error.response.data
+    console.log('error--->' + data)
     // 从 localstorage 获取 token
-    const token = storage.get(ACCESS_TOKEN)
+    const adminToken = storage.get(ADMIN_TOKEN)
     if (error.response.status === 403) {
       notification.error({
         message: '禁止访问',
-        description: data.message
+        description: '禁止访问'
       })
     }
     if (error.response.status === 401) {
@@ -28,8 +29,9 @@ const errorHandler = (error) => {
         message: '未登录',
         description: '登录验证失败'
       })
-      if (token) {
-        store.dispatch('Logout').then(() => {
+      if (adminToken) {
+        // todo 此处两种登出如何处理
+        store.dispatch('AdminLogout').then(() => {
           setTimeout(() => {
             window.location.reload()
           }, 500)
@@ -42,12 +44,14 @@ const errorHandler = (error) => {
 
 // request interceptor
 request.interceptors.request.use(config => {
-  const token = storage.get(ACCESS_TOKEN)
-  // 如果 token 存在
-  // 让每个请求携带自定义 token 请根据实际情况自行修改
-  if (token) {
-    config.headers['Authorization'] = token
-  }
+  const adminToken = storage.get(ADMIN_TOKEN)
+  const token = storage.get(TOKEN)
+
+  config.headers['Access-Control-Allow-Headers'] = 'adminToken, token,Content-Type'
+
+  // config.headers['Authorization'] = ''
+  config.headers['ADMINTOKEN'] = adminToken
+  config.headers['TOKEN'] = token
   return config
 }, errorHandler)
 

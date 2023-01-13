@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import {listApi, deleteApi} from '@/api/tag'
+import {listApi, deleteApi} from '@/api/admin/tag'
 import EditTag from '@/views/admin/model/edit-tag'
 
 const columns = [

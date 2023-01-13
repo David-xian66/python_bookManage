@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import {listApi, createApi, updateApi} from '@/api/borrow'
+import {listApi, createApi, updateApi} from '@/api/admin/borrow'
 // import EditTag from '@/views/admin/model/edit-tag'
 
 const columns = [

@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import {listApi, deleteApi} from '@/api/role'
+import {listApi, deleteApi} from '@/api/admin/role'
 import EditRole from '@/views/admin/model/edit-role'
 
 const columns = [

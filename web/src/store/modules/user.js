@@ -1,46 +1,48 @@
 import storage from 'store'
-// import { login, getInfo } from '@/api/login'
-import { USER_NAME, ACCESS_TOKEN } from '@/store/constants'
+import { adminLogin } from '@/api/admin/user'
+import { ADMIN_TOKEN } from '@/store/constants'
 
 const user = {
   namespaced: false,
   state: {
     token: '',
-    name: '',
-    sex: ''
+    adminToken: ''
   },
   getters: {
     token: state => state.token,
-    name: state => state.name,
-    sex: state => state.sex
+    adminToken: state => state.adminToken
   },
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token
     },
-    SET_NAME: (state, name) => {
-      state.name = name
-    },
-    SET_SEX: (state, sex) => {
-      state.sex = sex
+    SET_ADMINTOKEN: (state, adminToken) => {
+      state.adminToken = adminToken
     }
   },
 
   actions: {
-    Login ({commit}, name) {
+    // 管理员登录
+    AdminLogin ({commit}, {username, password}) {
       return new Promise((resolve, reject) => {
-        commit('SET_NAME', name)
-        storage.set(USER_NAME, name)
-        storage.set(ACCESS_TOKEN, '19191919191919191919')
-        resolve()
+        adminLogin({
+          username,
+          password
+        }).then(response => {
+          const result = response.data
+          commit('SET_ADMINTOKEN', result.admin_token)
+          storage.set(ADMIN_TOKEN, result.admin_token, 7 * 24 * 60 * 60 * 1000)
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
       })
     },
-    Logout ({ commit, state }) {
+    // 管理员退出
+    AdminLogout ({ commit, state }) {
       return new Promise((resolve) => {
-        commit('SET_TOKEN', '')
-        commit('SET_NAME', '')
-        commit('SET_SEX', '')
-        storage.remove(ACCESS_TOKEN)
+        commit('SET_ADMINTOKEN', '')
+        storage.remove(ADMIN_TOKEN)
         // window.location.reload()
         resolve()
       })

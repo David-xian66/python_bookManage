@@ -51,8 +51,8 @@
 </template>
 
 <script>
-import {createApi, updateApi} from '@/api/user'
-import {listApi as listRoleData} from '@/api/role'
+import {createApi, updateApi} from '@/api/admin/user'
+import {listApi as listRoleData} from '@/api/admin/role'
 
 export default {
   name: 'EditUser',

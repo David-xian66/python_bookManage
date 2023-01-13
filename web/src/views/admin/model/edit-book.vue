@@ -122,9 +122,9 @@
 </template>
 
 <script>
-import {createApi, updateApi} from '@/api/book'
-import {listApi as listClassificationApi} from '@/api/classification'
-import {listApi as listTagApi} from '@/api/tag'
+import {createApi, updateApi} from '@/api/admin/book'
+import {listApi as listClassificationApi} from '@/api/admin/classification'
+import {listApi as listTagApi} from '@/api/admin/tag'
 
 export default {
   name: 'EditBook',

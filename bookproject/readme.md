@@ -36,5 +36,15 @@ https://www.cnblogs.com/SunshineKimi/p/14140900.html
 join查询
 ForeignKey的时候字段会自动加_id后缀
 学习SerializerMethodField
+跨域配置 django-cors-headers
+
+### 登录接口
+
+调login -> 生成token
+
+### 认证
+
+接口添加 @authentication_classes注解
+
 
 

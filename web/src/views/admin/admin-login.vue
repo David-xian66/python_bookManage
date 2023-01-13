@@ -89,7 +89,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['Login']),
+    ...mapActions(['AdminLogin']),
     handleSubmit () {
       this.loginError = ''
       this.$refs.loginForm.validate(valid => {
@@ -102,7 +102,7 @@ export default {
       })
     },
     handleLogin () {
-      this.Login({
+      this.AdminLogin({
         username: this.loginForm.username,
         password: this.loginForm.password
       }).then(() => {
@@ -113,13 +113,13 @@ export default {
     },
     loginSuccess () {
       this.loginBtn = false
-      this.$router.push({ path: '/' })
+      this.$router.push({ path: '/admin' })
       this.$message.success('登录成功！')
       // satoken
     },
     requestFailed (err) {
       this.loginBtn = false
-      this.$message.error(err.msg || err.data)
+      this.$message.error(err.msg)
     }
   }
 }

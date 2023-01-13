@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import {listApi, deleteApi} from '@/api/user'
+import {listApi, deleteApi} from '@/api/admin/user'
 import EditUser from '@/views/admin/model/edit-user'
 
 const columns = [

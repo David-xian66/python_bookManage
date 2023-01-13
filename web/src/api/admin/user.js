@@ -4,10 +4,25 @@
 import axios from '@/utils/request.js'
 
 const api = {
+  adminLogin: '/myapp/adminLogin',
   listApi: '/myapp/user/list',
   createApi: '/myapp/user/create',
   deleteApi: '/myapp/user/delete',
   updateApi: '/myapp/user/update'
+}
+
+/**
+ * 管理员登录
+ */
+export const adminLogin = function (data) {
+  return axios({
+    url: api.adminLogin,
+    method: 'post',
+    headers: {
+      'Content-Type': 'multipart/form-data;charset=utf-8'
+    },
+    data: data
+  })
 }
 
 /**

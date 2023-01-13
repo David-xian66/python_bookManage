@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import {createApi, updateApi} from '@/api/tag'
+import {createApi, updateApi} from '@/api/admin/tag'
 
 export default {
   name: 'EditTag',

@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import {listApi, deleteApi} from '@/api/login-log'
+import {listApi, deleteApi} from '@/api/admin/login-log'
 
 const columns = [
   {

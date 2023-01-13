@@ -44,9 +44,9 @@
 
 <script>
 import * as echarts from 'echarts'
-import {listApi} from '@/api/overview'
+import {listApi} from '@/api/admin/overview'
 import storage from 'store'
-import {USER_NAME, ACCESS_TOKEN} from '@/store/constants'
+import {ADMIN_TOKEN} from '@/store/constants'
 
 export default {
   name: 'One',
@@ -61,11 +61,10 @@ export default {
     // this.$store.commit('SET_NAME', 'zhangsan')
     // this.$store.dispatch('Login', 'linxiaomei')
 
-    console.log(this.$store.state.user.name)
-    console.log(this.$store.getters.name)
+    // console.log(this.$store.state.user.name)
+    // console.log(this.$store.getters.name)
 
-    console.log(storage.get(USER_NAME))
-    console.log(storage.get(ACCESS_TOKEN))
+    console.log(storage.get(ADMIN_TOKEN))
     this.list()
     const that = this
     setTimeout(function () {
@@ -90,7 +89,7 @@ export default {
         console.log(res.data)
         this.data = res.data
       }).catch(err => {
-        this.$message.error(err.data || '获取失败！')
+        this.$message.error(err.msg || '获取失败！')
       })
     },
     initBarChart () {

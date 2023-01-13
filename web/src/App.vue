@@ -24,6 +24,6 @@ export default {
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   height: 100vh;
-  overflow: hidden;
+  overflow: scroll;
 }
 </style>

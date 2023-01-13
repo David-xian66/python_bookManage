@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import {createApi, updateApi} from '@/api/comment'
+import {createApi, updateApi} from '@/api/admin/comment'
 
 export default {
   name: 'EditComment',

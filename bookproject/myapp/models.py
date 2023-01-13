@@ -1,16 +1,6 @@
 from django.db import models
 
 
-class Role(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    title = models.CharField(max_length=100, blank=True, null=True)
-    remark = models.CharField(max_length=100, blank=True, null=True)
-    create_time = models.DateTimeField(auto_now_add=True, null=True)
-
-    class Meta:
-        db_table = "b_role"
-
-
 class User(models.Model):
     GENDER_CHOICES = (
         ('M', '男'),
@@ -27,7 +17,7 @@ class User(models.Model):
     id = models.BigAutoField(primary_key=True)
     username = models.CharField(max_length=50, null=True)
     password = models.CharField(max_length=50, null=True)
-    role = models.ForeignKey(Role, on_delete=models.SET_NULL, blank=True, null=True, related_name='role_user')
+    role = models.CharField(max_length=2, blank=True, null=True)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='0')
     nickname = models.CharField(blank=True, null=True, max_length=20)
     avatar = models.FileField(upload_to='avatar/', null=True)
@@ -36,6 +26,8 @@ class User(models.Model):
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True, null=True)
     description = models.TextField(max_length=200, null=True)
     create_time = models.DateTimeField(auto_now_add=True, null=True)
+    admin_token = models.CharField(max_length=32, blank=True, null=True)
+    token = models.CharField(max_length=32, blank=True, null=True)
 
     class Meta:
         db_table = "b_user"

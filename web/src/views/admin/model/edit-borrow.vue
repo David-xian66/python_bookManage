@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import {createApi, updateApi} from '@/api/borrow'
+import {createApi, updateApi} from '@/api/admin/borrow'
 
 export default {
   name: 'EditBorrow',
