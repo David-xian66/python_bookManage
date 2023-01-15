@@ -4,10 +4,11 @@
 import axios from '@/utils/request.js'
 
 const api = {
-  listApi: '/myapp/borrow/list',
-  createApi: '/myapp/borrow/create',
-  deleteApi: '/myapp/borrow/delete',
-  updateApi: '/myapp/borrow/update'
+  listApi: '/myapp/end/borrow/list',
+  createApi: '/myapp/end/borrow/create',
+  deleteApi: '/myapp/end/borrow/delete',
+  updateApi: '/myapp/end/borrow/update',
+  delayApi: '/myapp/end/borrow/delay'
 }
 
 /**
@@ -51,6 +52,20 @@ export const deleteApi = function (params) {
 export const updateApi = function (params, data) {
   return axios({
     url: api.updateApi,
+    method: 'post',
+    headers: {
+      'Content-Type': 'multipart/form-data;charset=utf-8'
+    },
+    params: params,
+    data: data
+  })
+}
+/**
+ * 延期
+ */
+export const delayApi = function (params, data) {
+  return axios({
+    url: api.delayApi,
     method: 'post',
     headers: {
       'Content-Type': 'multipart/form-data;charset=utf-8'

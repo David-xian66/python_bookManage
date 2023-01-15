@@ -1,8 +1,10 @@
 # Create your views here.
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, authentication_classes
 
+from myapp.auth.authentication import AdminTokenAuthtication
 from myapp.handler import APIResponse
 from myapp.models import Tag
+from myapp.permission.permission import isDemoAdminUser
 from myapp.serializers import TagSerializer
 
 
@@ -15,7 +17,11 @@ def list_api(request):
 
 
 @api_view(['POST'])
+@authentication_classes([AdminTokenAuthtication])
 def create(request):
+    if isDemoAdminUser(request):
+        return APIResponse(code=1, msg='演示帐号无法操作')
+
     tags = Tag.objects.filter(title=request.data['title'])
     if len(tags) > 0:
         return APIResponse(code=1, msg='该名称已存在')
@@ -29,7 +35,11 @@ def create(request):
 
 
 @api_view(['POST'])
+@authentication_classes([AdminTokenAuthtication])
 def update(request):
+    if isDemoAdminUser(request):
+        return APIResponse(code=1, msg='演示帐号无法操作')
+
     try:
         pk = request.GET.get('id', -1)
         tags = Tag.objects.get(pk=pk)
@@ -45,7 +55,11 @@ def update(request):
 
 
 @api_view(['POST'])
+@authentication_classes([AdminTokenAuthtication])
 def delete(request):
+    if isDemoAdminUser(request):
+        return APIResponse(code=1, msg='演示帐号无法操作')
+
     try:
         ids = request.GET.get('ids')
         ids_arr = ids.split(',')

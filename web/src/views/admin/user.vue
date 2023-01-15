@@ -26,9 +26,15 @@
           showTotal: (total) => `共${total}条数据`
         }"
       >
+        <span slot="role" slot-scope="text">
+          <span v-if="text === '1'">管理员</span>
+          <span v-if="text === '2'">普通用户</span>
+          <span v-if="text === '3'">演示帐号</span>
+        </span>
         <span slot="operation" class="operation" slot-scope="text, record">
           <a-space :size="16">
             <a @click="handleEdit(record)">编辑</a>
+            <a @click="handleUpdatePwd(record)" :disabled="record.username !== currentAdminUserName">改密</a>
             <a @click="handleDelete(record)">删除</a>
           </a-space>
         </span>
@@ -40,6 +46,7 @@
 <script>
 import {listApi, deleteApi} from '@/api/admin/user'
 import EditUser from '@/views/admin/model/edit-user'
+import EditPassword from '@/views/admin/model/edit-password'
 
 const columns = [
   {
@@ -62,7 +69,7 @@ const columns = [
     title: '角色',
     dataIndex: 'role',
     key: 'role',
-    customRender: (text) => text === '0' ? '管理员' : '普通用户'
+    scopedSlots: { customRender: 'role' }
   },
   {
     title: '状态',
@@ -100,6 +107,7 @@ export default {
   data () {
     return {
       loading: false,
+      currentAdminUserName: '',
       keyword: '',
       selectedRowKeys: [],
       columns,
@@ -148,6 +156,28 @@ export default {
         },
         {
           title: '新增用户',
+          width: '480px',
+          centered: true,
+          bodyStyle: {
+            maxHeight: 'calc(100vh - 200px)',
+            overflowY: 'auto'
+          }
+        }
+      )
+    },
+    handleUpdatePwd (record) {
+      this.$dialog(
+        EditPassword,
+        {
+          user: Object.assign({}, record),
+          on: {
+            ok: () => {
+              this.getList()
+            }
+          }
+        },
+        {
+          title: '修改密码',
           width: '480px',
           centered: true,
           bodyStyle: {
@@ -222,6 +252,7 @@ export default {
     }
   },
   mounted () {
+    this.currentAdminUserName = this.$store.state.user.adminUserName
     this.getList()
   }
 }
@@ -234,7 +265,7 @@ export default {
 .page-view {
   min-height: 100%;
   background: #FFF;
-  padding: 8px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
 }

@@ -221,7 +221,7 @@ export default {
                 console.log(res)
                 resolve(true)
               }).catch(err => {
-                this.$message.error(err.data || '更新失败')
+                this.$message.error(err.msg || '更新失败')
                 reject(new Error('更新失败'))
               })
             } else {
@@ -230,7 +230,7 @@ export default {
                 console.log(res)
                 resolve(true)
               }).catch(err => {
-                this.$message.error(err.data || '新建失败')
+                this.$message.error(err.msg || '新建失败')
                 reject(new Error('新建失败'))
               })
             }

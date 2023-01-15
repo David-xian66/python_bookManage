@@ -6,30 +6,30 @@
     <a-row :gutter="24">
       <a-col span="24">
         <a-form-model-item label="用户名" prop="username">
-          <a-input placeholder="请输入" v-model="form.username"></a-input>
+          <a-input :disabled="modifyFlag" placeholder="请输入" v-model="form.username" allowClear></a-input>
         </a-form-model-item>
       </a-col>
-      <a-col span="24">
+      <a-col span="24" v-if="!modifyFlag">
         <a-form-model-item label="密码" prop="password">
-          <a-input placeholder="请输入" v-model="form.password"></a-input>
+          <a-input placeholder="请输入" type="password" v-model="form.password" allowClear></a-input>
         </a-form-model-item>
       </a-col>
       <a-col span="24">
         <a-form-model-item label="昵称" prop="nickname">
-          <a-input placeholder="请输入" v-model="form.nickname"></a-input>
+          <a-input placeholder="请输入" v-model="form.nickname" allowClear></a-input>
         </a-form-model-item>
       </a-col>
       <a-col span="24">
         <a-form-model-item label="角色" prop="role">
-          <a-select placeholder="请选择" allowClear v-model="form.role">
+          <a-select placeholder="请选择" allowClear v-model="form.role" allowClear>
             <template v-for="item in roleData">
-              <a-select-option :key="item.id" :value="item.id">{{item.title}}</a-select-option>
+              <a-select-option :key="item.id" :value="item.id">{{ item.title }}</a-select-option>
             </template>
           </a-select>
         </a-form-model-item>
       </a-col>
       <a-col span="24">
-        <a-form-model-item label="状态" prop="role">
+        <a-form-model-item label="状态" prop="status">
           <a-select placeholder="请选择" allowClear v-model="form.status">
             <a-select-option key="0" value="0">正常</a-select-option>
             <a-select-option key="1" value="1">封号</a-select-option>
@@ -38,12 +38,12 @@
       </a-col>
       <a-col span="24">
         <a-form-model-item label="邮箱" prop="email">
-          <a-input placeholder="请输入" v-model="form.email"></a-input>
+          <a-input placeholder="请输入" v-model="form.email" allowClear></a-input>
         </a-form-model-item>
       </a-col>
       <a-col span="24">
         <a-form-model-item label="手机号" prop="mobile">
-          <a-input placeholder="请输入" v-model="form.mobile"></a-input>
+          <a-input placeholder="请输入" v-model="form.mobile" allowClear></a-input>
         </a-form-model-item>
       </a-col>
     </a-row>
@@ -52,8 +52,21 @@
 
 <script>
 import {createApi, updateApi} from '@/api/admin/user'
-import {listApi as listRoleData} from '@/api/admin/role'
 
+const RoleData = [
+  {
+    id: '1',
+    title: '管理员'
+  },
+  {
+    id: '2',
+    title: '普通用户'
+  },
+  {
+    id: '3',
+    title: '演示帐号'
+  }
+]
 export default {
   name: 'EditUser',
   props: {
@@ -63,18 +76,23 @@ export default {
     },
     user: {
       type: Object,
-      default: () => {}
+      default: () => {
+      }
     }
   },
   data () {
     return {
-      roleData: [],
+      roleData: RoleData,
       form: {
-        role: undefined
+        username: undefined,
+        role: undefined,
+        status: undefined
       },
       rules: {
-        username: [{ required: true, message: '请输入用户名', trigger: 'change' }],
-        password: [{ required: true, message: '请输入密码', trigger: 'change' }]
+        username: [{required: true, message: '请输入用户名', trigger: 'change'}],
+        password: [{required: true, message: '请输入密码', trigger: 'change'}],
+        role: [{required: true, message: '请选择角色', trigger: 'change'}],
+        status: [{required: true, message: '请选择状态', trigger: 'change'}]
       }
     }
   },
@@ -87,7 +105,6 @@ export default {
         }
       }
     }
-    this.getRoleData()
   },
   methods: {
     onOk () {
@@ -118,11 +135,6 @@ export default {
             }
           }
         })
-      })
-    },
-    getRoleData () {
-      listRoleData().then(res => {
-        this.roleData = res.data
       })
     }
   }

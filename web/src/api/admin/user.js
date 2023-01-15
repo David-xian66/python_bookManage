@@ -4,11 +4,13 @@
 import axios from '@/utils/request.js'
 
 const api = {
-  adminLogin: '/myapp/adminLogin',
-  listApi: '/myapp/user/list',
-  createApi: '/myapp/user/create',
-  deleteApi: '/myapp/user/delete',
-  updateApi: '/myapp/user/update'
+  adminLogin: '/myapp/end/adminLogin',
+  listApi: '/myapp/end/user/list',
+  createApi: '/myapp/end/user/create',
+  deleteApi: '/myapp/end/user/delete',
+  updateApi: '/myapp/end/user/update',
+  updatePwdApi: '/myapp/end/user/updatePwd',
+  infoApi: '/myapp/end/user/info'
 }
 
 /**
@@ -31,6 +33,17 @@ export const adminLogin = function (data) {
 export const listApi = function (data) {
   return axios({
     url: api.listApi,
+    method: 'get',
+    params: data
+  })
+}
+
+/**
+ * 基本信息
+ */
+export const infoApi = function (data) {
+  return axios({
+    url: api.infoApi,
     method: 'get',
     params: data
   })
@@ -66,6 +79,20 @@ export const deleteApi = function (params) {
 export const updateApi = function (params, data) {
   return axios({
     url: api.updateApi,
+    method: 'post',
+    headers: {
+      'Content-Type': 'multipart/form-data;charset=utf-8'
+    },
+    params: params,
+    data: data
+  })
+}
+/**
+ * 更新密码
+ */
+export const updatePwdApi = function (params, data) {
+  return axios({
+    url: api.updatePwdApi,
     method: 'post',
     headers: {
       'Content-Type': 'multipart/form-data;charset=utf-8'

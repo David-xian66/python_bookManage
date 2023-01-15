@@ -37,10 +37,26 @@ join查询
 ForeignKey的时候字段会自动加_id后缀
 学习SerializerMethodField
 跨域配置 django-cors-headers
+数据库备份命令:
+mysqldump -u root -p --databases 数据库名称 > xxx.sql
 
 ### 登录接口
 
 调login -> 生成token
+
+### 字典设计
+
+```
+角色字典role
+管理员: 1
+普通用户: 2
+演示帐号: 3
+
+认证
+后台认证失败: AUTH_FAIL_END
+前台认证失败: AUTH_FAIL_FRONT
+
+```
 
 ### 认证
 

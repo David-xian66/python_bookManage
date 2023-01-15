@@ -6,6 +6,7 @@ def isDemoAdminUser(request):
     users = User.objects.filter(admin_token=adminToken)
     if len(users) > 0:
         user = users[0]
-        # 考虑将角色写死
-        print(user.role)
-    return True
+        if user.role == '3':  # （角色3）表示演示帐号
+            print('演示帐号===>')
+            return True
+    return False

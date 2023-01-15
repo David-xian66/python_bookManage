@@ -1,10 +1,12 @@
 # Create your views here.
 import datetime
 
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, authentication_classes
 
+from myapp.auth.authentication import AdminTokenAuthtication
 from myapp.handler import APIResponse
 from myapp.models import Borrow
+from myapp.permission.permission import isDemoAdminUser
 from myapp.serializers import BorrowSerializer
 
 
@@ -17,7 +19,10 @@ def list_api(request):
 
 
 @api_view(['POST'])
+@authentication_classes([AdminTokenAuthtication])
 def create(request):
+    if isDemoAdminUser(request):
+        return APIResponse(code=1, msg='演示帐号无法操作')
 
     data = request.data.copy()
     create_time = datetime.datetime.now()
@@ -33,14 +38,18 @@ def create(request):
 
 
 @api_view(['POST'])
+@authentication_classes([AdminTokenAuthtication])
 def update(request):
+    if isDemoAdminUser(request):
+        return APIResponse(code=1, msg='演示帐号无法操作')
+
     try:
         pk = request.GET.get('id', -1)
-        borrows = Borrow.objects.get(pk=pk)
+        borrow = Borrow.objects.get(pk=pk)
     except Borrow.DoesNotExist:
         return APIResponse(code=1, msg='对象不存在')
 
-    serializer = BorrowSerializer(borrows, data=request.data)
+    serializer = BorrowSerializer(borrow, data=request.data)
     if serializer.is_valid():
         serializer.save()
         return APIResponse(code=0, msg='更新成功', data=serializer.data)
@@ -50,7 +59,39 @@ def update(request):
 
 
 @api_view(['POST'])
+@authentication_classes([AdminTokenAuthtication])
+def delay(request):
+    if isDemoAdminUser(request):
+        return APIResponse(code=1, msg='演示帐号无法操作')
+
+    try:
+        pk = request.GET.get('id', -1)
+        borrow = Borrow.objects.get(pk=pk)
+    except Borrow.DoesNotExist:
+        return APIResponse(code=1, msg='对象不存在')
+
+    if borrow.delayed:
+        return APIResponse(code=1, msg='已超最大延期次数')
+    else:
+        data = {
+            "delayed": True,
+            "expect_time": borrow.expect_time + datetime.timedelta(days=30)
+        }
+        serializer = BorrowSerializer(borrow, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return APIResponse(code=0, msg='延期成功', data=serializer.data)
+        else:
+            print(serializer.errors)
+            return APIResponse(code=1, msg='延期失败')
+
+
+@api_view(['POST'])
+@authentication_classes([AdminTokenAuthtication])
 def delete(request):
+    if isDemoAdminUser(request):
+        return APIResponse(code=1, msg='演示帐号无法操作')
+
     try:
         ids = request.GET.get('ids')
         ids_arr = ids.split(',')

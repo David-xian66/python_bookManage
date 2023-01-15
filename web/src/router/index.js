@@ -61,14 +61,14 @@ const constantRouterMap = [
         component: () => import('@/views/admin/login-log')
       },
       {
+        path: 'opLog',
+        name: 'opLog',
+        component: () => import('@/views/admin/op-log')
+      },
+      {
         path: 'comment',
         name: 'comment',
         component: () => import('@/views/admin/comment')
-      },
-      {
-        path: 'role',
-        name: 'role',
-        component: () => import('@/views/admin/role')
       },
       {
         path: 'borrow',

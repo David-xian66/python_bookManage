@@ -1,5 +1,5 @@
 <template>
-  <div style="width: 200px; height: 100%;">
+  <div style="width: 200px; height: 100%; padding-bottom: 48px; overflow: scroll;">
     <a-menu
       :default-selected-keys="[this.$route.path]"
       :default-open-keys="[]"
@@ -101,12 +101,12 @@ export default {
               title: '用户管理'
             },
             {
-              key: '/admin/role',
-              title: '角色管理'
-            },
-            {
               key: '/admin/loginLog',
               title: '登录日志'
+            },
+            {
+              key: '/admin/opLog',
+              title: '操作日志'
             }
           ]
         }

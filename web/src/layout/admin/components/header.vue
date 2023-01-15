@@ -1,9 +1,9 @@
 <template>
   <div class="header">
     <img class="header-logo" src="@/assets/logo.png" alt="">
-    <span class="header-title">图书后台管理</span>
+    <span class="header-title">图书后台管理系统</span>
     <div class="empty"></div>
-    <span>管理员[{{username}}]</span>
+    <span>管理员[{{$store.state.user.adminUserName}}]</span>
     <a class="header-quit" @click="handleLogout">退出</a>
   </div>
 </template>
@@ -17,7 +17,7 @@ export default {
     }
   },
   mounted () {
-    this.username = this.$store.state.user.name
+    // this.username = this.$store.state.user.adminUserName
   },
   methods: {
     handleLogout () {

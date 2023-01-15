@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import {listApi, createApi, updateApi} from '@/api/admin/borrow'
+import {listApi, createApi, updateApi, delayApi} from '@/api/admin/borrow'
 // import EditTag from '@/views/admin/model/edit-tag'
 
 const columns = [
@@ -127,6 +127,8 @@ export default {
         delayed: false
       }).then(res => {
         this.getList()
+      }).catch(err => {
+        this.$message.error(err.msg || '新增失败')
       })
     },
     // 还书
@@ -153,12 +155,11 @@ export default {
       const that = this
       this.$confirm({
         title: '确定延期?',
-        onOk() {
-          updateApi({
+        content: '延期30天',
+        onOk () {
+          delayApi({
             id: record.id
-          }, {
-            delayed: true
-          }).then(res => {
+          }, {}).then(res => {
             that.$message.success('延期成功')
             that.getList()
           }).catch(err => {
@@ -182,7 +183,7 @@ export default {
 .page-view {
   min-height: 100%;
   background: #FFF;
-  padding: 8px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
 }

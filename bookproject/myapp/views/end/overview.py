@@ -2,27 +2,18 @@
 import datetime
 
 from django.db import connection
-from django.db.migrations import serializer
-from django.db.models import Count
-from rest_framework.decorators import api_view, action, authentication_classes, permission_classes
-from rest_framework.response import Response
+from rest_framework.decorators import api_view, authentication_classes
 
 from myapp.handler import APIResponse
 
 from myapp.models import Book, Borrow
-
-from myapp.models import Classification, Tag
 from myapp.utils import dict_fetchall
-from myapp.views.authentication import TokenAuthtication
-from myapp.views.permission import isDemoAdminUser
+from myapp.auth.authentication import AdminTokenAuthtication
 
 
 @api_view(['GET'])
-@authentication_classes([TokenAuthtication])
+@authentication_classes([AdminTokenAuthtication])
 def count(request):
-
-    if isDemoAdminUser(request):
-        return APIResponse(code=1, msg='演示帐号无法操作')
 
     if request.method == 'GET':
         now = datetime.datetime.now()

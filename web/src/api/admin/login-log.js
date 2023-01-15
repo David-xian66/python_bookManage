@@ -4,10 +4,10 @@
 import axios from '@/utils/request.js'
 
 const api = {
-  listApi: '/myapp/loginLog/list',
-  createApi: '/myapp/loginLog/create',
-  deleteApi: '/myapp/loginLog/delete',
-  updateApi: '/myapp/loginLog/update'
+  listApi: '/myapp/end/loginLog/list',
+  createApi: '/myapp/end/loginLog/create',
+  deleteApi: '/myapp/end/loginLog/delete',
+  updateApi: '/myapp/end/loginLog/update'
 }
 
 /**

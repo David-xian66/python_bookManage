@@ -8,7 +8,7 @@
         <div class="logo" />
         <SiderBar/>
       </a-layout-sider>
-      <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '100px' }">
+      <a-layout-content :style="{ margin: '24px 16px', minHeight: '100px' }">
         <router-view/>
       </a-layout-content>
     </a-layout>

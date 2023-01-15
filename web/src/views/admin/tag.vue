@@ -1,21 +1,21 @@
 <template>
   <div class="page-view">
-    <div class="table-operation">
-      <a-space>
-        <a-button type="primary" @click="handleAdd">新增</a-button>
-        <a-button @click="handleBatchDelete">批量删除</a-button>
-      </a-space>
-    </div>
-    <div class="table-wrap" ref="tableWrap">
-      <a-table
-        size="middle"
-        rowKey="id"
-        :loading="loading"
-        :columns="columns"
-        :data-source="data"
-        :scroll="{ x: 'max-content' }"
-        :row-selection="rowSelection()"
-        :pagination="{
+      <div class="table-operation">
+        <a-space>
+          <a-button type="primary" @click="handleAdd">新增</a-button>
+          <a-button @click="handleBatchDelete">批量删除</a-button>
+        </a-space>
+      </div>
+      <div class="table-wrap" ref="tableWrap">
+        <a-table
+          size="middle"
+          rowKey="id"
+          :loading="loading"
+          :columns="columns"
+          :data-source="data"
+          :scroll="{ x: 'max-content' }"
+          :row-selection="rowSelection()"
+          :pagination="{
           size: 'default',
           current: page,
           pageSize: pageSize,
@@ -24,16 +24,16 @@
           showSizeChanger: true,
           showTotal: (total) => `共${total}条数据`
         }"
-      >
+        >
         <span slot="operation" class="operation" slot-scope="text, record">
           <a-space :size="16">
             <a @click="handleEdit(record)">编辑</a>
             <a @click="handleDelete(record)">删除</a>
           </a-space>
         </span>
-      </a-table>
+        </a-table>
+      </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -192,7 +192,7 @@ export default {
 .page-view {
   min-height: 100%;
   background: #FFF;
-  padding: 8px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
 }

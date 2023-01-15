@@ -12,26 +12,28 @@ const request = axios.create({
 
 // 异常拦截处理器
 const errorHandler = (error) => {
-  console.log('error--->' + error)
   if (error.response) {
     const data = error.response.data
-    console.log('error--->' + data)
+    console.log(data)
     // 从 localstorage 获取 token
-    const adminToken = storage.get(ADMIN_TOKEN)
     if (error.response.status === 403) {
-      notification.error({
-        message: '禁止访问',
-        description: '禁止访问'
-      })
-    }
-    if (error.response.status === 401) {
       notification.error({
         message: '未登录',
         description: '登录验证失败'
       })
-      if (adminToken) {
-        // todo 此处两种登出如何处理
+
+      // 后台认证失败
+      if (data.detail === 'AUTH_FAIL_END') {
         store.dispatch('AdminLogout').then(() => {
+          setTimeout(() => {
+            window.location.reload()
+          }, 500)
+        })
+      }
+
+      // 前台认证失败
+      if (data.detail === 'AUTH_FAIL_FRONT') {
+        store.dispatch('Logout').then(() => {
           setTimeout(() => {
             window.location.reload()
           }, 500)

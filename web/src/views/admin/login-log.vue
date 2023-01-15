@@ -1,19 +1,14 @@
 <template>
   <div class="page-view">
-    <div class="table-operation">
-      <a-space>
-        <a-button @click="handleBatchDelete">批量删除</a-button>
-      </a-space>
-    </div>
     <div class="table-wrap" ref="tableWrap">
       <a-table
         size="middle"
         rowKey="id"
+        bordered
         :loading="loading"
         :columns="columns"
         :data-source="data"
         :scroll="{ x: 'max-content' }"
-        :row-selection="rowSelection()"
         :pagination="{
           size: 'default',
           current: page,
@@ -24,18 +19,13 @@
           showTotal: (total) => `共${total}条数据`
         }"
       >
-        <span slot="operation" class="operation" slot-scope="text, record">
-          <a-space :size="16">
-            <a @click="handleDelete(record)">删除</a>
-          </a-space>
-        </span>
       </a-table>
     </div>
   </div>
 </template>
 
 <script>
-import {listApi, deleteApi} from '@/api/admin/login-log'
+import {listApi} from '@/api/admin/login-log'
 
 const columns = [
   {
@@ -58,14 +48,6 @@ const columns = [
     title: '登录时间',
     dataIndex: 'log_time',
     key: 'log_time'
-  },
-  {
-    title: '操作',
-    dataIndex: 'action',
-    align: 'right',
-    fixed: 'right',
-    width: 140,
-    scopedSlots: { customRender: 'operation' }
   }
 ]
 
@@ -93,53 +75,6 @@ export default {
         console.log(res)
       })
     },
-    rowSelection () {
-      return {
-        onChange: (selectedRowKeys, selectedRows) => {
-          this.selectedRowKeys = selectedRowKeys
-        }
-      }
-    },
-    // 删除
-    handleDelete (record) {
-      const that = this
-      this.$confirm({
-        title: '确定删除?',
-        onOk () {
-          deleteApi({
-            ids: record.id
-          }).then(res => {
-            that.$message.success('删除成功')
-            that.getList()
-          }).catch(err => {
-            that.$message.error(err.msg || '删除失败')
-          })
-        }
-      })
-    },
-    // 批量删除
-    handleBatchDelete () {
-      console.log(this.selectedRowKeys)
-      if (this.selectedRowKeys.length <= 0) {
-        this.$message.warn('请勾选删除项')
-        return
-      }
-      const that = this
-      this.$confirm({
-        title: '确定删除?',
-        onOk () {
-          deleteApi({
-            ids: that.selectedRowKeys.join(',')
-          }).then(res => {
-            that.$message.success('删除成功')
-            that.selectedRowKeys = []
-            that.getList()
-          }).catch(err => {
-            that.$message.error(err.msg || '删除失败')
-          })
-        }
-      })
-    }
   },
   mounted () {
     this.getList()
@@ -154,7 +89,7 @@ export default {
 .page-view {
   min-height: 100%;
   background: #FFF;
-  padding: 8px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
 }

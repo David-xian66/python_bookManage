@@ -276,7 +276,7 @@ export default {
 .page-view {
   min-height: 100%;
   background: #FFF;
-  padding: 8px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
 }
