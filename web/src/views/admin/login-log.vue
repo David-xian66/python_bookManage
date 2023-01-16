@@ -32,22 +32,25 @@ const columns = [
     title: '序号',
     dataIndex: 'index',
     key: 'index',
-    width: 60
+    align: 'center'
   },
   {
     title: '用户',
     dataIndex: 'username',
-    key: 'username'
+    key: 'username',
+    align: 'center'
   },
   {
     title: 'IP地址',
     dataIndex: 'ip',
-    key: 'ip'
+    key: 'ip',
+    align: 'center'
   },
   {
     title: '登录时间',
     dataIndex: 'log_time',
-    key: 'log_time'
+    key: 'log_time',
+    align: 'center'
   }
 ]
 

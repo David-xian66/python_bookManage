@@ -53,49 +53,56 @@ const columns = [
     title: '序号',
     dataIndex: 'index',
     key: 'index',
-    width: 60
+    align: 'center'
   },
   {
     title: '用户名',
     dataIndex: 'username',
-    key: 'username'
+    key: 'username',
+    align: 'center'
   },
   {
     title: '昵称',
     dataIndex: 'nickname',
-    key: 'nickname'
+    key: 'nickname',
+    align: 'center'
   },
   {
     title: '角色',
     dataIndex: 'role',
     key: 'role',
+    align: 'center',
     scopedSlots: { customRender: 'role' }
   },
   {
     title: '状态',
     dataIndex: 'status',
     key: 'status',
+    align: 'center',
     customRender: (text) => text === '0' ? '正常' : '封号'
   },
   {
     title: '邮箱',
     dataIndex: 'email',
-    key: 'email'
+    key: 'email',
+    align: 'center'
   },
   {
     title: '手机号',
     dataIndex: 'mobile',
-    key: 'mobile'
+    key: 'mobile',
+    align: 'center'
   },
   {
     title: '创建时间',
     dataIndex: 'create_time',
-    key: 'create_time'
+    key: 'create_time',
+    align: 'center'
   },
   {
     title: '操作',
     dataIndex: 'action',
-    align: 'right',
+    align: 'center',
     fixed: 'right',
     width: 140,
     scopedSlots: { customRender: 'operation' }

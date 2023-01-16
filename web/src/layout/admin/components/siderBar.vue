@@ -63,6 +63,10 @@ export default {
           title: '总览'
         },
         {
+          key: '/admin/borrow',
+          title: '借阅管理'
+        },
+        {
           key: '/admin/book',
           title: '图书管理'
         },
@@ -79,20 +83,6 @@ export default {
           title: '评论管理'
         },
         {
-          key: '/admin/borrow',
-          title: '借阅管理',
-          children: [
-            {
-              key: '/admin/borrow',
-              title: '借阅管理'
-            },
-            {
-              key: '/admin/borrowLog',
-              title: '借阅日志'
-            }
-          ]
-        },
-        {
           key: '/admin/user',
           title: '系统管理',
           children: [
@@ -107,6 +97,10 @@ export default {
             {
               key: '/admin/opLog',
               title: '操作日志'
+            },
+            {
+              key: '/admin/borrowLog',
+              title: '借阅日志'
             }
           ]
         }

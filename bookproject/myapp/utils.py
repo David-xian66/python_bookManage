@@ -1,3 +1,4 @@
+import datetime
 import hashlib
 
 
@@ -26,3 +27,16 @@ def get_ip(request):
     else:
         ip = request.META.get('REMOTE_ADDR')
     return ip
+
+
+def getWeekDays():
+    """
+    获取近一周的日期
+    """
+    week_days = []
+    now = datetime.datetime.now()
+    for i in range(7):
+        day = now - datetime.timedelta(days=i)
+        week_days.append(day.strftime('%Y-%m-%d %H:%M:%S.%f')[:10])
+    week_days.reverse()  # 逆序
+    return week_days

@@ -108,13 +108,13 @@
         </a-form-model-item>
       </a-col>
       <a-col span="12">
-        <a-form-model-item label="页数">
-          <a-input placeholder="请输入" v-model="form.page_count"></a-input>
+        <a-form-model-item label="页数" prop="page_count">
+          <a-input-number placeholder="请输入" :min="0" v-model="form.page_count" style="width: 100%;"></a-input-number>
         </a-form-model-item>
       </a-col>
       <a-col span="12">
-        <a-form-model-item label="库存">
-          <a-input placeholder="请输入" v-model="form.repertory"></a-input>
+        <a-form-model-item label="库存" prop="repertory">
+          <a-input-number placeholder="请输入" :min="0" v-model="form.repertory" style="width: 100%;"></a-input-number>
         </a-form-model-item>
       </a-col>
     </a-row>
@@ -146,7 +146,9 @@ export default {
       },
       rules: {
         title: [{ required: true, message: '请输入书名', trigger: 'change' }],
-        classification: [{ required: true, message: '请选择分类', trigger: 'change' }]
+        classification: [{ required: true, message: '请选择分类', trigger: 'change' }],
+        page_count: [{ required: true, message: '请输入页数', trigger: 'change' }],
+        repertory: [{ required: true, message: '请输入库存', trigger: 'change' }]
       },
       cData: [],
       tagData: []

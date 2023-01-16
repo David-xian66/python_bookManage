@@ -1,87 +1,88 @@
 <template>
 
-  <div class="main">
+  <a-spin :spinning="showSpin">
+    <div class="main">
+      <a-row :gutter="[20,20]">
+        <a-col :sm="24" :md="12" :lg="6">
+          <a-card size="small" title="图书总数">
+            <a-tag color="blue" slot="extra">月</a-tag>
+            <div class="box">
+              <div class="box-top">
+                <span class="box-value">{{ data.book_count }}<span class="v-e">本</span></span>
+                <a-icon type="book" theme="twoTone" style="font-size: 24px;"/>
+              </div>
+              <div class="box-bottom">
+                <span>图书总数: 3,000</span>
+              </div>
+            </div>
+          </a-card>
+        </a-col>
 
-    <a-row :gutter="[20,20]">
-      <a-col :sm="24" :md="12" :lg="6">
-        <a-card size="small" title="图书总数">
-          <a-tag color="blue" slot="extra">月</a-tag>
-          <div class="box">
-            <div class="box-top">
-              <span class="box-value">{{ data.book_count }}<span class="v-e">本</span></span>
-              <a-icon type="book" theme="twoTone" style="font-size: 24px;"/>
+        <a-col :sm="24" :md="12" :lg="6">
+          <a-card size="small" title="在借书籍">
+            <a-tag color="green" slot="extra">月</a-tag>
+            <div class="box">
+              <div class="box-top">
+                <span class="box-value">{{ data.borrow_count }}<span class="v-e">本</span></span>
+                <a-icon type="book" theme="twoTone" style="font-size: 24px;"/>
+              </div>
+              <div class="box-bottom">
+                <span>在借总数: 3,000</span>
+              </div>
             </div>
-            <div class="box-bottom">
-              <span>图书总数: 3,000</span>
-            </div>
-          </div>
-        </a-card>
-      </a-col>
+          </a-card>
+        </a-col>
 
-      <a-col :sm="24" :md="12" :lg="6">
-        <a-card size="small" title="在借书籍">
-          <a-tag color="green" slot="extra">月</a-tag>
-          <div class="box">
-            <div class="box-top">
-              <span class="box-value">{{ data.borrow_count }}<span class="v-e">本</span></span>
-              <a-icon type="book" theme="twoTone" style="font-size: 24px;"/>
+        <a-col :sm="24" :md="12" :lg="6">
+          <a-card size="small" title="已还书籍">
+            <a-tag color="blue" slot="extra">月</a-tag>
+            <div class="box">
+              <div class="box-top">
+                <span class="box-value">{{ data.return_count }}<span class="v-e">本</span></span>
+                <a-icon type="book" theme="twoTone" style="font-size: 24px;"/>
+              </div>
+              <div class="box-bottom">
+                <span>已还总数: 3,000</span>
+              </div>
             </div>
-            <div class="box-bottom">
-              <span>在借总数: 3,000</span>
-            </div>
-          </div>
-        </a-card>
-      </a-col>
+          </a-card>
+        </a-col>
 
-      <a-col :sm="24" :md="12" :lg="6">
-        <a-card size="small" title="已还书籍">
-          <a-tag color="blue" slot="extra">月</a-tag>
-          <div class="box">
-            <div class="box-top">
-              <span class="box-value">{{ data.return_count }}<span class="v-e">本</span></span>
-              <a-icon type="book" theme="twoTone" style="font-size: 24px;"/>
+        <a-col :sm="24" :md="12" :lg="6">
+          <a-card size="small" title="逾期未还">
+            <a-tag color="green" slot="extra">月</a-tag>
+            <div class="box">
+              <div class="box-top">
+                <span class="box-value">{{ data.overdue_count }}<span class="v-e">本</span></span>
+                <a-icon type="book" theme="twoTone" style="font-size: 24px;"/>
+              </div>
+              <div class="box-bottom">
+                <span>逾期总数: 3,000</span>
+              </div>
             </div>
-            <div class="box-bottom">
-              <span>已还总数: 3,000</span>
-            </div>
-          </div>
-        </a-card>
-      </a-col>
+          </a-card>
+        </a-col>
+      </a-row>
 
-      <a-col :sm="24" :md="12" :lg="6">
-        <a-card size="small" title="逾期未还">
-          <a-tag color="green" slot="extra">月</a-tag>
-          <div class="box">
-            <div class="box-top">
-              <span class="box-value">{{ data.overdue_count }}<span class="v-e">本</span></span>
-              <a-icon type="book" theme="twoTone" style="font-size: 24px;"/>
-            </div>
-            <div class="box-bottom">
-              <span>逾期总数: 3,000</span>
-            </div>
-          </div>
-        </a-card>
-      </a-col>
-    </a-row>
+      <a-card title="最近一周访问量">
+        <div style="height: 300px;" ref="visitChart"></div>
+      </a-card>
 
-    <a-card title="访问量">
-      <div style="height: 300px;" ref="visitChart"></div>
-    </a-card>
+      <a-row :gutter="[20,20]">
+        <a-col :sm="24" :md="24" :lg="12">
+          <a-card title="热门借阅排名" style="flex:1;">
+            <div style="height: 300px;" ref="barChart"></div>
+          </a-card>
+        </a-col>
+        <a-col :sm="24" :md="24" :lg="12">
+          <a-card title="热门分类比例" style="flex:1;">
+            <div style="height: 300px;" ref="pieChart"></div>
+          </a-card>
+        </a-col>
+      </a-row>
 
-    <a-row :gutter="[20,20]">
-      <a-col :sm="24" :md="24" :lg="12">
-        <a-card title="热门借阅排名" style="flex:1;">
-          <div style="height: 300px;" ref="barChart"></div>
-        </a-card>
-      </a-col>
-      <a-col :sm="24" :md="24" :lg="12">
-        <a-card title="热门分类比例" style="flex:1;">
-          <div style="height: 300px;" ref="pieChart"></div>
-        </a-card>
-      </a-col>
-    </a-row>
-
-  </div>
+    </div>
+  </a-spin>
 
 </template>
 
@@ -95,12 +96,14 @@ export default {
   name: 'One',
   data () {
     return {
+      showSpin: true,
       visitChart: undefined,
       barChart: undefined,
       pieChart: undefined,
       data: {
         borrow_rank_data: [],
-        classification_rank_data: []
+        classification_rank_data: [],
+        visit_data: []
       }
     }
   },
@@ -131,7 +134,9 @@ export default {
         console.log(res.data)
         this.data = res.data
         this.initCharts()
+        this.showSpin = false
       }).catch(err => {
+        this.showSpin = false
         this.$message.error(err.msg || '获取失败！')
       })
     },
@@ -144,39 +149,37 @@ export default {
       }, 100)
     },
     initVisitChart () {
-      const xData = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月','9月', '10月', '11月', '12月']
-      const yData = [220, 200, 180, 150, 130, 110, 100, 80,130, 110, 100, 80]
+      let xData = []
+      let uvData = []
+      let pvData = []
+      this.data.visit_data.forEach((item, index) => {
+        xData.push(item.day)
+        uvData.push(item.uv)
+        pvData.push(item.pv)
+      })
       this.visitChart = echarts.init(this.$refs.visitChart)
       let option = {
-        grid: {
-          // 让图表占满容器
-          top: '40px',
-          left: '40px',
-          right: '40px',
-          bottom: '40px'
-        },
         title: {
-          text: '',
-          textStyle: {
-            color: '#AAAAAA',
-            fontStyle: 'normal',
-            fontWeight: 'normal',
-            fontSize: 18
-          },
-          x: 'center',
-          y: 'top'
+          text: ''
         },
         tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'shadow'
-          }
+          trigger: 'axis'
+        },
+        legend: {
+          data: ['IP', 'visit'],
+          top: '90%',
+          left: 'center'
+        },
+        grid: {
+          top: '30px',
+          left: '20px',
+          right: '20px',
+          bottom: '40px',
+          containLabel: true
         },
         xAxis: {
-          data: xData,
           type: 'category',
           axisLabel: {
-            rotate: 30, // 倾斜30度,
             textStyle: {
               color: '#2F4F4F'
             }
@@ -185,7 +188,9 @@ export default {
             lineStyle: {
               color: '#2F4F4F'
             }
-          }
+          },
+          // boundaryGap: false,
+          data: xData
         },
         yAxis: {
           type: 'value',
@@ -202,16 +207,16 @@ export default {
         },
         series: [
           {
-            data: yData,
-            type: 'bar',
-            itemStyle: {
-              normal: {
-                color: function (params) {
-                  // 柱图颜色
-                  return '#58A0D5'
-                }
-              }
-            }
+            name: 'IP',
+            type: 'line',
+            stack: 'Total',
+            data: uvData
+          },
+          {
+            name: 'visit',
+            type: 'line',
+            stack: 'Total',
+            data: pvData
           }
         ]
       }

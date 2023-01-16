@@ -127,7 +127,7 @@ const columns = [
   {
     title: '操作',
     dataIndex: 'action',
-    align: 'right',
+    align: 'center',
     fixed: 'right',
     width: 140,
     scopedSlots: { customRender: 'operation' }
@@ -162,6 +162,9 @@ export default {
         })
         this.data = res.data
         console.log(res)
+      }).catch(err => {
+        this.$message.error(err.msg)
+        this.loading = false
       })
     },
     onSearchChange (e) {

@@ -10,6 +10,7 @@
         <a-table
           size="middle"
           rowKey="id"
+          bordered
           :loading="loading"
           :columns="columns"
           :data-source="data"
@@ -45,17 +46,18 @@ const columns = [
     title: '序号',
     dataIndex: 'index',
     key: 'index',
-    width: 60
+    align: 'center'
   },
   {
     title: '标签名称',
     dataIndex: 'title',
-    key: 'title'
+    key: 'title',
+    align: 'center'
   },
   {
     title: '操作',
     dataIndex: 'action',
-    align: 'right',
+    align: 'center',
     fixed: 'right',
     width: 140,
     scopedSlots: { customRender: 'operation' }

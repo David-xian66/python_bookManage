@@ -24,6 +24,11 @@
           showTotal: (total) => `共${total}条数据`
         }"
       >
+        <span slot="status" slot-scope="text">
+          <a-tag :color="text === '1'? '#2db7f5':'#87d068'">
+            {{text === '1'? '借出':'已还'}}
+          </a-tag>
+        </span>
         <span slot="operation" class="operation" slot-scope="text, record">
           <a-space :size="16">
             <a :disabled="record.status === '2'" @click="handleReturn(record)">还书</a>
@@ -44,43 +49,49 @@ const columns = [
     title: '序号',
     dataIndex: 'index',
     key: 'index',
-    width: 60
+    align: 'center'
   },
   {
     title: '用户',
     dataIndex: 'username',
-    key: 'username'
+    key: 'username',
+    align: 'center'
   },
   {
     title: '图书',
     dataIndex: 'title',
-    key: 'title'
+    key: 'title',
+    align: 'center'
   },
   {
     title: '状态',
     dataIndex: 'status',
     key: 'status',
+    align: 'center',
     filters: [
       {text: '借出', value: '1'},
       {text: '已还', value: '2'}
     ],
     onFilter: (value, record) => record.status.includes(value),
-    customRender: (text) => text === '1' ? '借出' : '已还'
+    // customRender: (text) => text === '1' ? '借出' : '已还'
+    scopedSlots: {customRender: 'status'}
   },
   {
     title: '借出时间',
     dataIndex: 'borrow_time',
     key: 'borrow_time',
+    align: 'center'
   },
   {
     title: '应还时间',
     dataIndex: 'expect_time',
-    key: 'expect_time'
+    key: 'expect_time',
+    align: 'center'
   },
   {
     title: '操作',
     dataIndex: 'action',
-    align: 'right',
+    align: 'center',
     fixed: 'right',
     width: 140,
     scopedSlots: {customRender: 'operation'}

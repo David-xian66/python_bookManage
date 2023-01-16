@@ -44,32 +44,36 @@ const columns = [
     title: '序号',
     dataIndex: 'index',
     key: 'index',
-    width: 60
+    align: 'center'
   },
   {
     title: '用户',
     dataIndex: 'username',
-    key: 'username'
+    key: 'username',
+    align: 'center'
   },
   {
     title: '书名',
     dataIndex: 'title',
-    key: 'title'
+    key: 'title',
+    align: 'center'
   },
   {
     title: '评论内容',
     dataIndex: 'content',
-    key: 'content'
+    key: 'content',
+    align: 'center'
   },
   {
     title: '评论时间',
     dataIndex: 'comment_time',
-    key: 'comment_time'
+    key: 'comment_time',
+    align: 'center'
   },
   {
     title: '操作',
     dataIndex: 'action',
-    align: 'right',
+    align: 'center',
     fixed: 'right',
     width: 140,
     scopedSlots: { customRender: 'operation' }
