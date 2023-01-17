@@ -45,6 +45,7 @@ class Tag(models.Model):
 class Classification(models.Model):
     list_display = ("title", "id")
     id = models.BigAutoField(primary_key=True)
+    pid = models.IntegerField(blank=True, null=True, default=-1)
     title = models.CharField(max_length=100, blank=True, null=True)
     create_time = models.DateTimeField(auto_now_add=True, null=True)
 

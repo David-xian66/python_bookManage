@@ -30,6 +30,9 @@ django-cors-headers
 
 https://www.cnblogs.com/SunshineKimi/p/14140900.html
 
+二级分类设计：
+https://blog.csdn.net/weixin_47971206/article/details/124199978
+
 ### 常见问题
 
 多对多的查询可通过related_name别名查询

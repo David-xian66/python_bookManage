@@ -16,11 +16,22 @@
       </a-col>
       <a-col span="12">
         <a-form-model-item label="分类" prop="classification">
-          <a-select placeholder="请选择" allowClear v-model="form.classification">
-            <template v-for="item in cData">
-              <a-select-option :key="item.id" :value="item.id">{{item.title}}</a-select-option>
+          <a-tree-select
+            v-model="form.classification"
+            style="width: 100%"
+            :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }"
+            placeholder="请选择"
+            allow-clear
+            tree-default-expand-all
+          >
+            <template v-for="item1 in cData">
+              <a-tree-select-node :key="item1.key" :value="item1.key" :title="item1.name">
+                <template v-for="item2 in item1.children">
+                  <a-tree-select-node :key="item2.key" :value="item2.key" :title="item2.name"></a-tree-select-node>
+                </template>
+              </a-tree-select-node>
             </template>
-          </a-select>
+          </a-tree-select>
         </a-form-model-item>
       </a-col>
       <a-col span="12">
@@ -243,9 +254,6 @@ export default {
     getCDataList () {
       listClassificationApi().then(res => {
         this.loading = false
-        res.data.forEach((item, index) => {
-          item.index = index + 1
-        })
         this.cData = res.data
       })
     },

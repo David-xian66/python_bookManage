@@ -23,6 +23,10 @@ export default {
       type: Boolean,
       default: () => false
     },
+    pid: {
+      type: Number,
+      default: () => -1
+    },
     classification: {
       type: Object,
       default: () => {}
@@ -31,6 +35,7 @@ export default {
   data () {
     return {
       form: {
+        title: undefined
       },
       rules: {
         title: [{ required: true, message: '请输入分类名称', trigger: 'change' }]
@@ -39,7 +44,11 @@ export default {
   },
   created () {
     if (this.modifyFlag) {
-      this.form = this.classification
+      this.form.title = this.classification.name
+      this.form.id = this.classification.key
+    }
+    if (this.pid > 0) {
+      this.form.pid = this.pid
     }
   },
   methods: {
@@ -51,7 +60,7 @@ export default {
             if (this.modifyFlag) {
               // 修改接口
               updateApi({
-                id: this.classification.id
+                id: this.form.id
               }, this.form).then(res => {
                 console.log(res)
                 resolve(true)

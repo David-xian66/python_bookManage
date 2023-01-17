@@ -2,15 +2,14 @@
   <div class="page-view">
     <div class="table-operation">
       <a-space>
-        <a-button type="primary" @click="handleAdd">新增</a-button>
+        <a-button type="primary" @click="handleAdd(-1)">新增</a-button>
         <a-button @click="handleBatchDelete">批量删除</a-button>
       </a-space>
     </div>
     <div class="table-wrap" ref="tableWrap">
       <a-table
         size="middle"
-        rowKey="id"
-        bordered
+        rowKey="key"
         :loading="loading"
         :columns="columns"
         :data-source="data"
@@ -28,6 +27,7 @@
       >
         <span slot="operation" class="operation" slot-scope="text, record">
           <a-space :size="16">
+            <a v-if="record.isParent" @click="handleAdd(record.key)">新增</a>
             <a @click="handleEdit(record)">编辑</a>
             <a @click="handleDelete(record)">删除</a>
           </a-space>
@@ -43,21 +43,14 @@ import EditClassification from '@/views/admin/model/edit-classification'
 
 const columns = [
   {
-    title: '序号',
-    dataIndex: 'index',
-    key: 'index',
-    align: 'center',
-  },
-  {
     title: '分类名称',
-    dataIndex: 'title',
-    key: 'title',
-    align: 'center',
+    dataIndex: 'name',
+    key: 'name',
   },
   {
     title: '操作',
     dataIndex: 'action',
-    align: 'center',
+    align: 'right',
     fixed: 'right',
     width: 140,
     scopedSlots: { customRender: 'operation' }
@@ -81,9 +74,6 @@ export default {
       this.loading = true
       listApi().then(res => {
         this.loading = false
-        res.data.forEach((item, index) => {
-          item.index = index + 1
-        })
         this.data = res.data
       })
     },
@@ -91,13 +81,17 @@ export default {
       return {
         onChange: (selectedRowKeys, selectedRows) => {
           this.selectedRowKeys = selectedRowKeys
-        }
+        },
+        onSelect: (record, selected, selectedRows) => {
+          console.log(record, selected, selectedRows);
+        },
       }
     },
-    handleAdd () {
+    handleAdd (pid) {
       this.$dialog(
         EditClassification,
         {
+          pid: pid,
           on: {
             ok: () => {
               this.page = 1
@@ -147,7 +141,7 @@ export default {
         content: '该分类下的图书也会被删除！',
         onOk () {
           deleteApi({
-            ids: record.id
+            ids: record.key
           }).then(res => {
             that.$message.success('删除成功')
             that.getList()
