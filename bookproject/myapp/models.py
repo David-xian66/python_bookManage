@@ -159,3 +159,13 @@ class BorrowLog(models.Model):
 
     class Meta:
         db_table = "b_borrow_log"
+
+
+class Banner(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    image = models.ImageField(upload_to='banner/', null=True)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, null=True, related_name='book_banner')
+    create_time = models.DateTimeField(auto_now_add=True, null=True)
+
+    class Meta:
+        db_table = "b_banner"

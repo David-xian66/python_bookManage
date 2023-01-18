@@ -83,6 +83,24 @@ export default {
           title: '评论管理'
         },
         {
+          key: '/admin/banner',
+          title: '运营管理',
+          children: [
+            {
+              key: '/admin/banner',
+              title: '横幅管理'
+            },
+            {
+              key: '/admin/ad',
+              title: '广告管理'
+            },
+            {
+              key: '/admin/notice',
+              title: '通知公告'
+            }
+          ]
+        },
+        {
           key: '/admin/user',
           title: '系统管理',
           children: [
