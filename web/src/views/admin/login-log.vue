@@ -47,6 +47,12 @@ const columns = [
     align: 'center'
   },
   {
+    title: 'User-Agent',
+    dataIndex: 'ua',
+    key: 'ua',
+    align: 'center'
+  },
+  {
     title: '登录时间',
     dataIndex: 'log_time',
     key: 'log_time',

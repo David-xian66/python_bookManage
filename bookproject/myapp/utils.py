@@ -29,6 +29,14 @@ def get_ip(request):
     return ip
 
 
+def get_ua(request):
+    """
+    获取请求者的IP信息
+    """
+    ua = request.META.get('HTTP_USER_AGENT')
+    return ua[0:200]
+
+
 def getWeekDays():
     """
     获取近一周的日期

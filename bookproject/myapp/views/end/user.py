@@ -17,7 +17,8 @@ def make_login_log(request):
         username = request.data['username']
         data = {
             "username": username,
-            "ip": utils.get_ip(request)
+            "ip": utils.get_ip(request),
+            "ua": utils.get_ua(request)
         }
         serializer = LoginLogSerializer(data=data)
         if serializer.is_valid():
