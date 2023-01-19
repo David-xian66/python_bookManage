@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import {listApi, createApi, updateApi, delayApi} from '@/api/admin/borrow'
+import {listApi, createApi, updateApi, returnBookApi, delayApi} from '@/api/admin/borrow'
 
 const columns = [
   {
@@ -147,9 +147,10 @@ export default {
       this.$confirm({
         title: '确定还书?',
         onOk() {
-          updateApi({
+          returnBookApi({
             id: record.id
           }, {
+            book: record.book,
             status: '2'
           }).then(res => {
             that.$message.success('还书成功')

@@ -215,7 +215,7 @@ export default {
         if (this.form.page_count) {
           formData.append('page_count', this.form.page_count)
         }
-        if (this.form.repertory) {
+        if (this.form.repertory >= 0) {
           formData.append('repertory', this.form.repertory)
         }
         if (this.form.status) {

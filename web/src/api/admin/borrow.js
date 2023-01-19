@@ -6,6 +6,7 @@ import axios from '@/utils/request.js'
 const api = {
   listApi: '/myapp/end/borrow/list',
   createApi: '/myapp/end/borrow/create',
+  returnBookApi: '/myapp/end/borrow/return_book',
   deleteApi: '/myapp/end/borrow/delete',
   updateApi: '/myapp/end/borrow/update',
   delayApi: '/myapp/end/borrow/delay'
@@ -52,6 +53,20 @@ export const deleteApi = function (params) {
 export const updateApi = function (params, data) {
   return axios({
     url: api.updateApi,
+    method: 'post',
+    headers: {
+      'Content-Type': 'multipart/form-data;charset=utf-8'
+    },
+    params: params,
+    data: data
+  })
+}
+/**
+ * 还书
+ */
+export const returnBookApi = function (params, data) {
+  return axios({
+    url: api.returnBookApi,
     method: 'post',
     headers: {
       'Content-Type': 'multipart/form-data;charset=utf-8'

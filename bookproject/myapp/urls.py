@@ -41,6 +41,7 @@ urlpatterns = [
     path('end/borrow/list', views.end.borrow.list_api),
     path('end/borrow/create', views.end.borrow.create),
     path('end/borrow/update', views.end.borrow.update),
+    path('end/borrow/return_book', views.end.borrow.return_book),
     path('end/borrow/delay', views.end.borrow.delay),
     path('end/borrow/delete', views.end.borrow.delete),
     path('end/loginLog/list', views.end.loginLog.list_api),

@@ -115,10 +115,6 @@ export default {
             {
               key: '/admin/opLog',
               title: '操作日志'
-            },
-            {
-              key: '/admin/borrowLog',
-              title: '借阅日志'
             }
           ]
         }

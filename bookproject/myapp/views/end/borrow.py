@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view, authentication_classes
 
 from myapp.auth.authentication import AdminTokenAuthtication
 from myapp.handler import APIResponse
-from myapp.models import Borrow
+from myapp.models import Borrow, Book
 from myapp.permission.permission import isDemoAdminUser
 from myapp.serializers import BorrowSerializer
 
@@ -21,16 +21,27 @@ def list_api(request):
 @api_view(['POST'])
 @authentication_classes([AdminTokenAuthtication])
 def create(request):
+    """
+    创建借书
+    """
     if isDemoAdminUser(request):
         return APIResponse(code=1, msg='演示帐号无法操作')
 
     data = request.data.copy()
+    book = Book.objects.get(pk=data['book'])
+    if book.repertory <= 0:
+        return APIResponse(code=1, msg='库存不足')
+
     create_time = datetime.datetime.now()
     data['create_time'] = create_time
     data['expect_time'] = create_time + datetime.timedelta(days=60)
     serializer = BorrowSerializer(data=data)
     if serializer.is_valid():
         serializer.save()
+        # 减库存
+        book.repertory = book.repertory - 1
+        book.save()
+
         return APIResponse(code=0, msg='创建成功', data=serializer.data)
     else:
         print(serializer.errors)
@@ -53,6 +64,38 @@ def update(request):
     if serializer.is_valid():
         serializer.save()
         return APIResponse(code=0, msg='更新成功', data=serializer.data)
+    else:
+        print(serializer.errors)
+        return APIResponse(code=1, msg='更新失败')
+
+
+@api_view(['POST'])
+@authentication_classes([AdminTokenAuthtication])
+def return_book(request):
+    """
+    还书
+    """
+    if isDemoAdminUser(request):
+        return APIResponse(code=1, msg='演示帐号无法操作')
+
+    try:
+        pk = request.GET.get('id', -1)
+        borrow = Borrow.objects.get(pk=pk)
+    except Borrow.DoesNotExist:
+        return APIResponse(code=1, msg='对象不存在')
+
+    data = {
+        'status': 2
+    }
+    serializer = BorrowSerializer(borrow, data=data)
+    if serializer.is_valid():
+        serializer.save()
+        # 加库存
+        book = Book.objects.get(pk=request.data['book'])
+        book.repertory = book.repertory + 1
+        book.save()
+
+        return APIResponse(code=0, msg='借书成功', data=serializer.data)
     else:
         print(serializer.errors)
         return APIResponse(code=1, msg='更新失败')
