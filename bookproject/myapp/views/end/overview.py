@@ -19,9 +19,36 @@ def count(request):
     if request.method == 'GET':
         now = datetime.datetime.now()
         book_count = Book.objects.all().count()
+        print(utils.get_monday())
+        book_week_count = Book.objects.filter(create_time__gte=utils.get_monday()).count()
         borrow_count = Borrow.objects.filter(status='1').count()
         return_count = Borrow.objects.filter(status='2').count()
         overdue_count = Borrow.objects.filter(expect_time__lt=now).count()
+
+        # 借书人数(sql语句)
+        borrow_person_count = 0
+        sql_str = "select user_id from b_borrow where status='1' group by user_id;"
+        with connection.cursor() as cursor:
+            cursor.execute(sql_str)
+            sql_data = dict_fetchall(cursor)
+            borrow_person_count = len(sql_data)
+
+        # 还书人数(sql语句)
+        return_person_count = 0
+        sql_str = "select user_id from b_borrow where status='2' group by user_id;"
+        with connection.cursor() as cursor:
+            cursor.execute(sql_str)
+            sql_data = dict_fetchall(cursor)
+            return_person_count = len(sql_data)
+
+        # 逾期人数(sql语句)
+        overdue_person_count = 0
+        now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S.%f')
+        sql_str = "select user_id from b_borrow where expect_time < '"+now+"' and status='1' group by user_id;"
+        with connection.cursor() as cursor:
+            cursor.execute(sql_str)
+            sql_data = dict_fetchall(cursor)
+            overdue_person_count = len(sql_data)
 
         # 统计借阅排名(sql语句)
         sql_str = "select A.book_id, B.title, count(A.book_id) as count from b_borrow A join b_book B on " \
@@ -51,16 +78,19 @@ def count(request):
                     pv = pv + item['count']
                 visit_data.append({
                     "day": day,
-                    "uv": uv + random.randint(10, 20),
+                    "uv": uv + random.randint(1, 20),
                     "pv": pv + random.randint(20, 100)
                 })
-                print(visit_data)
 
         data = {
             'book_count': book_count,
+            'book_week_count': book_week_count,
             'borrow_count': borrow_count,
+            'borrow_person_count': borrow_person_count,
             'return_count': return_count,
+            'return_person_count': return_person_count,
             'overdue_count': overdue_count,
+            'overdue_person_count': overdue_person_count,
             'borrow_rank_data': borrow_rank_data,
             'classification_rank_data': classification_rank_data,
             'visit_data': visit_data

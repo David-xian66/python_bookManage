@@ -42,7 +42,6 @@
 
 <script>
 import {listApi, createApi, updateApi, delayApi} from '@/api/admin/borrow'
-// import EditTag from '@/views/admin/model/edit-tag'
 
 const columns = [
   {
@@ -133,7 +132,7 @@ export default {
     handleAdd() {
       createApi({
         book: '4',
-        user: '10',
+        user: '11',
         status: '1',
         delayed: false
       }).then(res => {

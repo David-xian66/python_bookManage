@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
-from myapp.models import Book, Classification, Tag, User, Comment, Record, LoginLog, Borrow, BorrowLog, OpLog, Banner
+from myapp.models import Book, Classification, Tag, User, Comment, Record, LoginLog, Borrow, BorrowLog, OpLog, Banner, \
+    Ad, Notice
 
 
 class BookSerializer(serializers.ModelSerializer):
@@ -89,4 +90,20 @@ class BannerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Banner
+        fields = '__all__'
+
+
+class AdSerializer(serializers.ModelSerializer):
+    create_time = serializers.DateTimeField(format='%Y-%m-%d %H:%M:%S', required=False)
+
+    class Meta:
+        model = Ad
+        fields = '__all__'
+
+
+class NoticeSerializer(serializers.ModelSerializer):
+    create_time = serializers.DateTimeField(format='%Y-%m-%d %H:%M:%S', required=False)
+
+    class Meta:
+        model = Notice
         fields = '__all__'

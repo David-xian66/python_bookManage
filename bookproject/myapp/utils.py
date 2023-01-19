@@ -40,3 +40,12 @@ def getWeekDays():
         week_days.append(day.strftime('%Y-%m-%d %H:%M:%S.%f')[:10])
     week_days.reverse()  # 逆序
     return week_days
+
+
+def get_monday():
+    """
+    获取本周周一日期
+    """
+    now = datetime.datetime.now()
+    monday = now - datetime.timedelta(now.weekday())
+    return monday.strftime('%Y-%m-%d %H:%M:%S.%f')[:10]

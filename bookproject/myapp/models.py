@@ -169,3 +169,22 @@ class Banner(models.Model):
 
     class Meta:
         db_table = "b_banner"
+
+
+class Ad(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    image = models.ImageField(upload_to='ad/', null=True)
+    link = models.CharField(max_length=500, blank=True, null=True)
+    create_time = models.DateTimeField(auto_now_add=True, null=True)
+
+    class Meta:
+        db_table = "b_ad"
+
+
+class Notice(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    content = models.CharField(max_length=1000, blank=True, null=True)
+    create_time = models.DateTimeField(auto_now_add=True, null=True)
+
+    class Meta:
+        db_table = "b_notice"

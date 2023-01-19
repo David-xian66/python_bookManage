@@ -9,3 +9,5 @@ from myapp.views.end.loginLog import *
 from myapp.views.end.borrow import *
 from myapp.views.end.opLog import *
 from myapp.views.end.banner import *
+from myapp.views.end.ad import *
+from myapp.views.end.notice import *

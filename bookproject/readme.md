@@ -42,6 +42,8 @@ ForeignKey的时候字段会自动加_id后缀
 跨域配置 django-cors-headers
 数据库备份命令:
 mysqldump -u root -p --databases 数据库名称 > xxx.sql
+创建管理员命令：
+insert into b_user(username,password,role,status) values('admin111',md5('admin111'),1,'0');
 
 ### 登录接口
 

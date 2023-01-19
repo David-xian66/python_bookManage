@@ -83,6 +83,10 @@ export default {
           title: '评论管理'
         },
         {
+          key: '/admin/user',
+          title: '用户管理'
+        },
+        {
           key: '/admin/banner',
           title: '运营管理',
           children: [
@@ -104,10 +108,6 @@ export default {
           key: '/admin/user',
           title: '系统管理',
           children: [
-            {
-              key: '/admin/user',
-              title: '用户管理'
-            },
             {
               key: '/admin/loginLog',
               title: '登录日志'

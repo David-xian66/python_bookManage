@@ -5,14 +5,14 @@
       <a-row :gutter="[20,20]">
         <a-col :sm="24" :md="12" :lg="6">
           <a-card size="small" title="图书总数">
-            <a-tag color="blue" slot="extra">月</a-tag>
+            <a-tag color="blue" slot="extra">总</a-tag>
             <div class="box">
               <div class="box-top">
                 <span class="box-value">{{ data.book_count }}<span class="v-e">本</span></span>
-                <a-icon type="book" theme="twoTone" style="font-size: 24px;"/>
+                <a-icon type="profile" theme="twoTone" style="font-size: 24px;"/>
               </div>
               <div class="box-bottom">
-                <span>图书总数: 3,000</span>
+                <span>本周新增 {{ data.book_week_count }} 本</span>
               </div>
             </div>
           </a-card>
@@ -20,14 +20,14 @@
 
         <a-col :sm="24" :md="12" :lg="6">
           <a-card size="small" title="在借书籍">
-            <a-tag color="green" slot="extra">月</a-tag>
+            <a-tag color="green" slot="extra">借</a-tag>
             <div class="box">
               <div class="box-top">
                 <span class="box-value">{{ data.borrow_count }}<span class="v-e">本</span></span>
-                <a-icon type="book" theme="twoTone" style="font-size: 24px;"/>
+                <a-icon type="carry-out"  theme="twoTone" style="font-size: 24px;"/>
               </div>
               <div class="box-bottom">
-                <span>在借总数: 3,000</span>
+                <span>共 {{data.borrow_person_count}} 人</span>
               </div>
             </div>
           </a-card>
@@ -35,14 +35,14 @@
 
         <a-col :sm="24" :md="12" :lg="6">
           <a-card size="small" title="已还书籍">
-            <a-tag color="blue" slot="extra">月</a-tag>
+            <a-tag color="blue" slot="extra">还</a-tag>
             <div class="box">
               <div class="box-top">
                 <span class="box-value">{{ data.return_count }}<span class="v-e">本</span></span>
-                <a-icon type="book" theme="twoTone" style="font-size: 24px;"/>
+                <a-icon type="interaction" theme="twoTone" style="font-size: 24px;"/>
               </div>
               <div class="box-bottom">
-                <span>已还总数: 3,000</span>
+                <span>共 {{data.return_person_count}} 人</span>
               </div>
             </div>
           </a-card>
@@ -50,14 +50,15 @@
 
         <a-col :sm="24" :md="12" :lg="6">
           <a-card size="small" title="逾期未还">
-            <a-tag color="green" slot="extra">月</a-tag>
+            <a-tag color="green" slot="extra">逾</a-tag>
+
             <div class="box">
               <div class="box-top">
                 <span class="box-value">{{ data.overdue_count }}<span class="v-e">本</span></span>
-                <a-icon type="book" theme="twoTone" style="font-size: 24px;"/>
+                <a-icon type="bell" theme="twoTone" style="font-size: 24px;"/>
               </div>
               <div class="box-bottom">
-                <span>逾期总数: 3,000</span>
+                <span>共 {{data.overdue_person_count}} 人</span>
               </div>
             </div>
           </a-card>
@@ -396,7 +397,7 @@ export default {
     }
     .box-value {
       color: #000000;
-      font-size: 28px;
+      font-size: 32px;
       margin-right: 12px;
       .v-e {
         font-size: 14px;

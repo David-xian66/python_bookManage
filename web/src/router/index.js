@@ -76,6 +76,16 @@ const constantRouterMap = [
         component: () => import('@/views/admin/banner')
       },
       {
+        path: 'ad',
+        name: 'ad',
+        component: () => import('@/views/admin/ad')
+      },
+      {
+        path: 'notice',
+        name: 'notice',
+        component: () => import('@/views/admin/notice')
+      },
+      {
         path: 'comment',
         name: 'comment',
         component: () => import('@/views/admin/comment')
