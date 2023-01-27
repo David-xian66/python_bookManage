@@ -5,6 +5,7 @@ from myapp import views
 app_name = 'myapp'
 urlpatterns = [
     path('end/overview/count', views.end.overview.count),
+    path('end/overview/sysInfo', views.end.overview.sysInfo),
     path('end/book/list', views.end.book.list_api),
     path('end/book/detail', views.end.book.detail),
     path('end/book/create', views.end.book.create),
@@ -49,6 +50,7 @@ urlpatterns = [
     path('end/loginLog/update', views.end.loginLog.update),
     path('end/loginLog/delete', views.end.loginLog.delete),
     path('end/opLog/list', views.end.opLog.list_api),
+    path('end/errorLog/list', views.end.errorLog.list_api),
     path('end/user/list', views.end.user.list_api),
     path('end/user/create', views.end.user.create),
     path('end/user/update', views.end.user.update),

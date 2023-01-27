@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from myapp.models import Book, Classification, Tag, User, Comment, Record, LoginLog, Borrow, BorrowLog, OpLog, Banner, \
-    Ad, Notice
+    Ad, Notice, ErrorLog
 
 
 class BookSerializer(serializers.ModelSerializer):
@@ -61,6 +61,14 @@ class OpLogSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = OpLog
+        fields = '__all__'
+
+
+class ErrorLogSerializer(serializers.ModelSerializer):
+    log_time = serializers.DateTimeField(format='%Y-%m-%d %H:%M:%S', required=False)
+
+    class Meta:
+        model = ErrorLog
         fields = '__all__'
 
 

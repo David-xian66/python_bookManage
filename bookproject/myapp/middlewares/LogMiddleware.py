@@ -37,7 +37,7 @@ class OpLogs(MiddlewareMixin):
                 # 're_content': re_content,
             }
         )
-        print(self.data)
+        # print(self.data)
 
     def process_response(self, request, response):
 

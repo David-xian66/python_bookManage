@@ -66,6 +66,11 @@ const constantRouterMap = [
         component: () => import('@/views/admin/op-log')
       },
       {
+        path: 'errorLog',
+        name: 'errorLog',
+        component: () => import('@/views/admin/error-log')
+      },
+      {
         path: 'banner',
         name: 'banner',
         component: () => import('@/views/admin/banner')
@@ -94,6 +99,11 @@ const constantRouterMap = [
         path: 'user',
         name: 'user',
         component: () => import('@/views/admin/user')
+      },
+      {
+        path: 'sysInfo',
+        name: 'sysInfo',
+        component: () => import('@/views/admin/sys-info')
       }
     ]
   },

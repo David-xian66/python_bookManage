@@ -105,8 +105,8 @@ export default {
           ]
         },
         {
-          key: '/admin/user',
-          title: '系统管理',
+          key: '/admin/loginLog',
+          title: '日志管理',
           children: [
             {
               key: '/admin/loginLog',
@@ -115,8 +115,16 @@ export default {
             {
               key: '/admin/opLog',
               title: '操作日志'
+            },
+            {
+              key: '/admin/errorLog',
+              title: '异常日志'
             }
           ]
+        },
+        {
+          key: '/admin/sysInfo',
+          title: '系统信息'
         }
       ]
     }
