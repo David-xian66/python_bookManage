@@ -4,12 +4,12 @@
 import axios from '@/utils/request.js'
 
 const api = {
-  listApi: '/myapp/end/borrow/list',
-  createApi: '/myapp/end/borrow/create',
-  returnBookApi: '/myapp/end/borrow/return_book',
-  deleteApi: '/myapp/end/borrow/delete',
-  updateApi: '/myapp/end/borrow/update',
-  delayApi: '/myapp/end/borrow/delay'
+  listApi: '/myapp/admin/borrow/list',
+  createApi: '/myapp/admin/borrow/create',
+  returnBookApi: '/myapp/admin/borrow/return_book',
+  deleteApi: '/myapp/admin/borrow/delete',
+  updateApi: '/myapp/admin/borrow/update',
+  delayApi: '/myapp/admin/borrow/delay'
 }
 
 /**

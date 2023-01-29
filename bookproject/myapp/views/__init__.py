@@ -1,1 +1,2 @@
-from myapp.views.end import *
+from myapp.views.admin import *
+from myapp.views.index import *

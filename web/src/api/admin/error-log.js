@@ -4,7 +4,7 @@
 import axios from '@/utils/request.js'
 
 const api = {
-  listApi: '/myapp/end/errorLog/list'
+  listApi: '/myapp/admin/errorLog/list'
 }
 
 /**
