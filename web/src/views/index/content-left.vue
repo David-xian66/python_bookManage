@@ -1,25 +1,21 @@
 <template>
   <div class="content-left">
     <div class="left-search-item"><h4>图书分类</h4>
-      <div class="category-item">
-        <div class="flex-view">
-          <span class="name">全部</span>
-          <span class="count"></span>
-        </div>
-      </div>
-      <template v-for="item in data">
-        <div class="category-item">
-          <div class="flex-view" @click="toggleShow($event)">
-            <span class="name">{{ item.name }}</span>
-            <span class="count">11</span>
-          </div>
-          <ul style="display: none;">
-            <template v-for="child in item.children">
-              <li class="child">{{ child.name }}</li>
-            </template>
-          </ul>
-        </div>
-      </template>
+      <a-tree :tree-data="cData">
+      </a-tree>
+<!--      <template v-for="(item,index) in data">-->
+<!--        <div class="category-item">-->
+<!--          <div :class="{'select':selectX===(index+1)}" class="flex-view" @click="toggleShow($event, index)">-->
+<!--            <span class="name ">{{ item.name }}</span>-->
+<!--            <span class="count">11</span>-->
+<!--          </div>-->
+<!--          <ul style="display: none;">-->
+<!--            <template v-for="child in item.children">-->
+<!--              <li class="child">{{ child.name }}</li>-->
+<!--            </template>-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--      </template>-->
     </div>
     <div class="left-search-item"><h4>书籍状态</h4>
       <div class="check-item flex-view"><input type="checkbox" name="state"
@@ -37,9 +33,7 @@
     </div>
     <div class="left-search-item"><h4>热门标签</h4>
       <div class="tag-view tag-flex-view">
-        <div v-for="item in tagData" :key="item.id">
-          <span class="tag">{{item.title}}</span>
-        </div>
+        <span class="tag" :class="{'tag-select': selectTagId===item.id}" v-for="item in tagData" :key="item.id" @click="clickTag(item.id)">{{item.title}}</span>
       </div>
     </div>
   </div>
@@ -53,7 +47,9 @@ export default {
   name: 'ContentLeft',
   data () {
     return {
-      data: [],
+      selectX: 0,
+      selectTagId: -1,
+      cData: [],
       tagData: [],
       loading: false
     }
@@ -64,14 +60,14 @@ export default {
   methods: {
     getList () {
       listApi().then(res => {
-        this.data = res.data
+        this.cData = res.data
       })
       listTagList().then(res => {
         this.tagData = res.data
       })
     },
     // 显示/隐藏
-    toggleShow (e) {
+    toggleShow (e, index) {
       let next = e.currentTarget.nextElementSibling
       let display = next.style.display
       if (display === 'none') {
@@ -80,6 +76,9 @@ export default {
         display = 'none'
       }
       next.style.display = display
+    },
+    clickTag (index) {
+      this.selectTagId = index
     }
   }
 }
@@ -211,5 +210,15 @@ li {
   cursor: pointer;
   font-size: 12px;
   color: #152844;
+}
+.tag:hover {
+  background: #4684e2;
+  color: #fff;
+  border: 1px solid #4684e2;
+}
+.tag-select {
+  background: #4684e2;
+  color: #fff;
+  border: 1px solid #4684e2;
 }
 </style>

@@ -12,7 +12,12 @@ def list_api(request):
         sql_str = 'SELECT x.id AS parentId, x.title AS parentTitle, y.id AS childId ,y.title AS childTitle FROM ' \
                   'b_classification AS x LEFT JOIN b_classification AS y ON y.pid = x.id WHERE x.pid = -1 order by ' \
                   'x.create_time desc '
-        data = []
+        data = [{
+            'key': -1,
+            'title': '全部',
+            'isParent': True,
+            'children': []
+        }]
         with connection.cursor() as cursor:
             cursor.execute(sql_str)
             join_data = dict_fetchall(cursor)
@@ -25,7 +30,7 @@ def list_api(request):
                         if item1['childId']:
                             item2['children'].append({
                                 'key': item1['childId'],
-                                'name': item1['childTitle'],
+                                'title': item1['childTitle'],
                                 'isParent': False,
                                 # 'children': []
                             })
@@ -33,14 +38,14 @@ def list_api(request):
                 if not found:
                     k = {
                         'key': item1['parentId'],
-                        'name': item1['parentTitle'],
+                        'title': item1['parentTitle'],
                         'isParent': True,
                         'children': []
                     }
                     if item1['childId']:
                         k['children'].append({
                             'key': item1['childId'],
-                            'name': item1['childTitle'],
+                            'title': item1['childTitle'],
                             'isParent': False,
                             # 'children': []
                         })

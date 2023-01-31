@@ -30,6 +30,11 @@ const constantRouterMap = [
         path: 'contentLeft',
         name: 'contentLeft',
         component: () => import('@/views/index/content-left')
+      },
+      {
+        path: 'header',
+        name: 'header',
+        component: () => import('@/components/index/header')
       }
     ]
   },
