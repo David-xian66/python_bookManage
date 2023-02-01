@@ -35,6 +35,16 @@ const constantRouterMap = [
         path: 'header',
         name: 'header',
         component: () => import('@/components/index/header')
+      },
+      {
+        path: 'footer',
+        name: 'footer',
+        component: () => import('@/components/index/footer')
+      },
+      {
+        path: 'contentRight',
+        name: 'contentRight',
+        component: () => import('@/views/index/content-right')
       }
     ]
   },

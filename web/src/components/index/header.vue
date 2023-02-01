@@ -2,10 +2,10 @@
   <div class="main-bar-view">
     <div class="search-entry">
       <img src="@/assets/search-icon.svg" class="search-icon">
-      <span>输入关键词</span>
+      <input placeholder="输入关键词" ref="keyword" @keyup.enter="search" />
     </div>
     <div class="right-view">
-      <button class="login btn hidden-sm">登录图灵</button>
+      <button class="login btn hidden-sm">登录</button>
       <img src="@/assets/avatar.jpg" class="self-img">
       <div class="right-icon">
         <img src="@/assets/cart-icon.svg">
@@ -18,6 +18,22 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'Header',
+  data () {
+    return {}
+  },
+  methods: {
+    search () {
+      const keyword = this.$refs.keyword.value
+      console.log(keyword)
+    }
+
+  }
+}
+</script>
 
 <style scoped lang="less">
 .main-bar-view {
@@ -55,10 +71,15 @@
     width: 18px;
     margin: 7px 8px 0 0;
   }
-  span {
+  input {
     position: absolute;
-    top:5px;
-    color: #a1adc5;
+    top:4px;
+    width: 85%;
+    height: 24px;
+    border: 0px;
+    outline:none;
+    color: #000;
+    background: #ecf3fc;
     font-size: 14px;
   }
 }
@@ -125,7 +146,7 @@
     color: #fff;
     border-radius: 32px;
     text-align: center;
-    width: 88px;
+    width: 66px;
     height: 32px;
     line-height: 32px;
     vertical-align: middle;
