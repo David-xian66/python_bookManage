@@ -60,6 +60,11 @@ const constantRouterMap = [
         path: 'searchContentView',
         name: 'searchContentView',
         component: () => import('@/views/index/components/search-content-view')
+      },
+      {
+        path: 'mineInfosView',
+        name: 'mineInfosView',
+        component: () => import('@/views/index/components/mine-infos-view')
       }
     ]
   },
