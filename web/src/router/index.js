@@ -29,22 +29,37 @@ const constantRouterMap = [
       {
         path: 'contentLeft',
         name: 'contentLeft',
-        component: () => import('@/views/index/content-left')
+        component: () => import('@/views/index/components/content-left')
       },
       {
         path: 'header',
         name: 'header',
-        component: () => import('@/components/index/header')
+        component: () => import('@/views/index/components/header')
       },
       {
         path: 'footer',
         name: 'footer',
-        component: () => import('@/components/index/footer')
+        component: () => import('@/views/index/components/footer')
       },
       {
         path: 'contentRight',
         name: 'contentRight',
-        component: () => import('@/views/index/content-right')
+        component: () => import('@/views/index/components/content-right')
+      },
+      {
+        path: 'bookInfosView',
+        name: 'bookInfosView',
+        component: () => import('@/views/index/components/book-infos-view')
+      },
+      {
+        path: 'bookContentView',
+        name: 'bookContentView',
+        component: () => import('@/views/index/components/book-content-view')
+      },
+      {
+        path: 'searchContentView',
+        name: 'searchContentView',
+        component: () => import('@/views/index/components/search-content-view')
       }
     ]
   },
