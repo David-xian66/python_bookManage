@@ -1,12 +1,12 @@
 <template>
   <div class="content-list">
-    <div class="list-title">我的收藏</div>
+    <div class="list-title">我的心愿单</div>
     <div role="tablist" class="list-tabs-view flex-view">
     </div>
     <div class="list-content">
       <div class="collect-book-view">
         <div class="book-list flex-view">
-          <div class="book-item item-column-3" v-for="(item,index) in collectData" :key="index">
+          <div class="book-item item-column-3" v-for="(item,index) in wishData" :key="index">
             <div class="remove">移出</div>
             <div class="img-view">
               <img class="" data-src="https://file.ituring.com.cn/LargeCover/2212db3d2bb99b3522ed"
@@ -26,10 +26,10 @@
 
 <script>
 export default {
-  name: 'CollectBookView',
+  name: 'WishBookView',
   data () {
     return {
-      collectData: ['','','','']
+      wishData: ['','','','']
     }
   }
 }

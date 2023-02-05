@@ -67,6 +67,11 @@ const constantRouterMap = [
         component: () => import('@/views/index/components/mine-infos-view')
       },
       {
+        path: 'wishBookView',
+        name: 'wishBookView',
+        component: () => import('@/views/index/user/wish-book-view')
+      },,
+      {
         path: 'collectBookView',
         name: 'collectBookView',
         component: () => import('@/views/index/user/collect-book-view')
@@ -80,6 +85,36 @@ const constantRouterMap = [
         path: 'userInfoEditView',
         name: 'userInfoEditView',
         component: () => import('@/views/index/user/userinfo-edit-view')
+      },
+      {
+        path: 'followView',
+        name: 'followView',
+        component: () => import('@/views/index/user/follow-view')
+      },
+      {
+        path: 'fansView',
+        name: 'fansView',
+        component: () => import('@/views/index/user/fans-view')
+      },
+      {
+        path: 'commentView',
+        name: 'commentView',
+        component: () => import('@/views/index/user/comment-view')
+      },
+      {
+        path: 'securityView',
+        name: 'securityView',
+        component: () => import('@/views/index/user/security-view')
+      },
+      {
+        path: 'pushView',
+        name: 'pushView',
+        component: () => import('@/views/index/user/push-view')
+      },
+      {
+        path: 'messageView',
+        name: 'messageView',
+        component: () => import('@/views/index/user/message-view')
       }
     ]
   },
