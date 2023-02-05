@@ -3,19 +3,6 @@
     <div class="left-search-item"><h4>图书分类</h4>
       <a-tree :tree-data="cData">
       </a-tree>
-<!--      <template v-for="(item,index) in data">-->
-<!--        <div class="category-item">-->
-<!--          <div :class="{'select':selectX===(index+1)}" class="flex-view" @click="toggleShow($event, index)">-->
-<!--            <span class="name ">{{ item.name }}</span>-->
-<!--            <span class="count">11</span>-->
-<!--          </div>-->
-<!--          <ul style="display: none;">-->
-<!--            <template v-for="child in item.children">-->
-<!--              <li class="child">{{ child.name }}</li>-->
-<!--            </template>-->
-<!--          </ul>-->
-<!--        </div>-->
-<!--      </template>-->
     </div>
     <div class="left-search-item"><h4>书籍状态</h4>
       <div class="check-item flex-view"><input type="checkbox" name="state"

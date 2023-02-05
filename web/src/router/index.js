@@ -65,6 +65,21 @@ const constantRouterMap = [
         path: 'mineInfosView',
         name: 'mineInfosView',
         component: () => import('@/views/index/components/mine-infos-view')
+      },
+      {
+        path: 'collectBookView',
+        name: 'collectBookView',
+        component: () => import('@/views/index/user/collect-book-view')
+      },
+      {
+        path: 'orderView',
+        name: 'orderView',
+        component: () => import('@/views/index/user/order-view')
+      },
+      {
+        path: 'userInfoEditView',
+        name: 'userInfoEditView',
+        component: () => import('@/views/index/user/userinfo-edit-view')
       }
     ]
   },
