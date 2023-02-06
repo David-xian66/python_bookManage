@@ -9,7 +9,7 @@ const constantRouterMap = [
     path: '/index',
     name: 'index',
     redirect: '/index/portal',
-    component: () => import('@/layout/index/indexLayout'),
+    component: () => import('@/views/index'),
     children: [
       {
         path: 'portal',
@@ -22,99 +22,72 @@ const constantRouterMap = [
         component: () => import('@/views/index/detail')
       },
       {
-        path: 'list',
-        name: 'list',
-        component: () => import('@/views/index/list')
+        path: 'search',
+        name: 'search',
+        component: () => import('@/views/index/search')
       },
       {
-        path: 'contentLeft',
-        name: 'contentLeft',
-        component: () => import('@/views/index/components/content-left')
-      },
-      {
-        path: 'header',
-        name: 'header',
-        component: () => import('@/views/index/components/header')
-      },
-      {
-        path: 'footer',
-        name: 'footer',
-        component: () => import('@/views/index/components/footer')
-      },
-      {
-        path: 'contentRight',
-        name: 'contentRight',
-        component: () => import('@/views/index/components/content-right')
-      },
-      {
-        path: 'bookInfosView',
-        name: 'bookInfosView',
-        component: () => import('@/views/index/components/book-infos-view')
-      },
-      {
-        path: 'bookContentView',
-        name: 'bookContentView',
-        component: () => import('@/views/index/components/book-content-view')
-      },
-      {
-        path: 'searchContentView',
-        name: 'searchContentView',
-        component: () => import('@/views/index/components/search-content-view')
-      },
-      {
-        path: 'mineInfosView',
-        name: 'mineInfosView',
-        component: () => import('@/views/index/components/mine-infos-view')
-      },
-      {
-        path: 'wishBookView',
-        name: 'wishBookView',
-        component: () => import('@/views/index/user/wish-book-view')
-      },,
-      {
-        path: 'collectBookView',
-        name: 'collectBookView',
-        component: () => import('@/views/index/user/collect-book-view')
-      },
-      {
-        path: 'orderView',
-        name: 'orderView',
-        component: () => import('@/views/index/user/order-view')
-      },
-      {
-        path: 'userInfoEditView',
-        name: 'userInfoEditView',
-        component: () => import('@/views/index/user/userinfo-edit-view')
-      },
-      {
-        path: 'followView',
-        name: 'followView',
-        component: () => import('@/views/index/user/follow-view')
-      },
-      {
-        path: 'fansView',
-        name: 'fansView',
-        component: () => import('@/views/index/user/fans-view')
-      },
-      {
-        path: 'commentView',
-        name: 'commentView',
-        component: () => import('@/views/index/user/comment-view')
-      },
-      {
-        path: 'securityView',
-        name: 'securityView',
-        component: () => import('@/views/index/user/security-view')
-      },
-      {
-        path: 'pushView',
-        name: 'pushView',
-        component: () => import('@/views/index/user/push-view')
-      },
-      {
-        path: 'messageView',
-        name: 'messageView',
-        component: () => import('@/views/index/user/message-view')
+        path: 'user',
+        name: 'user',
+        redirect: 'user/addressView',
+        component: () => import('@/views/index/user'),
+        children: [
+          {
+            path: 'addressView',
+            name: 'addressView',
+            component: () => import('@/views/index/user/address-view')
+          },
+          {
+            path: 'wishBookView',
+            name: 'wishBookView',
+            component: () => import('@/views/index/user/wish-book-view')
+          },
+          {
+            path: 'collectBookView',
+            name: 'collectBookView',
+            component: () => import('@/views/index/user/collect-book-view')
+          },
+          {
+            path: 'orderView',
+            name: 'orderView',
+            component: () => import('@/views/index/user/order-view')
+          },
+          {
+            path: 'userInfoEditView',
+            name: 'userInfoEditView',
+            component: () => import('@/views/index/user/userinfo-edit-view')
+          },
+          {
+            path: 'followView',
+            name: 'followView',
+            component: () => import('@/views/index/user/follow-view')
+          },
+          {
+            path: 'fansView',
+            name: 'fansView',
+            component: () => import('@/views/index/user/fans-view')
+          },
+          {
+            path: 'commentView',
+            name: 'commentView',
+            component: () => import('@/views/index/user/comment-view')
+          },
+          {
+            path: 'securityView',
+            name: 'securityView',
+            component: () => import('@/views/index/user/security-view')
+          },
+          {
+            path: 'pushView',
+            name: 'pushView',
+            component: () => import('@/views/index/user/push-view')
+          },
+          {
+            path: 'messageView',
+            name: 'messageView',
+            component: () => import('@/views/index/user/message-view')
+          },
+        ]
       }
     ]
   },

@@ -46,7 +46,7 @@ export default {
 </script>
 <style scoped lang="less">
 .content-margin {
-  margin: 156px 0 360px;
+  margin: 156px 0 100px;
 }
 
 .page-view {

@@ -204,7 +204,8 @@ export default {
     flex: 0 0 235px;
     margin: 0 40px 0 0;
     img {
-      width: 160px;
+      width: 235px;
+      height: 339px;
       display: block;
       margin: 0 auto;
       -webkit-box-shadow: 0 2px 32px rgb(0 0 0 / 20%);

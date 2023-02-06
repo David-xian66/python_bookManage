@@ -44,7 +44,7 @@ export default {
   width: 100%;
   background: #fff;
   border-bottom: 1px solid #cedce4;
-  padding-left: 16px;
+  padding-left: 48px;
   z-index: 16;
   display: flex;
   flex-direction: row;
@@ -85,7 +85,7 @@ export default {
 }
 
 .right-view {
-  padding-right: 24px;
+  padding-right: 36px;
   flex:1;
   display: flex;
   flex-direction: row;

@@ -4,7 +4,7 @@ import storage from 'store'
 import { ADMIN_TOKEN, TOKEN } from '@/store/constants'
 
 // 路由权限白名单
-const allowList = ['admin-login', 'portal', 'list', 'detail','pushView','messageView', 'securityView','commentView','followView','fansView', 'userInfoEditView', 'orderView', 'collectBookView', 'wishBookView', 'searchContentView', 'mineInfosView', 'bookContentView', 'bookInfosView', 'header', 'footer', 'contentRight', 'contentLeft', '403', '404']
+const allowList = ['admin-login', 'portal', 'list', 'detail', '403', '404']
 // 前台登录地址
 const loginRoutePath = '/login'
 // 后台登录地址
@@ -41,12 +41,15 @@ router.beforeEach((to, from, next) => {
         next()
       }
     } else {
-      if (allowList.includes(to.name)) {
-        // 在免登录名单，直接进入
-        next()
-      } else {
-        next({ path: loginRoutePath, query: { redirect: to.fullPath } })
-      }
+      // if (allowList.includes(to.name)) {
+      //   // 在免登录名单，直接进入
+      //   next()
+      // } else {
+      //   next({ path: loginRoutePath, query: { redirect: to.fullPath } })
+      // }
+
+      // todo mock
+      next()
     }
   }
 })

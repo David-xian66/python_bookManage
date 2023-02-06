@@ -7,7 +7,10 @@
       <div class="link-split"></div>
       <a href="" class="foot-link" target="_blank">关于我们</a>
     </div>
-    <div class="footer-infos"><span data-v-1c9e5d10=""><a href="" target="_blank" style="color: rgb(174, 174, 174);">京ICP备11039595号</a></span>
+    <div class="footer-infos">
+      <span data-v-1c9e5d10="">
+        <a style="color: rgb(174, 174, 174);">京ICP备11039122号</a>
+      </span>
       <span>&nbsp;&nbsp;京公网安备123456&nbsp;&nbsp;新出发京零字第东XXXXXX号&nbsp;&nbsp;统一社会信用代码 XXXXXXXXXXXXXXXXX</span>
     </div>
     <div class="address">2022-2023 © 北京XX有限公司 · All Rights Reserved</div>

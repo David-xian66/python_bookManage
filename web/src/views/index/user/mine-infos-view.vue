@@ -75,6 +75,12 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'MineInfosView'
+}
+</script>
+
 <style scoped lang="less">
 .flex-view {
   display: flex;
