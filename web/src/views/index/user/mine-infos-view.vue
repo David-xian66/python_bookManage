@@ -33,19 +33,19 @@
     <div class="order-box">
       <div class="title">订单中心</div>
       <div class="list">
-        <div class="mine-item flex-view">
+        <div class="mine-item flex-view" @click="clickMenu('orderView')">
           <img src="@/assets/order-icon.svg" alt="我的订单">
           <span>我的订单</span>
         </div>
-        <div class="mine-item flex-view">
-          <img src="@/assets/order-book-icon.svg" alt="样书兑换">
-          <span>样书兑换</span>
+        <div class="mine-item flex-view" @click="clickMenu('commentView')">
+          <img src="@/assets/order-book-icon.svg" alt="我的评论">
+          <span>我的评论</span>
         </div>
-        <div class="mine-item flex-view">
+        <div class="mine-item flex-view" @click="clickMenu('addressView')">
           <img src="@/assets/order-address-icon.svg" alt="地址管理">
           <span>地址管理</span>
         </div>
-        <div class="mine-item flex-view">
+        <div class="mine-item flex-view" @click="clickMenu('')">
           <img src="@/assets/order-point-icon.svg" alt="我的银子">
           <span>我的银子</span>
         </div>
@@ -54,19 +54,19 @@
     <div class="setting-box">
       <div class="title">个人设置</div>
       <div class="list">
-        <div class="mine-item flex-view">
+        <div class="mine-item flex-view" @click="clickMenu('userInfoEditView')">
           <img src="@/assets/setting-icon.svg" alt="编辑资料">
           <span>编辑资料</span>
         </div>
-        <div class="mine-item flex-view">
+        <div class="mine-item flex-view" @click="clickMenu('securityView')">
           <img src="@/assets/setting-safe-icon.svg" alt="账号安全">
           <span>账号安全</span>
         </div>
-        <div class="mine-item flex-view">
+        <div class="mine-item flex-view" @click="clickMenu('pushView')">
           <img src="@/assets/setting-push-icon.svg" alt="推送设置">
           <span>推送设置</span>
         </div>
-        <div class="mine-item flex-view">
+        <div class="mine-item flex-view" @click="clickMenu('messageView')">
           <img src="@/assets/setting-msg-icon.svg" alt="消息管理">
           <span>消息管理</span>
         </div>
@@ -77,7 +77,13 @@
 
 <script>
 export default {
-  name: 'MineInfosView'
+  name: 'MineInfosView',
+  methods: {
+    clickMenu (name) {
+      console.log('mmmmm')
+      this.$router.push({name: name})
+    }
+  }
 }
 </script>
 

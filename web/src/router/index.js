@@ -1,6 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+// 重复点击bug
+const originalPush = Router.prototype.push
+
+Router.prototype.push = function push (location) {
+  return originalPush.call(this, location).catch(err => err)
+}
+
 Vue.use(Router)
 
 const constantRouterMap = [
@@ -11,6 +18,16 @@ const constantRouterMap = [
     redirect: '/index/portal',
     component: () => import('@/views/index'),
     children: [
+      {
+        path: 'login',
+        name: 'login',
+        component: () => import('@/views/index/login')
+      },
+      {
+        path: 'register',
+        name: 'register',
+        component: () => import('@/views/index/register')
+      },
       {
         path: 'portal',
         name: 'portal',

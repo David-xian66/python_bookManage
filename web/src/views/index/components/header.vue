@@ -5,7 +5,7 @@
       <input placeholder="输入关键词" ref="keyword" @keyup.enter="search" />
     </div>
     <div class="right-view">
-      <button class="login btn hidden-sm">登录</button>
+      <button class="login btn hidden-sm" @click="goLogin()">登录</button>
       <img src="@/assets/avatar.jpg" class="self-img">
       <div class="right-icon">
         <img src="@/assets/cart-icon.svg">
@@ -29,6 +29,9 @@ export default {
     search () {
       const keyword = this.$refs.keyword.value
       console.log(keyword)
+    },
+    goLogin () {
+      this.$router.push({name: ''})
     }
 
   }
