@@ -63,5 +63,7 @@ urlpatterns = [
     # 前台管理api
     path('index/classification/list', views.index.classification.list_api),
     path('index/tag/list', views.index.tag.list_api),
+    path('index/user/login', views.index.user.login),
+    path('index/user/register', views.index.user.register),
 
 ]

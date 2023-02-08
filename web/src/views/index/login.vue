@@ -1,48 +1,83 @@
 <template>
   <div class="container">
     <div class="login-page pc-style">
-      <img src="@/assets/logo.png" alt="logo" class="logo-icon">
+      <img src="@/assets/front-logo.png" alt="logo" class="logo-icon">
       <div class="login-tab">
-        <div role="tab" class="tab-selected">
+        <div class="tab-selected">
           <span>邮箱登录</span>
-          <span class="tabline tabline-width">
-      </span>
+          <span class="tabline tabline-width"></span>
         </div>
       </div>
       <div class="mail-login" type="login">
         <div class="common-input">
           <img src="@/assets/mail-icon.svg" class="left-icon">
           <div class="input-view">
-            <input placeholder="请输入注册邮箱" length="50" type="text" class="input">
+            <input placeholder="请输入注册邮箱" v-model="loginForm.username" type="text" class="input">
             <p class="err-view">
             </p>
           </div>
-          <img src="" class="right-icon" style="display: none;">
           <!---->
         </div>
         <div class="common-input">
           <img src="@/assets/pwd-icon.svg" class="left-icon">
           <div class="input-view">
-            <input placeholder="请输入密码" length="24" type="password" class="input">
+            <input placeholder="请输入密码" v-model="loginForm.password" type="password" class="input">
             <p class="err-view">
             </p>
           </div>
-          <img src="@/assets/pwd-hidden.svg" class="right-icon">
+<!--          <img src="@/assets/pwd-hidden.svg" class="right-icon">-->
           <!---->
         </div>
         <div class="next-btn-view">
-          <button class="next-btn btn-active" style="margin: 16px 0px;">登录</button>
-        </div>
-        <div class="loading" style="display: none;">
-          <div class="content tl-detail-loading">
-          </div>
+          <button class="next-btn btn-active" style="margin: 16px 0px;" @click="handleLogin">登录</button>
         </div>
       </div>
-      <a href="/findPassword" class="forget-pwd" style="">忘记密码？</a>
+      <div class="operation">
+        <a @click="$router.push({name:'register'})" class="forget-pwd" style="text-align: left;">注册新帐号</a>
+        <a class="forget-pwd" style="text-align: right;">忘记密码？</a>
+      </div>
     </div>
   </div>
 </template>
 
+<script>
+import {mapActions} from 'vuex'
+
+export default {
+  name: 'Login',
+  data () {
+    return {
+      loginForm: {
+        username: '',
+        password: ''
+      }
+    }
+  },
+  methods: {
+    ...mapActions(['Login']),
+
+    handleLogin () {
+      console.log('login')
+      this.Login({
+        username: this.loginForm.username,
+        password: this.loginForm.password
+      }).then(() => {
+        this.loginSuccess()
+      }).catch(error => {
+        this.requestFailed(error)
+      })
+    },
+    loginSuccess () {
+      // this.$router.push({ path: '/admin' })
+      this.$message.success('登录成功！')
+    },
+    requestFailed (err) {
+      this.$message.error(err.msg || '登录失败')
+    }
+  }
+}
+
+</script>
 <style scoped lang="less">
 div {
   display: block;
@@ -52,6 +87,9 @@ div {
   background-color: #24273a;
   height: 100%;
   max-width: 100%;
+  display:flex;
+  justify-content: center;
+  align-items:center;
 }
 
 .new-content {
@@ -71,16 +109,17 @@ div {
 .login-page {
   overflow: hidden;
   background: #fff;
+
   .logo-icon {
+    margin-top: 20px;
     margin-left: 175px;
+    width: 48px;
+    height: 48px;
   }
 }
 
 .pc-style {
-  position: absolute;
-  top: 74px;
-  left: 100px;
-  right: 0;
+  position: relative;
   width: 400px;
   height: 464px;
   background: #fff;
@@ -93,6 +132,8 @@ div {
   display: flex;
   color: #1e1e1e;
   font-size: 14px;
+  color: #1e1e1e;
+  font-weight: 500;
   height: 46px;
   line-height: 44px;
   margin-bottom: 40px;
@@ -130,6 +171,10 @@ div {
     padding: 0 28px;
   }
 
+}
+
+.mail-login {
+  margin: 0px 24px;
 }
 
 .common-input {
@@ -173,12 +218,8 @@ div {
   }
 }
 
-.btn-active {
-  background: #3d5b96;
-}
-
 .next-btn {
-  //background: #c3c9d5;
+  background: #3d5b96;
   border-radius: 4px;
   color: #fff;
   font-size: 14px;
@@ -203,17 +244,20 @@ button, input, select, textarea {
   outline: none;
 }
 
+.operation {
+  display: flex;
+  flex-direction: row;
+  margin: 0 24px;
+}
+
 .forget-pwd {
-  text-align: center;
+  //text-align: center;
   display: block;
-  width: 100px;
   overflow: hidden;
-  white-space: nowrap;
-  height: 36px;
-  line-height: 36px;
+  flex:1;
   margin: 0 auto;
   color: #3d5b96;
-  font-size: 12px;
+  font-size: 14px;
   cursor: pointer;
 }
 

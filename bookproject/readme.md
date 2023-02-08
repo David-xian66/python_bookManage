@@ -45,6 +45,8 @@ mysqldump -u root -p --databases 数据库名称 > xxx.sql
 创建管理员命令：
 insert into b_user(username,password,role,status) values('admin111',md5('admin111'),1,'0');
 
+接口请求频次限制
+
 借出：库存减1
 还书：库存加1
 

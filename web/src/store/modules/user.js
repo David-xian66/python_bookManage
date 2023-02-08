@@ -1,5 +1,6 @@
 import storage from 'store'
 import { adminLogin } from '@/api/admin/user'
+import { loginApi } from '@/api/index/user'
 import {ADMIN_TOKEN, ADMIN_USERNAME, TOKEN, USERNAME} from '@/store/constants'
 
 const user = {
@@ -66,7 +67,21 @@ const user = {
 
     // 普通用户登录
     Login ({commit}, {username, password}) {
-      // todo
+      return new Promise((resolve, reject) => {
+        loginApi({
+          username,
+          password
+        }).then(response => {
+          const result = response.data
+          commit('SET_TOKEN', result.token)
+          commit('SET_USERNAME', result.username)
+          storage.set(TOKEN, result.token)
+          storage.set(USERNAME, result.username)
+          resolve()
+        }).catch(error => {
+          reject(error)
+        })
+      })
     },
     // 普通用户退出
     Logout ({ commit, state }) {
