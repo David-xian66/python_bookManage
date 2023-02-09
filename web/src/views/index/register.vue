@@ -75,7 +75,7 @@ export default {
         repassword: this.loginForm.repassword
       }).then(res => {
         this.$message.success('注册成功！')
-        this.$router.push({name:'login'})
+        this.$router.push({name: 'login'})
       }).catch(err => {
         this.$message.error(err.msg || '注册失败')
       })

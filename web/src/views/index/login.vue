@@ -68,7 +68,7 @@ export default {
       })
     },
     loginSuccess () {
-      // this.$router.push({ path: '/admin' })
+      this.$router.push({ name: 'portal' })
       this.$message.success('登录成功！')
     },
     requestFailed (err) {
