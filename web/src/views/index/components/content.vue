@@ -2,7 +2,7 @@
   <div class="content">
     <div class="content-left">
       <div class="left-search-item"><h4>图书分类</h4>
-        <a-tree :tree-data="cData">
+        <a-tree :tree-data="cData" :selected-keys="selectedKeys" @select="onSelect">
         </a-tree>
       </div>
       <div class="left-search-item"><h4>书籍状态</h4>
@@ -59,19 +59,17 @@
         </div>
       </div>
       <div class="pc-book-list flex-view">
-        <div v-for="item in bookData" class="book-item item-column-3"><!---->
-          <div class="img-view"><img class=""
-                                     data-src="https://file.ituring.com.cn/LargeCover/2212c21242c05ebc49f3"
-                                     src="https://file.ituring.com.cn/LargeCover/2212c21242c05ebc49f3"
-                                     lazy="loaded"></div>
-          <div class="info-view"><h3 class="book-name">可编程网络自动化</h3>
-            <p class="authors">menjiaLi qiao jun</p>
-            <p class="translators">门佳，李巧君（译者）</p></div>
+        <div v-for="item in pageData" :key="item.id" @click="handleDetail(item)" class="book-item item-column-3"><!---->
+          <div class="img-view">
+            <img class="" src="https://file.ituring.com.cn/LargeCover/2212c21242c05ebc49f3"></div>
+          <div class="info-view"><h3 class="book-name">{{item.title}}</h3>
+            <p class="authors">{{item.author}}</p>
+            <p class="translators">{{item.translator}}（译者）</p></div>
         </div>
         <div class="no-data" style="display: none;">没有搜索到结果</div>
       </div>
       <div class="page-view" style="">
-        <a-pagination v-model="page" size="small" :total="50"/>
+        <a-pagination v-model="page" size="small" @change="changePage" :hideOnSinglePage="true" :defaultPageSize="pageSize" :total="total"/>
       </div>
 
     </div>
@@ -82,6 +80,7 @@
 <script>
 import {listApi as listClassificationList} from '@/api/index/classification'
 import {listApi as listTagList} from '@/api/index/tag'
+import {listApi as listBookList} from '@/api/index/book'
 
 export default {
   name: 'Content',
@@ -90,36 +89,28 @@ export default {
       selectX: 0,
       selectTagId: -1,
       cData: [],
+      selectedKeys: [],
       tagData: [],
       loading: false,
 
-      page: 1,
-      typeData: ['纸质书', '电子书', '预售书'],
+      typeData: ['纸质书', '电子书'],
       selectTypeIndex: 0,
       typeUnderLeft: 22,
       tabData: ['最新', '最热', '推荐'],
       selectTabIndex: 0,
       tabUnderLeft: 86,
-      bookData: [
-        '1',
-        '1',
-        '1',
-        '1',
-        '1',
-        '1',
-        '1',
-        '1',
-        '1',
-        '1',
-        '1',
-        '1',
-        '1',
-        '1'
-      ]
+
+      bookData: [],
+      pageData: [],
+
+      page: 1,
+      total: 0,
+      pageSize: 3,
     }
   },
   mounted () {
     this.initSider()
+    this.getBookList({})
   },
   methods: {
     initSider () {
@@ -130,23 +121,21 @@ export default {
         this.tagData = res.data
       })
     },
-    // 显示/隐藏
-    // toggleShow (e, index) {
-    //   let next = e.currentTarget.nextElementSibling
-    //   let display = next.style.display
-    //   if (display === 'none') {
-    //     display = 'block'
-    //   } else {
-    //     display = 'none'
-    //   }
-    //   next.style.display = display
-    // },
+    onSelect (selectedKeys) {
+      this.selectedKeys = selectedKeys
+      console.log(this.selectedKeys[0])
+      if (this.selectedKeys.length > 0) {
+        this.getBookList({c: this.selectedKeys[0]})
+      }
+    },
     clickTag (index) {
       this.selectTagId = index
+      this.getBookList({tag: this.selectTagId})
     },
     search () {
       const keyword = this.$refs.keyword.value
       console.log(keyword)
+      this.getBookList({'keyword': keyword})
     },
     clearSearch () {
       this.$refs.keyword.value = ''
@@ -159,6 +148,28 @@ export default {
     selectTab (index) {
       this.selectTabIndex = index
       this.tabUnderLeft = 86 + 53 * index
+    },
+    handleDetail (item) {
+      // 跳转新页面
+      let text = this.$router.resolve({name: 'detail', query: {id: item.id}})
+      window.open(text.href, '_blank')
+    },
+    // 分页事件
+    changePage (page) {
+      this.page = page
+      let start = (this.page - 1) * this.pageSize
+      this.pageData = this.bookData.slice(start, start + this.pageSize)
+      console.log('第' + this.page + '页')
+    },
+    getBookList (data) {
+      listBookList(data).then(res => {
+        console.log(res)
+        this.bookData = res.data
+        this.total = this.bookData.length
+        this.changePage(1)
+      }).catch(err => {
+        console.log(err)
+      })
     }
   }
 }
@@ -231,7 +242,7 @@ li {
 .flex-view {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: space-between;
+  //justify-content: space-between;
   display: flex;
 }
 
@@ -366,6 +377,7 @@ li {
       height: 32px;
       line-height: 32px;
       margin-left: 2px;
+      cursor: pointer;
     }
 
     .float-count {
@@ -375,8 +387,6 @@ li {
   }
 
   .flex-view {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
   }
 
@@ -460,8 +470,6 @@ li {
       min-width: 255px;
       max-width: 255px;
       position: relative;
-      -webkit-box-flex: 1;
-      -ms-flex: 1;
       flex: 1;
       margin-right: 20px;
       height: fit-content;

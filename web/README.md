@@ -38,6 +38,10 @@ https://juejin.cn/post/7013325675129995272
 
 http://idea.94goo.com/key
 
+#### node
+
+node版本：15.14.0
+node版本切换命令： n x.x.x
 
 ## Build Setup
 
