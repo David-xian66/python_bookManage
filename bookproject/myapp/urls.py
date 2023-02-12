@@ -67,6 +67,9 @@ urlpatterns = [
     path('index/user/register', views.index.user.register),
     path('index/book/list', views.index.book.list_api),
     path('index/book/detail', views.index.book.detail),
+    path('index/book/increaseWishCount', views.index.book.increaseWishCount),
+    path('index/book/addWishUser', views.index.book.addWishUser),
+    path('index/book/increaseRecommendCount', views.index.book.increaseRecommendCount),
 
 
 ]

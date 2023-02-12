@@ -5,37 +5,40 @@
         <a-tree :tree-data="cData" :selected-keys="selectedKeys" @select="onSelect">
         </a-tree>
       </div>
-<!--      <div class="left-search-item"><h4>书籍状态</h4>-->
-<!--        <div class="check-item flex-view"><input type="checkbox" name="state"-->
-<!--                                                 id="state0" value=""><label-->
-<!--          for="state0">上架</label>-->
-<!--        </div>-->
-<!--        <div class="check-item flex-view"><input type="checkbox" name="state"-->
-<!--                                                 id="state1" value=""><label-->
-<!--          for="state1">下架</label>-->
-<!--        </div>-->
-<!--        <div class="check-item flex-view"><input type="checkbox" name="state"-->
-<!--                                                 id="state2" value=""><label-->
-<!--          for="state2">预售</label>-->
-<!--        </div>-->
-<!--      </div>-->
+      <!--      <div class="left-search-item"><h4>书籍状态</h4>-->
+      <!--        <div class="check-item flex-view"><input type="checkbox" name="state"-->
+      <!--                                                 id="state0" value=""><label-->
+      <!--          for="state0">上架</label>-->
+      <!--        </div>-->
+      <!--        <div class="check-item flex-view"><input type="checkbox" name="state"-->
+      <!--                                                 id="state1" value=""><label-->
+      <!--          for="state1">下架</label>-->
+      <!--        </div>-->
+      <!--        <div class="check-item flex-view"><input type="checkbox" name="state"-->
+      <!--                                                 id="state2" value=""><label-->
+      <!--          for="state2">预售</label>-->
+      <!--        </div>-->
+      <!--      </div>-->
       <div class="left-search-item"><h4>热门标签</h4>
         <div class="tag-view tag-flex-view">
-          <span class="tag" :class="{'tag-select': selectTagId===item.id}" v-for="item in tagData" :key="item.id"
-                @click="clickTag(item.id)">{{ item.title }}</span>
+            <span class="tag" :class="{'tag-select': selectTagId===item.id}" v-for="item in tagData" :key="item.id"
+                  @click="clickTag(item.id)">{{ item.title }}</span>
         </div>
       </div>
     </div>
     <div class="content-right">
-<!--      <div class="pc-search-view flex-view">-->
-<!--        <img src="@/assets/searchIcon.svg"-->
-<!--             alt="搜索" class="search-icon">-->
-<!--        <input placeholder="搜索书名、ISBN" ref="keyword">-->
-<!--        <img src="@/assets/clear-search.svg" alt="清空" @click="clearSearch" class="clear-search-icon">-->
-<!--        <button @click="search">搜索</button>-->
-<!--        <span class="float-count" style="">共有2005本图书</span>-->
-<!--      </div>-->
+      <!--      <div class="pc-search-view flex-view">-->
+      <!--        <img src="@/assets/searchIcon.svg"-->
+      <!--             alt="搜索" class="search-icon">-->
+      <!--        <input placeholder="搜索书名、ISBN" ref="keyword">-->
+      <!--        <img src="@/assets/clear-search.svg" alt="清空" @click="clearSearch" class="clear-search-icon">-->
+      <!--        <button @click="search">搜索</button>-->
+      <!--        <span class="float-count" style="">共有2005本图书</span>-->
+      <!--      </div>-->
       <div class="top-select-view flex-view">
+<!--        <div class="type-view">-->
+<!--          <span>全部</span>-->
+<!--        </div>-->
         <div class="order-view">
           <span class="title"></span>
           <span class="tab"
@@ -52,14 +55,15 @@
         <div v-for="item in pageData" :key="item.id" @click="handleDetail(item)" class="book-item item-column-3"><!---->
           <div class="img-view">
             <img :src="item.cover"></div>
-          <div class="info-view"><h3 class="book-name">{{item.title}}</h3>
-            <p class="authors">{{item.author}}</p>
-            <p class="translators" v-if="item.translator">{{item.translator}}（译者）</p></div>
+          <div class="info-view"><h3 class="book-name">{{ item.title }}</h3>
+            <p class="authors">{{ item.author }}</p>
+            <p class="translators" v-if="item.translator">{{ item.translator }}（译者）</p></div>
         </div>
-        <div class="no-data" style="display: none;">没有搜索到结果</div>
+        <div v-if="pageData.length <= 0" class="no-data" style="">暂无数据</div>
       </div>
       <div class="page-view" style="">
-        <a-pagination v-model="page" size="small" @change="changePage" :hideOnSinglePage="true" :defaultPageSize="pageSize" :total="total"/>
+        <a-pagination v-model="page" size="small" @change="changePage" :hideOnSinglePage="true"
+                      :defaultPageSize="pageSize" :total="total"/>
       </div>
 
     </div>
@@ -108,14 +112,23 @@ export default {
         this.tagData = res.data
       })
     },
+    getSelectedKey () {
+      if (this.selectedKeys.length > 0) {
+        return this.selectedKeys[0]
+      } else {
+        return -1
+      }
+    },
     onSelect (selectedKeys) {
       this.selectedKeys = selectedKeys
       console.log(this.selectedKeys[0])
       if (this.selectedKeys.length > 0) {
-        this.getBookList({c: this.selectedKeys[0]})
+        this.getBookList({c: this.getSelectedKey()})
       }
+      this.selectTagId = -1
     },
     clickTag (index) {
+      this.selectedKeys = []
       this.selectTagId = index
       this.getBookList({tag: this.selectTagId})
     },
@@ -124,16 +137,23 @@ export default {
       console.log(keyword)
       this.getBookList({'keyword': keyword})
     },
-    clearSearch () {
-      this.$refs.keyword.value = ''
-      this.search()
-    },
+    // clearSearch () {
+    //   this.$refs.keyword.value = ''
+    //   this.search()
+    // },
+    // 最新|最热|推荐
     selectTab (index) {
       this.selectTabIndex = index
       this.tabUnderLeft = 12 + 53 * index
       console.log(this.selectTabIndex)
       let sort = (index === 0 ? 'recent' : index === 1 ? 'hot' : 'recommend')
-      this.getBookList({sort: sort})
+      const data = {sort: sort}
+      if (this.selectTagId !== -1) {
+        data['tag'] = this.selectTagId
+      } else {
+        data['c'] = this.getSelectedKey()
+      }
+      this.getBookList(data)
     },
     handleDetail (item) {
       // 跳转新页面

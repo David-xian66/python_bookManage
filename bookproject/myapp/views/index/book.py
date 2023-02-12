@@ -4,8 +4,8 @@ from rest_framework.decorators import api_view, authentication_classes
 
 from myapp import utils
 from myapp.handler import APIResponse
-from myapp.models import Classification, Book, Tag
-from myapp.serializers import BookSerializer, ClassificationSerializer
+from myapp.models import Classification, Book, Tag, User
+from myapp.serializers import BookSerializer, ClassificationSerializer, ListBookSerializer
 from myapp.utils import dict_fetchall
 
 
@@ -43,9 +43,9 @@ def list_api(request):
             print(tag)
             books = tag.book_set.all().order_by(order)
         else:
-            books = Book.objects.all().order_by(order)
+            books = Book.objects.all().defer('wish').order_by(order)
 
-        serializer = BookSerializer(books, many=True)
+        serializer = ListBookSerializer(books, many=True)
         return APIResponse(code=0, msg='查询成功', data=serializer.data)
 
 
@@ -61,3 +61,57 @@ def detail(request):
     if request.method == 'GET':
         serializer = BookSerializer(book)
         return APIResponse(code=0, msg='查询成功', data=serializer.data)
+
+
+@api_view(['POST'])
+def increaseWishCount(request):
+    try:
+        pk = request.GET.get('id', -1)
+        book = Book.objects.get(pk=pk)
+        # wish_count加1
+        book.wish_count = book.wish_count + 1
+        book.save()
+    except Book.DoesNotExist:
+        utils.log_error(request, '对象不存在')
+        return APIResponse(code=1, msg='对象不存在')
+
+    serializer = BookSerializer(book)
+    return APIResponse(code=0, msg='操作成功', data=serializer.data)
+
+
+@api_view(['POST'])
+def increaseRecommendCount(request):
+    try:
+        pk = request.GET.get('id', -1)
+        book = Book.objects.get(pk=pk)
+        # recommend_count加1
+        book.recommend_count = book.recommend_count + 1
+        book.save()
+    except Book.DoesNotExist:
+        utils.log_error(request, '对象不存在')
+        return APIResponse(code=1, msg='对象不存在')
+
+    serializer = BookSerializer(book)
+    return APIResponse(code=0, msg='操作成功', data=serializer.data)
+
+@api_view(['POST'])
+def addWishUser(request):
+    try:
+        username = request.GET.get('username', None)
+        bookId = request.GET.get('bookId', None)
+
+        if username and bookId:
+            user = User.objects.get(username=username)
+            book = Book.objects.get(pk=bookId)
+
+            if user not in book.wish.all():
+                book.wish.add(user)
+                book.wish_count += 1
+                book.save()
+
+    except Book.DoesNotExist:
+        utils.log_error(request, '操作失败')
+        return APIResponse(code=1, msg='操作失败')
+
+    serializer = BookSerializer(book)
+    return APIResponse(code=0, msg='操作成功', data=serializer.data)

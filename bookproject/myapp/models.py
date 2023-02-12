@@ -83,9 +83,12 @@ class Book(models.Model):
     layout = models.CharField(max_length=10, blank=True, null=True)
     create_time = models.DateTimeField(auto_now_add=True, null=True)
     pv = models.IntegerField(default=0)
+    wish_count = models.IntegerField(default=0)
+    recommend_count = models.IntegerField(default=0)
+    wish = models.ManyToManyField(User, blank=True, related_name="wish_users")
 
     class Meta:
-        db_table = "b_book"
+            db_table = "b_book"
 
 
 class Comment(models.Model):

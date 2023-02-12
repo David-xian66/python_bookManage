@@ -5,9 +5,22 @@ from myapp.models import Book, Classification, Tag, User, Comment, Record, Login
 
 
 class BookSerializer(serializers.ModelSerializer):
+    # 额外字段
+    classification_title = serializers.ReadOnlyField(source='classification.title')
+
     class Meta:
         model = Book
         fields = '__all__'
+
+
+class ListBookSerializer(serializers.ModelSerializer):
+    # 额外字段
+    classification_title = serializers.ReadOnlyField(source='classification.title')
+
+    class Meta:
+        model = Book
+        # 排除字段
+        exclude = ('wish', 'description',)
 
 
 class ClassificationSerializer(serializers.ModelSerializer):
