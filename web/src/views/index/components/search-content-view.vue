@@ -1,10 +1,10 @@
 <template>
   <div class="content-margin">
-    <h1 class="search-name-box">Python</h1>
+    <h1 class="search-name-box">{{keyword}}</h1>
     <div class="search-tab-nav clearfix">
       <div class="tab-text">
         <span>与</span>
-        <span class="strong">Python</span>
+        <span class="strong">{{keyword}}</span>
         <span>相关的内容</span>
       </div>
     </div>
@@ -12,21 +12,19 @@
       <div class="book-list">
 
         <div class="books flex-view">
-          <div class="book-item item-column-4" v-for="item in bookList">
+          <div class="book-item item-column-4" v-for="item in pageData">
             <div class="img-view">
-              <img class="" data-src="https://file.ituring.com.cn/LargeCover/2210bdf43a591653d247"
-                   src="https://file.ituring.com.cn/LargeCover/2210bdf43a591653d247" lazy="loaded">
+              <img :src="item.cover" lazy="loaded">
             </div>
             <div class="info-view">
-              <h3 class="book-name">Python+Excel/Word/PPT一本通</h3>
-              <p class="authors">马文豪（@小码哥）（作者）</p>
-              <p class="translators">
-              </p>
+              <h3 class="book-name">{{item.title}}</h3>
+              <p class="authors" v-if="item.author">{{item.author}}（作者）</p>
+              <p class="translators" v-if="item.translator">{{item.translator}}（译者）</p>
             </div>
           </div>
         </div>
         <div class="page-view" style="">
-          <a-pagination v-model="page" size="small" :total="50"/>
+          <a-pagination v-model="page" size="small" @change="changePage" :hideOnSinglePage="true" :defaultPageSize="pageSize" :total="total"/>
         </div>
       </div>
     </div>
@@ -34,12 +32,56 @@
 </template>
 
 <script>
+import {listApi as listBookList} from '@/api/index/book'
+
 export default {
   name: 'SearchContentView',
   data () {
     return {
-      page:1,
-      bookList: ['','','','','','','','','','']
+      keyword: '',
+      bookData: [],
+      pageData: [],
+
+      page: 1,
+      total: 0,
+      pageSize: 2,
+    }
+  },
+  watch: {
+    // 监听路由
+    $route (to, from) {
+      this.search()
+    }
+  },
+
+  mounted () {
+    this.search()
+  },
+  methods: {
+    search () {
+      this.keyword = this.$route.query.keyword.trim()
+      this.getBookList({'keyword': this.keyword})
+    },
+    // 分页事件
+    changePage (page) {
+      this.page = page
+      let start = (this.page - 1) * this.pageSize
+      this.pageData = this.bookData.slice(start, start + this.pageSize)
+      console.log('第' + this.page + '页')
+    },
+    getBookList (data) {
+      listBookList(data).then(res => {
+        res.data.forEach((item, index) => {
+          if (item.cover) {
+            item.cover = this.$BASE_URL + item.cover
+          }
+        })
+        this.bookData = res.data
+        this.total = this.bookData.length
+        this.changePage(1)
+      }).catch(err => {
+        console.log(err)
+      })
     }
   }
 }

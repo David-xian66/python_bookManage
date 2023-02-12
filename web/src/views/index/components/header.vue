@@ -1,19 +1,57 @@
 <template>
   <div class="main-bar-view">
+    <div class="logo">
+      <img src="@/assets/logo.png" class="search-icon" @click="$router.push({name:'portal'})">
+    </div>
     <div class="search-entry">
       <img src="@/assets/search-icon.svg" class="search-icon">
       <input placeholder="输入关键词" ref="keyword" @keyup.enter="search" />
     </div>
     <div class="right-view">
-      <button class="login btn hidden-sm" @click="goLogin()">登录</button>
-      <img src="@/assets/avatar.jpg" class="self-img">
-      <div class="right-icon">
-        <img src="@/assets/cart-icon.svg">
-        <span>3</span>
-      </div>
-      <div class="right-icon">
+      <template v-if="$store.state.user.username">
+<!--        <span class="username">你好, {{$store.state.user.username}}</span>-->
+        <a-dropdown>
+          <a class="ant-dropdown-link" @click="e => e.preventDefault()">
+            <img src="@/assets/avatar.jpg" class="self-img" >
+          </a>
+          <a-menu slot="overlay">
+            <a-menu-item>
+              <a @click="goUserCenter()">订单中心</a>
+            </a-menu-item>
+            <a-menu-item>
+              <a @click="goUserCenter()">个人设置</a>
+            </a-menu-item>
+            <a-menu-item>
+              <a @click="quit()">退出</a>
+            </a-menu-item>
+          </a-menu>
+        </a-dropdown>
+        <div class="right-icon">
+          <img src="@/assets/cart-icon.svg">
+          <span>3</span>
+        </div>
+      </template>
+      <template v-else>
+        <button class="login btn hidden-sm" @click="goLogin()">登录</button>
+      </template>
+
+      <div class="right-icon" @click="msgVisible=true">
         <img src="@/assets/message-icon.svg">
         <span class="msg-point" style=""></span>
+      </div>
+      <div>
+        <a-drawer
+          title="我的消息"
+          placement="right"
+          :closable="true"
+          :maskClosable="true"
+          :visible="msgVisible"
+          @close="onClose"
+        >
+          <p>新书通知...</p>
+          <p>新书通知...</p>
+          <p>新书通知...</p>
+        </a-drawer>
       </div>
     </div>
   </div>
@@ -23,17 +61,34 @@
 export default {
   name: 'Header',
   data () {
-    return {}
+    return {
+      msgVisible: false
+    }
   },
   methods: {
     search () {
       const keyword = this.$refs.keyword.value
-      console.log(keyword)
+      if (this.$route.name === 'search') {
+        this.$router.push({name: 'search', query: {keyword: keyword}})
+      } else {
+        let text = this.$router.resolve({name: 'search', query: {keyword: keyword}})
+        window.open(text.href, '_blank')
+      }
     },
     goLogin () {
-      this.$router.push({name: ''})
+      this.$router.push({name: 'login'})
+    },
+    goUserCenter () {
+      this.$router.push({name: 'orderView'})
+    },
+    quit () {
+      this.$store.dispatch('Logout').then(res => {
+        this.$router.push({name: 'portal'})
+      })
+    },
+    onClose () {
+      this.msgVisible = false;
     }
-
   }
 }
 </script>
@@ -53,6 +108,15 @@ export default {
   flex-direction: row;
   //justify-content: center; /*水平居中*/
   align-items: center; /*垂直居中*/
+}
+
+.logo {
+  margin-right: 24px;
+  img {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
 }
 
 .search-entry {
@@ -94,6 +158,12 @@ export default {
   flex-direction: row;
   gap: 20px;
   justify-content: flex-end; /* 内容右对齐 */
+
+  .username {
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+  }
   button {
     outline: none;
     border: none;

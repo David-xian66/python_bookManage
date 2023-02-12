@@ -5,20 +5,20 @@
         <a-tree :tree-data="cData" :selected-keys="selectedKeys" @select="onSelect">
         </a-tree>
       </div>
-      <div class="left-search-item"><h4>书籍状态</h4>
-        <div class="check-item flex-view"><input type="checkbox" name="state"
-                                                 id="state0" value="上市销售"><label
-          for="state0">上市销售</label>
-        </div>
-        <div class="check-item flex-view"><input type="checkbox" name="state"
-                                                 id="state1" value="诚招译者"><label
-          for="state1">诚招译者</label>
-        </div>
-        <div class="check-item flex-view"><input type="checkbox" name="state"
-                                                 id="state2" value="正在翻译"><label
-          for="state2">正在翻译</label>
-        </div>
-      </div>
+<!--      <div class="left-search-item"><h4>书籍状态</h4>-->
+<!--        <div class="check-item flex-view"><input type="checkbox" name="state"-->
+<!--                                                 id="state0" value=""><label-->
+<!--          for="state0">上架</label>-->
+<!--        </div>-->
+<!--        <div class="check-item flex-view"><input type="checkbox" name="state"-->
+<!--                                                 id="state1" value=""><label-->
+<!--          for="state1">下架</label>-->
+<!--        </div>-->
+<!--        <div class="check-item flex-view"><input type="checkbox" name="state"-->
+<!--                                                 id="state2" value=""><label-->
+<!--          for="state2">预售</label>-->
+<!--        </div>-->
+<!--      </div>-->
       <div class="left-search-item"><h4>热门标签</h4>
         <div class="tag-view tag-flex-view">
           <span class="tag" :class="{'tag-select': selectTagId===item.id}" v-for="item in tagData" :key="item.id"
@@ -27,44 +27,34 @@
       </div>
     </div>
     <div class="content-right">
-      <div class="pc-search-view flex-view">
-        <img src="@/assets/searchIcon.svg"
-             alt="搜索" class="search-icon">
-        <input placeholder="搜索书名、ISBN" ref="keyword">
-        <img src="@/assets/clear-search.svg" alt="清空" @click="clearSearch" class="clear-search-icon">
-        <button @click="search">搜索</button>
-        <span class="float-count" style="">共有2005本图书</span>
-      </div>
+<!--      <div class="pc-search-view flex-view">-->
+<!--        <img src="@/assets/searchIcon.svg"-->
+<!--             alt="搜索" class="search-icon">-->
+<!--        <input placeholder="搜索书名、ISBN" ref="keyword">-->
+<!--        <img src="@/assets/clear-search.svg" alt="清空" @click="clearSearch" class="clear-search-icon">-->
+<!--        <button @click="search">搜索</button>-->
+<!--        <span class="float-count" style="">共有2005本图书</span>-->
+<!--      </div>-->
       <div class="top-select-view flex-view">
-        <div class="type-view">
-        <span class="type-tab"
-              :class="selectTypeIndex===index? 'type-tab-select':''"
-              v-for="(item,index) in typeData"
-              :key="index"
-              @click="selectType(index)">
-          {{ item }}
-        </span>
-          <span :style="{left: typeUnderLeft + 'px'}" class="tab-underline"></span>
-        </div>
         <div class="order-view">
-          <span class="title">排序方式：</span>
+          <span class="title"></span>
           <span class="tab"
                 :class="selectTabIndex===index? 'tab-select':''"
                 v-for="(item,index) in tabData"
                 :key="index"
                 @click="selectTab(index)">
-          {{ item }}
-        </span>
+            {{ item }}
+          </span>
           <span :style="{left: tabUnderLeft + 'px'}" class="tab-underline"></span>
         </div>
       </div>
       <div class="pc-book-list flex-view">
         <div v-for="item in pageData" :key="item.id" @click="handleDetail(item)" class="book-item item-column-3"><!---->
           <div class="img-view">
-            <img class="" src="https://file.ituring.com.cn/LargeCover/2212c21242c05ebc49f3"></div>
+            <img :src="item.cover"></div>
           <div class="info-view"><h3 class="book-name">{{item.title}}</h3>
             <p class="authors">{{item.author}}</p>
-            <p class="translators">{{item.translator}}（译者）</p></div>
+            <p class="translators" v-if="item.translator">{{item.translator}}（译者）</p></div>
         </div>
         <div class="no-data" style="display: none;">没有搜索到结果</div>
       </div>
@@ -93,19 +83,16 @@ export default {
       tagData: [],
       loading: false,
 
-      typeData: ['纸质书', '电子书'],
-      selectTypeIndex: 0,
-      typeUnderLeft: 22,
       tabData: ['最新', '最热', '推荐'],
       selectTabIndex: 0,
-      tabUnderLeft: 86,
+      tabUnderLeft: 12,
 
       bookData: [],
       pageData: [],
 
       page: 1,
       total: 0,
-      pageSize: 3,
+      pageSize: 9,
     }
   },
   mounted () {
@@ -141,13 +128,12 @@ export default {
       this.$refs.keyword.value = ''
       this.search()
     },
-    selectType (index) {
-      this.selectTypeIndex = index
-      this.typeUnderLeft = 22 + 90 * index
-    },
     selectTab (index) {
       this.selectTabIndex = index
-      this.tabUnderLeft = 86 + 53 * index
+      this.tabUnderLeft = 12 + 53 * index
+      console.log(this.selectTabIndex)
+      let sort = (index === 0 ? 'recent' : index === 1 ? 'hot' : 'recommend')
+      this.getBookList({sort: sort})
     },
     handleDetail (item) {
       // 跳转新页面
@@ -163,6 +149,11 @@ export default {
     },
     getBookList (data) {
       listBookList(data).then(res => {
+        res.data.forEach((item, index) => {
+          if (item.cover) {
+            item.cover = this.$BASE_URL + item.cover
+          }
+        })
         console.log(res)
         this.bookData = res.data
         this.total = this.bookData.length
@@ -327,7 +318,7 @@ li {
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
-  padding-top: 24px;
+  padding-top: 12px;
 
   .pc-search-view {
     margin: 0 0 24px;

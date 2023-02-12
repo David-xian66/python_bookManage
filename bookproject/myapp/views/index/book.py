@@ -15,9 +15,17 @@ def list_api(request):
         keyword = request.GET.get("keyword", None)
         c = request.GET.get("c", None)
         tag = request.GET.get("tag", None)
+        sort = request.GET.get("sort", 'recent')
+
+        # 排序方式
+        order = '-create_time'
+        if sort == 'recent':
+            order = '-create_time'
+        elif sort == 'hot' or sort == 'recommend':
+            order = '-pv'
 
         if keyword:
-            books = Book.objects.filter(title__contains=keyword).order_by('-create_time')
+            books = Book.objects.filter(title__contains=keyword).order_by(order)
         elif c and int(c) > -1:
             ids = [c]
             classifications = Classification.objects.filter(pid=c)
@@ -28,14 +36,14 @@ def list_api(request):
                 ids.append(item['id'])
             print(ids)
 
-            books = Book.objects.filter(classification_id__in=ids).order_by('-create_time')
+            books = Book.objects.filter(classification_id__in=ids).order_by(order)
 
         elif tag:
             tag = Tag.objects.get(id=tag)
             print(tag)
-            books = tag.book_set.all()
+            books = tag.book_set.all().order_by(order)
         else:
-            books = Book.objects.all().order_by('-create_time')
+            books = Book.objects.all().order_by(order)
 
         serializer = BookSerializer(books, many=True)
         return APIResponse(code=0, msg='查询成功', data=serializer.data)

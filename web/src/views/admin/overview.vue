@@ -125,11 +125,6 @@ export default {
     }
   },
   methods: {
-    handleLogout () {
-      this.$store.dispatch('Logout').then(res => {
-        this.$router.push({name: 'login'})
-      })
-    },
     list () {
       listApi({}).then(res => {
         console.log(res.data)
