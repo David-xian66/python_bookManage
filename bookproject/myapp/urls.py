@@ -70,6 +70,9 @@ urlpatterns = [
     path('index/book/increaseWishCount', views.index.book.increaseWishCount),
     path('index/book/addWishUser', views.index.book.addWishUser),
     path('index/book/increaseRecommendCount', views.index.book.increaseRecommendCount),
+    path('index/comment/list', views.index.comment.list_api),
+    path('index/comment/create', views.index.comment.create),
+    path('index/comment/delete', views.index.comment.delete),
 
 
 ]

@@ -1,7 +1,7 @@
 import store from '@/store'
 import storage from 'store'
 import {
-  ADMIN_TOKEN, ADMIN_USERNAME, TOKEN, USERNAME
+  ADMIN_TOKEN, ADMIN_USERNAME, TOKEN, USERID, USERNAME
 } from '@/store/constants'
 
 export default function Initializer () {
@@ -11,6 +11,7 @@ export default function Initializer () {
 
   store.commit('SET_TOKEN', storage.get(TOKEN))
   store.commit('SET_USERNAME', storage.get(USERNAME))
+  store.commit('SET_USERID', storage.get(USERID))
 
   // store.dispatch('setLang', storage.get(APP_LANGUAGE, 'zh-CN'))
 }

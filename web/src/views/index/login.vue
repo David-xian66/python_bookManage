@@ -72,6 +72,7 @@ export default {
       this.$message.success('登录成功！')
     },
     requestFailed (err) {
+      console.log(err)
       this.$message.error(err.msg || '登录失败')
     }
   }

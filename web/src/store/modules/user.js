@@ -1,7 +1,7 @@
 import storage from 'store'
 import { adminLogin } from '@/api/admin/user'
 import { loginApi } from '@/api/index/user'
-import {ADMIN_TOKEN, ADMIN_USERNAME, TOKEN, USERNAME} from '@/store/constants'
+import {ADMIN_TOKEN, ADMIN_USERNAME, TOKEN, USERNAME, USERID} from '@/store/constants'
 
 const user = {
   namespaced: false,
@@ -9,6 +9,7 @@ const user = {
     /** 前台字段 **/
     token: '',
     username: '',
+    userId: '',
 
     /** 后台字段**/
     adminToken: '',
@@ -17,6 +18,7 @@ const user = {
   getters: {
     token: state => state.token,
     username: state => state.username,
+    userId: state => state.userId,
     adminToken: state => state.adminToken,
     adminUserName: state => state.adminUserName
   },
@@ -26,6 +28,9 @@ const user = {
     },
     SET_USERNAME: (state, username) => {
       state.username = username
+    },
+    SET_USERID: (state, userId) => {
+      state.userId = userId
     },
     SET_ADMIN_TOKEN: (state, adminToken) => {
       state.adminToken = adminToken
@@ -75,8 +80,10 @@ const user = {
           const result = response.data
           commit('SET_TOKEN', result.token)
           commit('SET_USERNAME', result.username)
+          commit('SET_USERID', result.id)
           storage.set(TOKEN, result.token)
           storage.set(USERNAME, result.username)
+          storage.set(USERID, result.id)
           resolve()
         }).catch(error => {
           reject(error)
@@ -88,8 +95,10 @@ const user = {
       return new Promise((resolve) => {
         commit('SET_TOKEN', '')
         commit('SET_USERNAME', '')
+        commit('SET_USERID', '')
         storage.remove(TOKEN)
         storage.remove(USERNAME)
+        storage.remove(USERID)
         resolve()
       })
     }

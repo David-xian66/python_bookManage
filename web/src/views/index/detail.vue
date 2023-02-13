@@ -1,6 +1,6 @@
 <template>
   <div class="detail">
-    <Header />
+    <Header/>
 
     <div class="detail-content">
       <div class="detail-content-top">
@@ -15,18 +15,18 @@
                   <span class="state hidden-sm">书籍状态</span>
                   <span>可借</span>
                 </div>
-                <h1 class="book-name">{{detailData.title}}</h1>
+                <h1 class="book-name">{{ detailData.title }}</h1>
                 <div class="authors flex-view">
-                  <span >作者：</span>
-                  <span  class="name">{{detailData.author}}</span>
+                  <span>作者：</span>
+                  <span class="name">{{ detailData.author }}</span>
                 </div>
                 <div class="translators flex-view" style="">
-                  <span >译者：</span>
-                  <span class="name">{{detailData.translator}}</span>
+                  <span>译者：</span>
+                  <span class="name">{{ detailData.translator }}</span>
                 </div>
                 <div class="translators flex-view" style="">
-                  <span >分类：</span>
-                  <span class="name">{{detailData.classification_title}}</span>
+                  <span>分类：</span>
+                  <span class="name">{{ detailData.classification_title }}</span>
                 </div>
               </div>
             </div>
@@ -40,7 +40,7 @@
                     <span class="count-title">加入心愿单</span>
                   </div>
                   <div class="count-num-box">
-                    <span  class="num-text">{{detailData.wish_count}}</span>
+                    <span class="num-text">{{ detailData.wish_count }}</span>
                   </div>
                 </div>
               </div>
@@ -53,7 +53,7 @@
                     <span class="count-title">推荐</span>
                   </div>
                   <div class="count-num-box">
-                    <span  class="num-text">{{detailData.recommend_count}}</span>
+                    <span class="num-text">{{ detailData.recommend_count }}</span>
                   </div>
                 </div>
               </div>
@@ -66,7 +66,7 @@
                     <span class="count-title">借阅次数</span>
                   </div>
                   <div class="count-num-box">
-                    <span  class="num-text">120</span>
+                    <span class="num-text">120</span>
                   </div>
                 </div>
               </div>
@@ -79,7 +79,7 @@
                     <span class="count-title">分享</span>
                   </div>
                   <div class="count-num-box">
-                    <span  class="num-text"></span>
+                    <span class="num-text"></span>
                     <img src="@/assets/wb-share.svg" class="mg-l">
                   </div>
                 </div>
@@ -95,7 +95,7 @@
                   <span data-v-b02241e2="">可借阅60天</span>
                 </div>
                 <div data-v-b02241e2="" class="price">
-<!--                  <span data-v-b02241e2="" class="price-text">¥ 34.9</span>-->
+                  <!--                  <span data-v-b02241e2="" class="price-text">¥ 34.9</span>-->
                   <!---->
                   <button data-v-b02241e2="" class="buy-btn">
                     <img data-v-b02241e2="" src="@/assets/add.svg">
@@ -103,19 +103,19 @@
                   </button>
                 </div>
               </div>
-<!--              <div data-v-b02241e2="" class="buy-way-item" style="">-->
-<!--                <div data-v-b02241e2="" class="name">-->
-<!--                  <span data-v-b02241e2="">电子书</span>-->
-<!--                </div>-->
-<!--                <div data-v-b02241e2="" class="price">-->
-<!--                  <span data-v-b02241e2="" class="price-text">¥ 34.9</span>-->
-<!--                  &lt;!&ndash;&ndash;&gt;-->
-<!--                  <button data-v-b02241e2="" class="buy-btn">-->
-<!--                    <img data-v-b02241e2="" src="@/assets/add.svg">-->
-<!--                    <span data-v-b02241e2="">购书袋</span>-->
-<!--                  </button>-->
-<!--                </div>-->
-<!--              </div>-->
+              <!--              <div data-v-b02241e2="" class="buy-way-item" style="">-->
+              <!--                <div data-v-b02241e2="" class="name">-->
+              <!--                  <span data-v-b02241e2="">电子书</span>-->
+              <!--                </div>-->
+              <!--                <div data-v-b02241e2="" class="price">-->
+              <!--                  <span data-v-b02241e2="" class="price-text">¥ 34.9</span>-->
+              <!--                  &lt;!&ndash;&ndash;&gt;-->
+              <!--                  <button data-v-b02241e2="" class="buy-btn">-->
+              <!--                    <img data-v-b02241e2="" src="@/assets/add.svg">-->
+              <!--                    <span data-v-b02241e2="">购书袋</span>-->
+              <!--                  </button>-->
+              <!--                </div>-->
+              <!--              </div>-->
             </div>
           </div>
         </div>
@@ -134,11 +134,53 @@
               <span :style="{left: tabUnderLeft + 'px'}" class="tab-underline"></span>
             </div>
 
-            <div class="book-intro">
-              <p class="text" style="">
-                不管是个人，还是企业，要实现目标、获得成功，往往都要先构建自己的竞争优势。有些优势是我们未曾意识到自己本就拥有的，有些优势是我们明确知道自己尚未具备的，但是怎样的优势组合才是真正有效的？本书提出了不公平优势的概念与由5种不公平优势构成的MILES框架，并结合大量案例，介绍了如何利用自己的不公平优势获得商业上的成功，同时，作为成功的创业者，两位作者还非常贴心地提供了快速创业入门指南。
-                本书适合个人贡献者和创业者阅读。</p>
+            <!--简介-->
+            <div class="book-intro" :class="selectTabIndex <= 0? '':'hide'">
+              <p class="text" style="">{{detailData.description}}</p>
             </div>
+
+            <!--评论-->
+            <div class="book-comment" :class="selectTabIndex > 0? '':'hide'">
+              <div class="title">发表新的评论</div>
+              <div class="publish flex-view">
+                <img src="@/assets/avatar.jpg" class="mine-img">
+                <input placeholder="说点什么..." class="content-input" ref="comment">
+                <button class="send-btn" @click="sendComment()">发送</button>
+              </div>
+              <div class="tab-view flex-view">
+                <div class="count-text">共有{{commentData.length}}条评论</div>
+                <div class="tab-box flex-view" v-if="commentData.length > 0">
+                  <span :class="sortIndex === 0? 'tab-select': ''" @click="sortCommentList('recent')">最新</span>
+                  <div class="line"></div>
+                  <span :class="sortIndex === 1? 'tab-select': ''" @click="sortCommentList('hot')">热门</span>
+                </div>
+              </div>
+              <div class="comments-list">
+                <div class="comment-item" v-for="item in commentData">
+                  <div class="flex-item flex-view">
+                    <img src="@/assets/avatar.jpg" class="avator">
+                    <div class="person">
+                      <div class="name">{{item.username}}</div>
+                      <div class="time">{{item.comment_time}}</div>
+                    </div>
+                    <div class="float-right">
+                      <span @click="like(item.id)">推荐</span>
+                      <span class="num">{{item.like_count}}</span>
+                    </div>
+                  </div>
+                  <p class="comment-content">{{item.content}}</p>
+                </div>
+                <div class="infinite-loading-container">
+                  <div class="infinite-status-prompt" style="">
+                    <div slot="no-results" class="no-results">
+                      <div> </div>
+                      <p>没有更多了</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
           <div class="recommend" style="">
             <div class="title">大家都在读</div>
@@ -148,9 +190,9 @@
                   <img :src="item.cover">
                 </div>
                 <div class="info-view">
-                  <h3 class="book-name">{{item.title}}</h3>
-                  <p class="authors">{{item.author}}（作者）</p>
-                  <p class="translators">{{item.translator}}（译者）</p>
+                  <h3 class="book-name">{{ item.title }}</h3>
+                  <p class="authors">{{ item.author }}（作者）</p>
+                  <p class="translators">{{ item.translator }}（译者）</p>
                 </div>
               </div>
             </div>
@@ -159,18 +201,18 @@
       </div>
     </div>
 
-    <Footer />
+    <Footer/>
   </div>
 </template>
 <script>
 import Header from '@/views/index/components/header'
 import Footer from '@/views/index/components/footer'
 import {detailApi, increaseRecommendCountApi, addWishUserApi, listApi as listBookList} from '@/api/index/book'
-
+import {listApi as listCommentListApi, createApi as createCommentApi} from '@/api/index/comment'
 export default {
   components: {
     Footer,
-    Header,
+    Header
   },
   data () {
     return {
@@ -179,17 +221,22 @@ export default {
       tabUnderLeft: 6,
       tabData: ['简介', '评论'],
       selectTabIndex: 0,
-      recommendData: ['', '', '', '', '']
+      commentData: [],
+      recommendData: [],
+      sortIndex: 0,
+      order: 'recent', // 默认排序最新
     }
   },
   mounted () {
     this.bookId = this.$route.query.id.trim()
     this.getBookDetail()
     this.getRecommendBook()
+    this.getCommentList()
   },
   methods: {
     selectTab (index) {
       this.selectTabIndex = index
+      console.log(this.selectTabIndex)
       this.tabUnderLeft = 6 + 58 * index
     },
     getBookDetail () {
@@ -236,11 +283,57 @@ export default {
       }).catch(err => {
         console.log(err)
       })
+    },
+    sendComment () {
+      let text = this.$refs.comment.value.trim()
+      console.log(text)
+      if (text.length <= 0) {
+        return
+      }
+      this.$refs.comment.value = ''
+      let userId = this.$store.state.user.userId
+      if (userId) {
+        createCommentApi({content: text, book: this.bookId, user: userId}).then(res => {
+          this.getCommentList()
+        }).catch(err => {
+          console.log(err)
+        })
+      } else {
+        this.$message.warn('请先登录！')
+        this.$router.push({name: 'login'})
+      }
+    },
+    like(commentId) {
+      likeComment().then(res => {
+        // todo here
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    getCommentList () {
+      listCommentListApi({bookId: this.bookId, order: this.order}).then(res => {
+        this.commentData = res.data
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    sortCommentList (sortType) {
+      if (sortType === 'recent') {
+        this.sortIndex = 0
+      } else {
+        this.sortIndex = 1
+      }
+      this.order = sortType
+      this.getCommentList()
     }
   }
 }
 </script>
 <style scoped lang="less">
+
+.hide {
+  display: none;
+}
 
 .detail-content {
   display: flex;
@@ -256,7 +349,7 @@ export default {
 }
 
 .hidden-lg {
-  display: none!important;
+  display: none !important;
 }
 
 .book-infos-view {
@@ -283,23 +376,26 @@ export default {
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
     justify-content: space-between;
+
     .state {
       width: 64px;
       height: 24px;
       line-height: 24px;
-      background: rgba(70,132,226,.1);
+      background: rgba(70, 132, 226, .1);
       border-radius: 2px;
       font-weight: 500;
       font-size: 12px;
       color: #4684e2;
       text-align: center;
     }
+
     .share-img {
       background: #fff;
       width: 38px;
       height: 38px;
       border-radius: 50%;
       text-align: center;
+
       img {
         position: relative;
         top: 4px;
@@ -307,11 +403,13 @@ export default {
       }
     }
   }
+
   .book-img-box {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 235px;
     flex: 0 0 235px;
     margin: 0 40px 0 0;
+
     img {
       width: 235px;
       height: 339px;
@@ -329,27 +427,32 @@ export default {
     padding: 0;
     margin: 0;
   }
+
   .book-state {
     height: 26px;
     line-height: 26px;
+
     .state {
       font-weight: 500;
       color: #4684e2;
-      background: rgba(70,132,226,.1);
+      background: rgba(70, 132, 226, .1);
       border-radius: 2px;
       padding: 5px 8px;
       margin-right: 16px;
     }
+
     span {
       font-size: 14px;
       color: #152844;
     }
   }
+
   .book-name {
     font-size: 24px;
     line-height: 32px;
     margin: 16px 0;
   }
+
   .translators, .authors {
     line-height: 18px;
     font-size: 14px;
@@ -366,13 +469,16 @@ export default {
       white-space: normal;
     }
   }
+
   .tags {
     position: absolute;
     bottom: 20px;
     margin-top: 16px;
+
     .category-box {
       color: #152844;
       font-size: 14px;
+
       .title {
         color: #787878;
       }
@@ -385,9 +491,11 @@ export default {
     flex: 0 0 235px;
     margin-left: 20px;
   }
+
   .pointer {
     cursor: pointer;
   }
+
   .count-item {
     height: 64px;
     -webkit-box-align: center;
@@ -395,17 +503,20 @@ export default {
     align-items: center;
     cursor: pointer;
   }
+
   .count-img {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 32px;
     flex: 0 0 32px;
     margin-right: 24px;
     font-size: 0;
+
     img {
       width: 100%;
       display: block;
     }
   }
+
   .count-box {
     position: relative;
     border-bottom: 1px solid #cedce4;
@@ -420,8 +531,10 @@ export default {
     flex: 1;
     height: 100%;
   }
+
   .count-text-box {
     font-size: 0;
+
     .count-title {
       color: #152844;
       font-weight: 600;
@@ -431,6 +544,7 @@ export default {
       height: 18px;
     }
   }
+
   .count-num-box {
     font-weight: 600;
     font-size: 20px;
@@ -441,6 +555,7 @@ export default {
 
 .buy-way {
   overflow: hidden;
+
   .title {
     font-weight: 600;
     font-size: 18px;
@@ -449,6 +564,7 @@ export default {
     color: #152844;
     margin-bottom: 12px;
   }
+
   .buy-way-item {
     background: #fbfeff;
     border: 1px solid #cedce4;
@@ -458,6 +574,7 @@ export default {
     -ms-flex: 0 0 255px;
     flex: 0 0 255px;
     padding: 10px;
+
     .name {
       font-weight: 500;
       font-size: 16px;
@@ -466,15 +583,18 @@ export default {
       height: 24px;
       margin-bottom: 12px;
     }
+
     .price {
       position: relative;
       line-height: 24px;
     }
+
     .price-text {
       color: #ff7b31;
       font-size: 18px;
       font-weight: 700;
     }
+
     .buy-btn {
       cursor: pointer;
       display: block;
@@ -490,17 +610,18 @@ export default {
       border: none;
       margin-top: 12px;
     }
+
     .buy-btn img {
       width: 12px;
       margin-right: 2px;
       vertical-align: middle;
     }
+
     .buy-btn span {
       vertical-align: middle;
     }
   }
 }
-
 
 .book-content-view {
   margin-top: 40px;
@@ -652,4 +773,183 @@ export default {
   }
 }
 
+.flex-view {
+  display: flex;
+}
+
+.book-comment {
+  .title {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 22px;
+    height: 22px;
+    color: #152844;
+    margin: 24px 0 12px;
+  }
+
+  .publish {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+    .mine-img {
+      -webkit-box-flex: 0;
+      -ms-flex: 0 0 40px;
+      flex: 0 0 40px;
+      margin-right: 12px;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+    }
+
+    .content-input {
+      -webkit-box-flex: 1;
+      -ms-flex: 1;
+      flex: 1;
+      background: #f6f9fb;
+      border-radius: 4px;
+      height: 32px;
+      line-height: 32px;
+      color: #484848;
+      padding: 5px 12px;
+      white-space: nowrap;
+      outline: none;
+      border: 0px;
+    }
+
+    .send-btn {
+      margin-left: 10px;
+      background: #4684e2;
+      border-radius: 4px;
+      -webkit-box-flex: 0;
+      -ms-flex: 0 0 80px;
+      flex: 0 0 80px;
+      color: #fff;
+      font-size: 14px;
+      text-align: center;
+      height: 32px;
+      line-height: 32px;
+      outline: none;
+      border: 0px;
+      cursor: pointer;
+    }
+  }
+
+  .tab-view {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    font-size: 14px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin: 24px 0;
+
+    .count-text {
+      color: #484848;
+      float: left;
+    }
+
+    .tab-box {
+      color: #5f77a6;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+
+      .tab-select {
+        color: #152844;
+      }
+
+      span {
+        cursor: pointer;
+      }
+    }
+
+    .line {
+      width: 1px;
+      height: 12px;
+      margin: 0 12px;
+      background: #cedce4;
+    }
+  }
+}
+
+.comments-list {
+  .comment-item {
+    .flex-item {
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      padding-top: 16px;
+
+      .avator {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 40px;
+        flex: 0 0 40px;
+        width: 40px;
+        height: 40px;
+        margin-right: 12px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+
+      .person {
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+      }
+
+      .name {
+        color: #152844;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 22px;
+        height: 22px;
+        cursor: pointer;
+      }
+
+      .time {
+        color: #5f77a6;
+        font-size: 12px;
+        line-height: 16px;
+        height: 16px;
+        margin-top: 2px;
+      }
+
+      .float-right {
+        color: #4684e2;
+        font-size: 14px;
+        float: right;
+
+        span {
+          margin-left: 19px;
+          cursor: pointer;
+        }
+
+        .num {
+          color: #152844;
+          margin-left: 6px;
+          cursor: auto;
+        }
+      }
+    }
+  }
+}
+
+.comment-content {
+  margin-top: 8px;
+  color: #484848;
+  font-size: 14px;
+  line-height: 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed #cedce4;
+  margin-left: 52px;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.infinite-loading-container {
+  clear: both;
+  text-align: center;
+}
 </style>

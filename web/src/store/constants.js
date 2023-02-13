@@ -1,5 +1,6 @@
 export const TOKEN = 'Token'
 export const USERNAME = 'UserName'
+export const USERID = 'UserId'
 
 export const ADMIN_TOKEN = 'Admin-Token'
 export const ADMIN_USERNAME = 'Admin-UserName'
