@@ -7,6 +7,7 @@ const api = {
   listApi: '/myapp/index/comment/list',
   createApi: '/myapp/index/comment/create',
   deleteApi: '/myapp/index/comment/delete',
+  likeApi: '/myapp/index/comment/like',
 }
 
 /**
@@ -40,6 +41,17 @@ export const createApi = function (data) {
 export const deleteApi = function (params) {
   return axios({
     url: api.deleteApi,
+    method: 'post',
+    params: params
+  })
+}
+
+/**
+ * like
+ */
+export const likeApi = function (params) {
+  return axios({
+    url: api.likeApi,
     method: 'post',
     params: params
   })

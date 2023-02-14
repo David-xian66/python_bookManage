@@ -73,6 +73,11 @@ urlpatterns = [
     path('index/comment/list', views.index.comment.list_api),
     path('index/comment/create', views.index.comment.create),
     path('index/comment/delete', views.index.comment.delete),
+    path('index/comment/like', views.index.comment.like),
+    path('index/borrow/list', views.index.borrow.list_api),
+    path('index/borrow/create', views.index.borrow.create),
+    path('index/borrow/return_book', views.index.borrow.return_book),
+    path('index/borrow/delay', views.index.borrow.delay),
 
 
 ]

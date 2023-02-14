@@ -25,7 +25,7 @@ class AdminTokenAuthtication(BaseAuthentication):
 # 前台接口认证
 class TokenAuthtication(BaseAuthentication):
     def authenticate(self, request):
-        token = request.META.get("HTTP_TOKEN")
+        token = request.META.get("HTTP_TOKEN", "")
         print("检查token==>" + token)
         users = User.objects.filter(token=token)
         """

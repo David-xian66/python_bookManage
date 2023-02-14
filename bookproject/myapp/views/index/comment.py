@@ -30,7 +30,6 @@ def list_api(request):
 
 @api_view(['POST'])
 def create(request):
-
     serializer = CommentSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
@@ -40,9 +39,9 @@ def create(request):
 
     return APIResponse(code=1, msg='创建失败')
 
+
 @api_view(['POST'])
 def delete(request):
-
     try:
         ids = request.GET.get('ids')
         ids_arr = ids.split(',')
@@ -51,3 +50,16 @@ def delete(request):
         return APIResponse(code=1, msg='对象不存在')
 
     return APIResponse(code=0, msg='删除成功')
+
+
+@api_view(['POST'])
+def like(request):
+    try:
+        commentId = request.GET.get('commentId')
+        comment = Comment.objects.get(pk=commentId)
+        comment.like_count += 1
+        comment.save()
+    except Comment.DoesNotExist:
+        return APIResponse(code=1, msg='对象不存在')
+
+    return APIResponse(code=0, msg='推荐成功')

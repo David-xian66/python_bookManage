@@ -87,32 +87,32 @@
             </div>
           </div>
 
-          <div data-v-b02241e2="" data-v-04e3a7b4="" class="buy-way hidden-sm">
-            <div data-v-b02241e2="" class="title">借还区域</div>
-            <div data-v-b02241e2="" class="flex-view">
-              <div data-v-b02241e2="" class="buy-way-item" style="">
-                <div data-v-b02241e2="" class="name">
-                  <span data-v-b02241e2="">可借阅60天</span>
+          <div  data-v-04e3a7b4="" class="buy-way hidden-sm">
+            <div  class="title">借还区域</div>
+            <div  class="flex-view">
+              <div  class="buy-way-item" style="">
+                <div  class="name">
+                  <span >可借阅60天</span>
                 </div>
-                <div data-v-b02241e2="" class="price">
-                  <!--                  <span data-v-b02241e2="" class="price-text">¥ 34.9</span>-->
+                <div  class="price">
+                  <!--                  <span  class="price-text">¥ 34.9</span>-->
                   <!---->
-                  <button data-v-b02241e2="" class="buy-btn">
-                    <img data-v-b02241e2="" src="@/assets/add.svg">
-                    <span data-v-b02241e2="">借阅</span>
+                  <button  class="buy-btn">
+                    <img  src="@/assets/add.svg">
+                    <span @click="handleBorrow()">借阅</span>
                   </button>
                 </div>
               </div>
-              <!--              <div data-v-b02241e2="" class="buy-way-item" style="">-->
-              <!--                <div data-v-b02241e2="" class="name">-->
-              <!--                  <span data-v-b02241e2="">电子书</span>-->
+              <!--              <div  class="buy-way-item" style="">-->
+              <!--                <div  class="name">-->
+              <!--                  <span >电子书</span>-->
               <!--                </div>-->
-              <!--                <div data-v-b02241e2="" class="price">-->
-              <!--                  <span data-v-b02241e2="" class="price-text">¥ 34.9</span>-->
+              <!--                <div  class="price">-->
+              <!--                  <span  class="price-text">¥ 34.9</span>-->
               <!--                  &lt;!&ndash;&ndash;&gt;-->
-              <!--                  <button data-v-b02241e2="" class="buy-btn">-->
-              <!--                    <img data-v-b02241e2="" src="@/assets/add.svg">-->
-              <!--                    <span data-v-b02241e2="">购书袋</span>-->
+              <!--                  <button  class="buy-btn">-->
+              <!--                    <img  src="@/assets/add.svg">-->
+              <!--                    <span >购书袋</span>-->
               <!--                  </button>-->
               <!--                </div>-->
               <!--              </div>-->
@@ -208,7 +208,7 @@
 import Header from '@/views/index/components/header'
 import Footer from '@/views/index/components/footer'
 import {detailApi, increaseRecommendCountApi, addWishUserApi, listApi as listBookList} from '@/api/index/book'
-import {listApi as listCommentListApi, createApi as createCommentApi} from '@/api/index/comment'
+import {listApi as listCommentListApi, createApi as createCommentApi, likeApi} from '@/api/index/comment'
 export default {
   components: {
     Footer,
@@ -271,6 +271,9 @@ export default {
       let shareHref = 'http://service.weibo.com/share/share.php?title=' + content
       window.open(shareHref)
     },
+    handleBorrow () {
+      // todo
+    },
     getRecommendBook () {
       listBookList({sort: 'recommend'}).then(res => {
         res.data.forEach((item, index) => {
@@ -303,9 +306,9 @@ export default {
         this.$router.push({name: 'login'})
       }
     },
-    like(commentId) {
-      likeComment().then(res => {
-        // todo here
+    like (commentId) {
+      likeApi({commentId: commentId}).then(res => {
+        this.getCommentList()
       }).catch(err => {
         console.log(err)
       })

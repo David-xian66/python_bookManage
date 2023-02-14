@@ -52,7 +52,7 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ['id', 'content', 'comment_time', 'book', 'user', 'title', 'username']
+        fields = ['id', 'content', 'comment_time', 'like_count', 'book', 'user', 'title', 'username']
 
 
 class RecordSerializer(serializers.ModelSerializer):
@@ -92,6 +92,7 @@ class BorrowSerializer(serializers.ModelSerializer):
     # extra
     username = serializers.ReadOnlyField(source='user.username')
     title = serializers.ReadOnlyField(source='book.title')
+    cover = serializers.FileField(source='book.cover')
 
     class Meta:
         model = Borrow
