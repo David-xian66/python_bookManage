@@ -35,7 +35,10 @@ def login(request):
     users = User.objects.filter(username=username, password=password)
     if len(users) > 0:
         user = users[0]
-        # datetime.datetime.now() + datetime.timedelta(days=60)
+
+        if user.role in ['1', '3']:
+            return APIResponse(code=1, msg='该帐号为后台管理员帐号')
+
         data = {
             'username': username,
             'password': password,

@@ -27,6 +27,24 @@ def list_api(request):
         else:
             return APIResponse(code=1, msg='bookId不能为空')
 
+@api_view(['GET'])
+def list_my_comment(request):
+    if request.method == 'GET':
+        userId = request.GET.get("userId", None)
+        order = request.GET.get("order", 'recent')
+
+        if userId:
+            if order == 'recent':
+                orderBy = '-comment_time'
+            else:
+                orderBy = '-like_count'
+
+            comments = Comment.objects.select_related("book").filter(user=userId).order_by(orderBy)
+            # print(comments)
+            serializer = CommentSerializer(comments, many=True)
+            return APIResponse(code=0, msg='查询成功', data=serializer.data)
+        else:
+            return APIResponse(code=1, msg='userId不能为空')
 
 @api_view(['POST'])
 def create(request):

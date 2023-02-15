@@ -92,7 +92,7 @@ class BorrowSerializer(serializers.ModelSerializer):
     # extra
     username = serializers.ReadOnlyField(source='user.username')
     title = serializers.ReadOnlyField(source='book.title')
-    cover = serializers.FileField(source='book.cover')
+    cover = serializers.FileField(source='book.cover', required=False)
 
     class Meta:
         model = Borrow

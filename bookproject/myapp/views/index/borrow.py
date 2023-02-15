@@ -30,6 +30,10 @@ def create(request):
     if book.repertory <= 0:
         return APIResponse(code=1, msg='库存不足')
 
+    borrows = Borrow.objects.filter(book=data['book']).filter(status='1')
+    if len(borrows) > 0:
+        return APIResponse(code=1, msg='您已经借过该书了')
+
     create_time = datetime.datetime.now()
     data['create_time'] = create_time
     data['expect_time'] = create_time + datetime.timedelta(days=60)
@@ -65,7 +69,8 @@ def return_book(request):
     if serializer.is_valid():
         serializer.save()
         # 加库存
-        book = Book.objects.get(pk=request.data['book'])
+        bookId = request.data['book']
+        book = Book.objects.get(pk=bookId)
         book.repertory = book.repertory + 1
         book.save()
 

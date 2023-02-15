@@ -26,15 +26,20 @@ class AdminTokenAuthtication(BaseAuthentication):
 class TokenAuthtication(BaseAuthentication):
     def authenticate(self, request):
         token = request.META.get("HTTP_TOKEN", "")
-        print("检查token==>" + token)
-        users = User.objects.filter(token=token)
-        """
-        判定条件：
-            1. 传了token 
-            2. 查到了该帐号 
-            3. 该帐号是普通用户
-        """
-        if not token or users.count == 0 or (users[0].role in ['1', '3']):
-            raise exceptions.AuthenticationFailed("AUTH_FAIL_FRONT")
+        if token is not None:
+            print("检查token==>" + token)
+            users = User.objects.filter(token=token)
+            # print(users)
+            """
+            判定条件：
+                1. 传了token 
+                2. 查到了该帐号 
+                3. 该帐号是普通用户
+            """
+            if not token or users.count == 0 or (users[0].role in ['1', '3']):
+                raise exceptions.AuthenticationFailed("AUTH_FAIL_FRONT")
+            else:
+                print('token验证通过')
         else:
-            print('token验证通过')
+            print("检查token==>token 为空")
+            raise exceptions.AuthenticationFailed("AUTH_FAIL_FRONT")

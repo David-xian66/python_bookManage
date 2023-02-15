@@ -71,6 +71,7 @@ urlpatterns = [
     path('index/book/addWishUser', views.index.book.addWishUser),
     path('index/book/increaseRecommendCount', views.index.book.increaseRecommendCount),
     path('index/comment/list', views.index.comment.list_api),
+    path('index/comment/listMyComments', views.index.comment.list_my_comment),
     path('index/comment/create', views.index.comment.create),
     path('index/comment/delete', views.index.comment.delete),
     path('index/comment/like', views.index.comment.like),

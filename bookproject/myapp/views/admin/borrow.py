@@ -32,6 +32,10 @@ def create(request):
     if book.repertory <= 0:
         return APIResponse(code=1, msg='库存不足')
 
+    borrows = Borrow.objects.filter(book=data['book']).filter(status='1')
+    if len(borrows) > 0:
+        return APIResponse(code=1, msg='您已经借过该书了')
+
     create_time = datetime.datetime.now()
     data['create_time'] = create_time
     data['expect_time'] = create_time + datetime.timedelta(days=60)

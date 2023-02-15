@@ -9,7 +9,8 @@
       <a-tab-pane key="3" tab="已还">
       </a-tab-pane>
     </a-tabs>
-    <div class="list-content">
+    <a-spin :spinning="loading" style="min-height: 200px;">
+      <div class="list-content">
       <div class="order-item-view" v-for="(item, index) in borrowData" :key="index">
         <div class="header flex-view">
           <div class="left">
@@ -18,7 +19,15 @@
             <span class="num">{{item.id}}</span>
           </div>
           <div class="right">
-            <a-button v-if="item.status==='1'" @click="handleReturn(item)" type="primary" size="small" style="margin-right: 24px;">还书</a-button>
+            <a-popconfirm
+              v-if="item.status==='1'"
+              title="确定还书？"
+              ok-text="是"
+              cancel-text="否"
+              @confirm="handleReturn(item)"
+            >
+              <a-button type="primary" size="small" style="margin-right: 24px;">还书</a-button>
+            </a-popconfirm>
             <span class="text">状态</span>
             <span class="state">{{item.status==='1'? '在借':'已还'}}</span>
           </div>
@@ -51,11 +60,12 @@
         <div class="bottom flex-view">
           <div class="left">
             <span class="text">共1本</span>
-            <span class="open">图书详情</span>
+            <span class="open" @click="handleDetail(item.book)">图书详情</span>
           </div>
         </div>
       </div>
     </div>
+    </a-spin>
   </div>
 </template>
 
@@ -67,6 +77,7 @@ export default {
   name: 'BorrowView',
   data () {
     return {
+      loading: false,
       borrowData: [],
       borrowStatus: ''
     }
@@ -89,6 +100,7 @@ export default {
       this.getBorrowList()
     },
     getBorrowList () {
+      this.loading = true
       listApi({borrowStatus: this.borrowStatus}).then(res => {
         res.data.forEach((item, index) => {
           if (item.cover) {
@@ -96,18 +108,25 @@ export default {
           }
         })
         this.borrowData = res.data
+        this.loading = false
       }).catch(err => {
         console.log(err)
+        this.loading = false
       })
     },
     handleReturn (item) {
-      returnBookApi({id: item.id}).then(res => {
+      returnBookApi({id: item.id}, {book: item.book}).then(res => {
         this.getBorrowList()
         this.$message.success('还书成功')
       }).catch(err => {
         console.log(err)
       })
-    }
+    },
+    handleDetail (bookId) {
+      // 跳转新页面
+      let text = this.$router.resolve({name: 'detail', query: {id: bookId}})
+      window.open(text.href, '_blank')
+    },
   }
 }
 </script>

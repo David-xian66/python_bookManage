@@ -5,6 +5,7 @@ import axios from '@/utils/request.js'
 
 const api = {
   listApi: '/myapp/index/comment/list',
+  listMyCommentsApi: '/myapp/index/comment/listMyComments',
   createApi: '/myapp/index/comment/create',
   deleteApi: '/myapp/index/comment/delete',
   likeApi: '/myapp/index/comment/like',
@@ -53,6 +54,17 @@ export const likeApi = function (params) {
   return axios({
     url: api.likeApi,
     method: 'post',
+    params: params
+  })
+}
+
+/**
+ * listMyCommentsApi
+ */
+export const listMyCommentsApi = function (params) {
+  return axios({
+    url: api.listMyCommentsApi,
+    method: 'get',
     params: params
   })
 }
