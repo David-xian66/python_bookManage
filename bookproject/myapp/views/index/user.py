@@ -4,6 +4,7 @@ import datetime
 from rest_framework.decorators import api_view, authentication_classes
 
 from myapp import utils
+from myapp.auth.authentication import TokenAuthtication
 from myapp.handler import APIResponse
 from myapp.models import User
 from myapp.serializers import UserSerializer, LoginLogSerializer
@@ -55,15 +56,6 @@ def login(request):
     return APIResponse(code=1, msg='用户名或密码错误')
 
 
-# @api_view(['GET'])
-# def info(request):
-#     if request.method == 'GET':
-#         pk = request.GET.get('id', -1)
-#         user = User.objects.get(pk=pk)
-#         serializer = UserSerializer(user)
-#         return APIResponse(code=0, msg='查询成功', data=serializer.data)
-
-
 @api_view(['POST'])
 def register(request):
     print(request.data)
@@ -93,3 +85,39 @@ def register(request):
         print(serializer.errors)
 
     return APIResponse(code=1, msg='创建失败')
+
+
+@api_view(['GET'])
+def info(request):
+    if request.method == 'GET':
+        pk = request.GET.get('id', -1)
+        user = User.objects.get(pk=pk)
+        serializer = UserSerializer(user)
+        return APIResponse(code=0, msg='查询成功', data=serializer.data)
+
+
+@api_view(['POST'])
+@authentication_classes([TokenAuthtication])
+def update(request):
+    try:
+        pk = request.GET.get('id', -1)
+        user = User.objects.get(pk=pk)
+    except User.DoesNotExist:
+        return APIResponse(code=1, msg='对象不存在')
+
+    data = request.data.copy()
+    if 'username' in data.keys():
+        del data['username']
+    if 'password' in data.keys():
+        del data['password']
+    if 'role' in data.keys():
+        del data['role']
+    serializer = UserSerializer(user, data=data)
+    print(serializer.is_valid())
+    if serializer.is_valid():
+        serializer.save()
+        return APIResponse(code=0, msg='更新成功', data=serializer.data)
+    else:
+        print(serializer.errors)
+
+    return APIResponse(code=1, msg='更新失败')

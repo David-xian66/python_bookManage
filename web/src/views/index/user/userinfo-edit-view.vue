@@ -1,15 +1,22 @@
 <template>
   <div class="content-list">
     <div class="list-title">设置</div>
-    <div class="list-content">
+    <a-spin :spinning="loading" style="min-height: 200px;">
+      <div class="list-content">
       <div class="edit-view" userid="602081">
         <div class="item flex-view">
           <div class="label">头像</div>
           <div class="right-box avatar-box flex-view">
-            <img src="https://file.ituring.com.cn/SmallAvatar/" class="avatar">
+            <img :src="avatarUrl" class="avatar">
             <div class="change-tips flex-view">
-              <label for="fileInput">点击更换头像</label>
-              <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                <a-upload
+                  name="file"
+                  accept="image/*"
+                  :multiple="false"
+                  :before-upload="beforeUpload"
+                >
+                  <label>点击更换头像</label>
+                </a-upload>
               <p class="tip">图片格式支持 GIF、PNG、JPEG，尺寸不小于 200 PX，小于 4 MB</p>
             </div>
           </div>
@@ -17,35 +24,114 @@
         <div class="item flex-view">
           <div class="label">昵称</div>
           <div class="right-box">
-            <input type="text" placeholder="请输入昵称" maxlength="20" class="input-dom">
-            <p class="tip">支持中英文，长度不能超过 20 个字符，180天内仅支持修改一次</p>
+            <input type="text" v-model="form.nickname" placeholder="请输入昵称" maxlength="20" class="input-dom">
+            <p class="tip">支持中英文，长度不能超过 20 个字符</p>
           </div>
         </div>
         <div class="item flex-view">
-          <div class="label">来自</div>
+          <div class="label">手机号</div>
           <div class="right-box">
-            <input type="text" placeholder="请输入地区" maxlength="20" class="input-dom">
+            <input type="text" v-model="form.mobile" placeholder="请输入邮箱" maxlength="100" class="input-dom web-input">
           </div>
         </div>
         <div class="item flex-view">
-          <div class="label">个人网站</div>
+          <div class="label">邮箱</div>
           <div class="right-box">
-            <input type="text" placeholder="请输入网址" maxlength="100" class="input-dom web-input">
+            <input type="text" v-model="form.email" placeholder="请输入邮箱" maxlength="100" class="input-dom web-input">
           </div>
         </div>
         <div class="item flex-view">
           <div class="label">个人简介</div>
           <div class="right-box">
-          <textarea placeholder="请输入简介" maxlength="200" class="intro">
+          <textarea v-model="form.description" placeholder="请输入简介" maxlength="200" class="intro">
           </textarea>
             <p class="tip">限制200字以内</p>
           </div>
         </div>
-        <button class="save mg">保存</button>
+        <button class="save mg" @click="submit()">保存</button>
       </div>
     </div>
+    </a-spin>
   </div>
 </template>
+
+<script>
+import {infoApi, updateApi} from '@/api/index/user'
+
+export default {
+  data () {
+    return {
+      loading: false,
+      form: {
+        avatarUrl: undefined,
+        avatar: undefined,
+        nickname: undefined,
+        email: undefined,
+        mobile: undefined,
+        description: undefined,
+      }
+    }
+  },
+  mounted () {
+    this.getUserInfo()
+  },
+  methods: {
+    beforeUpload (file) {
+      // 改文件名
+      const fileName = new Date().getTime().toString() + '.' + file.type.substring(6)
+      const copyFile = new File([file], fileName)
+      console.log(copyFile)
+      this.form.avatar = copyFile
+      return false
+    },
+    getUserInfo () {
+      this.loading = true
+      let userId = this.$store.state.user.userId
+      infoApi({id: userId}).then(res => {
+        this.form = res.data
+        if (this.form.avatar) {
+          this.avatarUrl = this.$BASE_URL + this.form.avatar
+          this.form.avatar = undefined
+        }
+        this.loading = false
+      }).catch(err => {
+        console.log(err)
+        this.loading = false
+      })
+    },
+    submit () {
+      let userId = this.$store.state.user.userId
+
+      const formData = new FormData()
+      if (this.form.avatar) {
+        formData.append('avatar', this.form.avatar)
+      }
+      if (this.form.nickname) {
+        formData.append('nickname', this.form.nickname)
+      }
+      if (this.form.email) {
+        formData.append('email', this.form.email)
+      }
+      if (this.form.mobile) {
+        formData.append('mobile', this.form.mobile)
+      }
+      if (this.form.description) {
+        formData.append('description', this.form.description)
+      }
+      updateApi({id: userId}, formData).then(res => {
+        this.form = res.data
+        if (this.form.avatar) {
+          this.avatarUrl = this.$BASE_URL + this.form.avatar
+          this.form.avatar = undefined
+        }
+        this.$message.success('保存成功')
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+  }
+}
+</script>
 
 <style scoped lang="less">
 input, textarea {

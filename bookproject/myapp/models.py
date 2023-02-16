@@ -199,6 +199,7 @@ class Ad(models.Model):
 
 class Notice(models.Model):
     id = models.BigAutoField(primary_key=True)
+    title = models.CharField(max_length=100, blank=True, null=True)
     content = models.CharField(max_length=1000, blank=True, null=True)
     create_time = models.DateTimeField(auto_now_add=True, null=True)
 

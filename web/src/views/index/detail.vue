@@ -252,6 +252,7 @@ export default {
       if (username) {
         addWishUserApi({bookId: this.bookId, username: username}).then(res => {
           this.detailData = res.data
+          this.detailData.cover = this.$BASE_URL + this.detailData.cover
           this.$message.success('加入成功')
         }).catch(err => {
           console.log('操作失败')
@@ -262,6 +263,7 @@ export default {
       increaseRecommendCountApi({id: this.bookId}).then(res => {
         this.$message.success('推荐成功')
         this.detailData = res.data
+        this.detailData.cover = this.$BASE_URL + this.detailData.cover
       }).catch(err => {
         console.log('推荐失败')
       })

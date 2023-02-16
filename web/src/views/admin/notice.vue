@@ -49,6 +49,12 @@ const columns = [
     align: 'center'
   },
   {
+    title: '标题',
+    dataIndex: 'title',
+    key: 'title',
+    align: 'center'
+  },
+  {
     title: '内容',
     dataIndex: 'content',
     key: 'content',
