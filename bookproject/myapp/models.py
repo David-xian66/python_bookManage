@@ -85,7 +85,8 @@ class Book(models.Model):
     pv = models.IntegerField(default=0)
     wish_count = models.IntegerField(default=0)
     recommend_count = models.IntegerField(default=0)
-    wish = models.ManyToManyField(User, blank=True, related_name="wish_users")
+    wish = models.ManyToManyField(User, blank=True, related_name="wish_books")
+    collect = models.ManyToManyField(User, blank=True, related_name="collect_books")
 
     class Meta:
             db_table = "b_book"

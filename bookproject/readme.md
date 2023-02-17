@@ -54,6 +54,10 @@ insert into b_user(username,password,role,status) values('admin111',md5('admin11
 
 调login -> 生成token
 
+### 注意
+
+update接口的时候，如果model里面存在多对多字段，则需要设置explode
+
 ### 字典设计
 
 ```

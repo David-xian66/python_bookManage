@@ -12,20 +12,20 @@
     </div>
     <div class="counts-view">
       <div class="counts flex-view">
-        <div class="fans-box flex-item">
-          <div class="text">粉丝</div>
+        <div class="fans-box flex-item" @click="clickMenu('collectBookView')">
+          <div class="text">收藏</div>
           <div class="num">0</div>
         </div>
         <div class="split-line">
         </div>
-        <div class="follow-box flex-item">
-          <div class="text">关注</div>
+        <div class="follow-box flex-item" @click="clickMenu('wishBookView')">
+          <div class="text">心愿单</div>
           <div class="num">2</div>
         </div>
         <div class="split-line">
         </div>
         <div class="points-box flex-item">
-          <div class="text">银子</div>
+          <div class="text">积分</div>
           <div class="num">0</div>
         </div>
       </div>

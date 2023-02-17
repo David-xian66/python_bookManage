@@ -6,7 +6,7 @@ from myapp.auth.authentication import AdminTokenAuthtication
 from myapp.handler import APIResponse
 from myapp.models import Classification, Book, Tag
 from myapp.permission.permission import isDemoAdminUser
-from myapp.serializers import BookSerializer
+from myapp.serializers import BookSerializer, UpdateBookSerializer
 
 
 @api_view(['GET'])
@@ -77,7 +77,7 @@ def update(request):
     except Book.DoesNotExist:
         return APIResponse(code=1, msg='对象不存在')
 
-    serializer = BookSerializer(book, data=request.data)
+    serializer = UpdateBookSerializer(book, data=request.data)
     if serializer.is_valid():
         serializer.save()
         return APIResponse(code=0, msg='查询成功', data=serializer.data)

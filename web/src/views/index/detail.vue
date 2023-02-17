@@ -8,7 +8,7 @@
           <div class="book-infos-view">
             <div class="book-infos">
               <div class="book-img-box">
-                <img :src="detailData.cover">
+                <img :src="detailData.cover" />
               </div>
               <div class="book-info-box">
                 <div class="book-state">

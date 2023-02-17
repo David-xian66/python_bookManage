@@ -7,6 +7,8 @@ const api = {
   listApi: '/myapp/index/book/list',
   detailApi: '/myapp/index/book/detail',
   addWishUserApi: '/myapp/index/book/addWishUser',
+  removeWishUserApi: '/myapp/index/book/removeWishUser',
+  getWishBookListApi: '/myapp/index/book/getWishBookList',
   increaseRecommendCountApi: '/myapp/index/book/increaseRecommendCount',
 }
 
@@ -36,6 +38,22 @@ export const addWishUserApi = function (data) {
     url: api.addWishUserApi,
     method: 'post',
     params: data
+  })
+}
+
+export const removeWishUserApi = function (data) {
+  return axios({
+    url: api.removeWishUserApi,
+    method: 'post',
+    params: data
+  })
+}
+
+export const getWishBookListApi = function (params) {
+  return axios({
+    url: api.getWishBookListApi,
+    method: 'get',
+    params: params
   })
 }
 
