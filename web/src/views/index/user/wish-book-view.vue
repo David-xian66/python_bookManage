@@ -30,7 +30,7 @@ export default {
   name: 'WishBookView',
   data () {
     return {
-      wishData: ['','','','']
+      wishData: []
     }
   },
   mounted () {

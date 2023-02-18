@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view, authentication_classes
 from myapp import utils
 from myapp.handler import APIResponse
 from myapp.models import Classification, Book, Tag, User
-from myapp.serializers import BookSerializer, ClassificationSerializer, ListBookSerializer
+from myapp.serializers import BookSerializer, ClassificationSerializer, ListBookSerializer, DetailBookSerializer
 from myapp.utils import dict_fetchall
 
 
@@ -152,4 +152,67 @@ def getWishBookList(request):
     except Exception as e:
         utils.log_error(request, '操作失败' + str(e))
         return APIResponse(code=1, msg='获取心愿单失败')
+
+
+@api_view(['POST'])
+def addCollectUser(request):
+    try:
+        username = request.GET.get('username', None)
+        bookId = request.GET.get('bookId', None)
+
+        if username and bookId:
+            user = User.objects.get(username=username)
+            book = Book.objects.get(pk=bookId)
+
+            if user not in book.collect.all():
+                book.collect.add(user)
+                book.collect_count += 1
+                book.save()
+
+    except Book.DoesNotExist:
+        utils.log_error(request, '操作失败')
+        return APIResponse(code=1, msg='操作失败')
+
+    serializer = DetailBookSerializer(book)
+    return APIResponse(code=0, msg='操作成功', data=serializer.data)
+
+
+@api_view(['POST'])
+def removeCollectUser(request):
+    try:
+        username = request.GET.get('username', None)
+        bookId = request.GET.get('bookId', None)
+
+        if username and bookId:
+            user = User.objects.get(username=username)
+            book = Book.objects.get(pk=bookId)
+
+            if user in book.collect.all():
+                book.collect.remove(user)
+                book.collect_count -= 1
+                book.save()
+
+    except Book.DoesNotExist:
+        utils.log_error(request, '操作失败')
+        return APIResponse(code=1, msg='操作失败')
+
+    return APIResponse(code=0, msg='操作成功')
+
+
+@api_view(['GET'])
+def getCollectBookList(request):
+    try:
+        username = request.GET.get('username', None)
+        if username:
+            user = User.objects.get(username=username)
+            books = user.collect_books.all()
+            serializer = ListBookSerializer(books, many=True)
+            return APIResponse(code=0, msg='操作成功', data=serializer.data)
+        else:
+            return APIResponse(code=1, msg='username不能为空')
+
+    except Exception as e:
+        utils.log_error(request, '操作失败' + str(e))
+        return APIResponse(code=1, msg='获取收藏失败')
+
 

@@ -3,7 +3,7 @@
     <div class="info-box flex-view">
       <img src="@/assets/avatar.jpg" alt="sdhh_3381" class="avatar-img">
       <div class="name-box">
-        <h2 class="nick">sdhh_3381</h2>
+        <h2 class="nick">{{ $store.state.user.username }}</h2>
         <div class="age">
           <span>活跃1天</span>
           <span class="give-point">个人主页</span>
@@ -14,20 +14,20 @@
       <div class="counts flex-view">
         <div class="fans-box flex-item" @click="clickMenu('collectBookView')">
           <div class="text">收藏</div>
-          <div class="num">0</div>
+          <div class="num">{{collectCount}}</div>
         </div>
         <div class="split-line">
         </div>
         <div class="follow-box flex-item" @click="clickMenu('wishBookView')">
           <div class="text">心愿单</div>
-          <div class="num">2</div>
+          <div class="num">{{wishCount}}</div>
         </div>
-        <div class="split-line">
-        </div>
-        <div class="points-box flex-item">
-          <div class="text">积分</div>
-          <div class="num">0</div>
-        </div>
+<!--        <div class="split-line">-->
+<!--        </div>-->
+<!--        <div class="points-box flex-item">-->
+<!--          <div class="text">积分</div>-->
+<!--          <div class="num">0</div>-->
+<!--        </div>-->
       </div>
     </div>
     <div class="order-box">
@@ -38,20 +38,20 @@
           <span>我的借阅</span>
         </div>
         <div class="mine-item flex-view" @click="clickMenu('orderView')">
-          <img src="@/assets/order-icon.svg" alt="我的订单">
+          <img src="@/assets/order-icon.svg">
           <span>我的订单</span>
         </div>
         <div class="mine-item flex-view" @click="clickMenu('commentView')">
-          <img src="@/assets/order-book-icon.svg" alt="我的评论">
+          <img src="@/assets/order-book-icon.svg">
           <span>我的评论</span>
         </div>
         <div class="mine-item flex-view" @click="clickMenu('addressView')">
-          <img src="@/assets/order-address-icon.svg" alt="地址管理">
+          <img src="@/assets/order-address-icon.svg">
           <span>地址管理</span>
         </div>
         <div class="mine-item flex-view" @click="clickMenu('')">
-          <img src="@/assets/order-point-icon.svg" alt="我的银子">
-          <span>我的银子</span>
+          <img src="@/assets/order-point-icon.svg">
+          <span>我的积分</span>
         </div>
       </div>
     </div>
@@ -80,12 +80,40 @@
 </template>
 
 <script>
+import {getCollectBookListApi, getWishBookListApi} from '@/api/index/book'
+
 export default {
   name: 'MineInfosView',
+  data () {
+    return {
+      collectCount: 0,
+      wishCount: 0
+    }
+  },
+  mounted () {
+    this.getCollectBookList()
+    this.getWishBookList()
+  },
   methods: {
     clickMenu (name) {
       console.log('mmmmm')
       this.$router.push({name: name})
+    },
+    getCollectBookList () {
+      let username = this.$store.state.user.username
+      getCollectBookListApi({username: username}).then(res => {
+        this.collectCount = res.data.length
+      }).catch(err => {
+        console.log(err.msg)
+      })
+    },
+    getWishBookList () {
+      let username = this.$store.state.user.username
+      getWishBookListApi({username: username}).then(res => {
+        this.wishCount = res.data.length
+      }).catch(err => {
+        console.log(err.msg)
+      })
     }
   }
 }

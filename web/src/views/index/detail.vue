@@ -44,16 +44,16 @@
                   </div>
                 </div>
               </div>
-              <div class="count-item flex-view pointer" @click="recommend()">
+              <div class="count-item flex-view pointer" @click="collect()">
                 <div class="count-img">
                   <img src="@/assets/recommend-hover.svg">
                 </div>
                 <div class="count-box flex-view">
                   <div class="count-text-box">
-                    <span class="count-title">推荐</span>
+                    <span class="count-title">收藏</span>
                   </div>
                   <div class="count-num-box">
-                    <span class="num-text">{{ detailData.recommend_count }}</span>
+                    <span class="num-text">{{ detailData.collect_count }}</span>
                   </div>
                 </div>
               </div>
@@ -207,7 +207,12 @@
 <script>
 import Header from '@/views/index/components/header'
 import Footer from '@/views/index/components/footer'
-import {detailApi, increaseRecommendCountApi, addWishUserApi, listApi as listBookList} from '@/api/index/book'
+import {
+  detailApi,
+  addWishUserApi,
+  listApi as listBookList,
+  addCollectUserApi
+} from '@/api/index/book'
 import {listApi as listCommentListApi, createApi as createCommentApi, likeApi} from '@/api/index/comment'
 export default {
   components: {
@@ -259,13 +264,14 @@ export default {
         })
       }
     },
-    recommend () {
-      increaseRecommendCountApi({id: this.bookId}).then(res => {
-        this.$message.success('推荐成功')
+    collect () {
+      let username = this.$store.state.user.username
+      addCollectUserApi({bookId: this.bookId, username: username}).then(res => {
+        this.$message.success('收藏成功')
         this.detailData = res.data
         this.detailData.cover = this.$BASE_URL + this.detailData.cover
       }).catch(err => {
-        console.log('推荐失败')
+        console.log('收藏失败')
       })
     },
     share () {

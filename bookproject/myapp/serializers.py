@@ -12,6 +12,15 @@ class BookSerializer(serializers.ModelSerializer):
         model = Book
         fields = '__all__'
 
+class DetailBookSerializer(serializers.ModelSerializer):
+    # 额外字段
+    classification_title = serializers.ReadOnlyField(source='classification.title')
+
+    class Meta:
+        model = Book
+        # 排除多对多字段
+        exclude = ('wish', 'collect',)
+
 class UpdateBookSerializer(serializers.ModelSerializer):
     # 额外字段
     classification_title = serializers.ReadOnlyField(source='classification.title')

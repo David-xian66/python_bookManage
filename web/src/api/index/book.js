@@ -9,7 +9,10 @@ const api = {
   addWishUserApi: '/myapp/index/book/addWishUser',
   removeWishUserApi: '/myapp/index/book/removeWishUser',
   getWishBookListApi: '/myapp/index/book/getWishBookList',
-  increaseRecommendCountApi: '/myapp/index/book/increaseRecommendCount',
+  addCollectUserApi: '/myapp/index/book/addCollectUser',
+  removeCollectUserApi: '/myapp/index/book/removeCollectUser',
+  getCollectBookListApi: '/myapp/index/book/getCollectBookList',
+  // increaseRecommendCountApi: '/myapp/index/book/increaseRecommendCount',
 }
 
 /**
@@ -57,10 +60,34 @@ export const getWishBookListApi = function (params) {
   })
 }
 
-export const increaseRecommendCountApi = function (data) {
+export const addCollectUserApi = function (data) {
   return axios({
-    url: api.increaseRecommendCountApi,
+    url: api.addCollectUserApi,
     method: 'post',
     params: data
   })
 }
+
+export const removeCollectUserApi = function (data) {
+  return axios({
+    url: api.removeCollectUserApi,
+    method: 'post',
+    params: data
+  })
+}
+
+export const getCollectBookListApi = function (params) {
+  return axios({
+    url: api.getCollectBookListApi,
+    method: 'get',
+    params: params
+  })
+}
+
+// export const increaseRecommendCountApi = function (data) {
+//   return axios({
+//     url: api.increaseRecommendCountApi,
+//     method: 'post',
+//     params: data
+//   })
+// }

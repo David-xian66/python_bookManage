@@ -7,15 +7,14 @@
       <div class="collect-book-view">
         <div class="book-list flex-view">
           <div class="book-item item-column-3" v-for="(item,index) in collectData" :key="index">
-            <div class="remove">移出</div>
+            <div class="remove" @click="handleRemove(item)">移出</div>
             <div class="img-view">
-              <img class="" data-src="https://file.ituring.com.cn/LargeCover/2212db3d2bb99b3522ed"
-                   src="https://file.ituring.com.cn/LargeCover/2212db3d2bb99b3522ed" lazy="loaded">
+              <img :src="item.cover">
             </div>
             <div class="info-view">
-              <h3 class="book-name">不公平优势：如何找到阻力最小的成功路径</h3>
-              <p class="authors">王红（作者)</p>
-              <p class="translators">王小皓（译者）</p>
+              <h3 class="book-name">{{item.title}}</h3>
+              <p class="authors" v-if="item.author">{{item.author}}（作者)</p>
+              <p class="translators" v-if="item.translator">{{item.translator}}（译者）</p>
             </div>
           </div>
         </div>
@@ -25,11 +24,38 @@
 </template>
 
 <script>
+import {getCollectBookListApi, removeCollectUserApi} from '@/api/index/book'
+
 export default {
   name: 'CollectBookView',
   data () {
     return {
-      collectData: ['','','','']
+      collectData: []
+    }
+  },
+  mounted () {
+    this.getCollectBookList()
+  },
+  methods: {
+    handleRemove (record) {
+      let username = this.$store.state.user.username
+      removeCollectUserApi({username: username, bookId: record.id}).then(res => {
+        this.$message.success('移除成功')
+        this.getCollectBookList()
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    getCollectBookList () {
+      let username = this.$store.state.user.username
+      getCollectBookListApi({username: username}).then(res => {
+        res.data.forEach(item => {
+          item.cover = this.$BASE_URL + item.cover
+        })
+        this.collectData = res.data
+      }).catch(err => {
+        console.log(err.msg)
+      })
     }
   }
 }
