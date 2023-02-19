@@ -90,6 +90,11 @@ const constantRouterMap = [
             component: () => import('@/views/index/user/fans-view')
           },
           {
+            path: 'scoreView',
+            name: 'scoreView',
+            component: () => import('@/views/index/user/score-view')
+          },
+          {
             path: 'commentView',
             name: 'commentView',
             component: () => import('@/views/index/user/comment-view')

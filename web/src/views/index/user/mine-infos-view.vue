@@ -49,7 +49,7 @@
           <img src="@/assets/order-address-icon.svg">
           <span>地址管理</span>
         </div>
-        <div class="mine-item flex-view" @click="clickMenu('')">
+        <div class="mine-item flex-view" @click="clickMenu('scoreView')">
           <img src="@/assets/order-point-icon.svg">
           <span>我的积分</span>
         </div>

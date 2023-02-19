@@ -2,31 +2,83 @@
   <div class="content-list">
     <div class="list-title">推送设置</div>
     <div class="list-content">
-      <div class="push-view" userid="602081">
+      <div class="push-view">
         <div class="item flex-view">
           <div class="label">推送邮箱</div>
           <div class="right-box">
-            <input type="text" class="input-dom" placeholder="请输入邮箱">
+            <input type="text" class="input-dom" placeholder="请输入邮箱" v-model="push_email">
           </div>
         </div>
         <div class="item flex-view">
           <div class="label">接受邮件消息</div>
           <div class="right-box">
-            <a-switch />
+            <a-switch v-model="push_switch"/>
           </div>
         </div>
-        <div class="item flex-view">
-          <div class="label">接受微信消息</div>
-          <div class="right-box">
-            <a-switch />
-          </div>
-        </div>
-        <button class="save mg">保存</button>
+        <button class="save mg" @click="handleSave()">保存</button>
       </div>
     </div>
   </div>
 </template>
 
+<script>
+import {infoApi, updateApi} from '@/api/index/user'
+
+export default {
+  data () {
+    return {
+      push_email: undefined,
+      push_switch: undefined
+    }
+  },
+  mounted () {
+    this.getUserInfo()
+  },
+  methods: {
+    // 积分逻辑：每次还书的时候积分加1
+    getUserInfo () {
+      this.loading = true
+      let userId = this.$store.state.user.userId
+      infoApi({id: userId}).then(res => {
+        if (res.data) {
+          this.push_email = res.data.push_email
+          this.push_switch = res.data.push_switch
+        }
+        this.loading = false
+      }).catch(err => {
+        console.log(err)
+        this.loading = false
+      })
+    },
+    handleSave () {
+      const reg = /^[a-zA-Z0-9][a-zA-Z0-9_]+\@[a-zA-Z0-9]+\.[a-zA-Z]{2,5}(\.[a-zA-Z]{2,5})*$/i
+
+      if (!this.push_email.match(reg)) {
+        this.$message.warn('请输入正确的邮箱格式')
+        return
+      }
+
+      let userId = this.$store.state.user.userId
+      const formData = new FormData()
+      if (this.push_email) {
+        formData.append('push_email', this.push_email)
+      }
+      if (this.push_switch) {
+        formData.append('push_switch', this.push_switch)
+      }
+      updateApi({id: userId}, formData).then(res => {
+        if (res.data) {
+          this.push_email = res.data.push_email
+          this.push_switch = res.data.push_switch
+        }
+        this.$message.success('保存成功')
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+  }
+}
+</script>
 <style scoped lang="less">
 progress {
   vertical-align: baseline;

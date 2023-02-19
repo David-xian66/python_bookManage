@@ -47,8 +47,8 @@ insert into b_user(username,password,role,status) values('admin111',md5('admin11
 
 接口请求频次限制
 
-借出：库存减1
-还书：库存加1
+借书逻辑：库存减1
+还书逻辑：库存加1, 积分加1
 
 ### 登录接口
 

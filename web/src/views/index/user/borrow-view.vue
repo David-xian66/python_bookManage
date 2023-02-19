@@ -101,7 +101,8 @@ export default {
     },
     getBorrowList () {
       this.loading = true
-      listApi({borrowStatus: this.borrowStatus}).then(res => {
+      let userId = this.$store.state.user.userId
+      listApi({userId: userId, borrowStatus: this.borrowStatus}).then(res => {
         res.data.forEach((item, index) => {
           if (item.cover) {
             item.cover = this.$BASE_URL + item.cover

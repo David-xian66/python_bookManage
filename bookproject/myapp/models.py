@@ -26,6 +26,9 @@ class User(models.Model):
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True, null=True)
     description = models.TextField(max_length=200, null=True)
     create_time = models.DateTimeField(auto_now_add=True, null=True)
+    score = models.IntegerField(default=0, blank=True, null=True)
+    push_email = models.CharField(max_length=40, blank=True, null=True)
+    push_switch = models.BooleanField(blank=True, null=True, default=False)
     admin_token = models.CharField(max_length=32, blank=True, null=True)
     token = models.CharField(max_length=32, blank=True, null=True)
 

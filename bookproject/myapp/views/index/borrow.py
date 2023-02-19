@@ -12,8 +12,10 @@ from myapp.serializers import BorrowSerializer
 @api_view(['GET'])
 def list_api(request):
     if request.method == 'GET':
+        userId = request.GET.get('userId', -1)
         borrowStatus = request.GET.get('borrowStatus', '')
-        borrows = Borrow.objects.all().filter(status__contains=borrowStatus).order_by('-borrow_time')
+
+        borrows = Borrow.objects.all().filter(user=userId).filter(status__contains=borrowStatus).order_by('-borrow_time')
         serializer = BorrowSerializer(borrows, many=True)
         return APIResponse(code=0, msg='查询成功', data=serializer.data)
 
@@ -73,6 +75,10 @@ def return_book(request):
         book = Book.objects.get(pk=bookId)
         book.repertory = book.repertory + 1
         book.save()
+
+        # 加积分
+        borrow.user.score = borrow.user.score + 1
+        borrow.user.save()
 
         return APIResponse(code=0, msg='还书成功', data=serializer.data)
     else:

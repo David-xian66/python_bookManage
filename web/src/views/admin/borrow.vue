@@ -131,8 +131,8 @@ export default {
     // 模拟新增
     handleAdd() {
       createApi({
-        book: '4',
-        user: '11',
+        book: '3',
+        user: '17',
         status: '1',
         delayed: false
       }).then(res => {
