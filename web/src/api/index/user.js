@@ -8,6 +8,7 @@ const api = {
   loginApi: '/myapp/index/user/login',
   infoApi: '/myapp/index/user/info',
   updateApi: '/myapp/index/user/update',
+  updatePwdApi: '/myapp/index/user/updatePwd',
 }
 
 export const registerApi = function (data) {
@@ -37,6 +38,18 @@ export const infoApi = function (params) {
 export const updateApi = function (params, data) {
   return axios({
     url: api.updateApi,
+    method: 'post',
+    headers: {
+      'Content-Type': 'multipart/form-data;charset=utf-8'
+    },
+    params: params,
+    data: data
+  })
+}
+
+export const updatePwdApi = function (params, data) {
+  return axios({
+    url: api.updatePwdApi,
     method: 'post',
     headers: {
       'Content-Type': 'multipart/form-data;charset=utf-8'

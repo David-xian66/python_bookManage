@@ -2,7 +2,7 @@
   <div class="content-list">
     <div class="list-title">帐号安全</div>
     <div class="list-content">
-      <div class="safe-view" userid="602081">
+      <div class="safe-view">
         <div class="safe-info-box">
           <div class="item flex-view">
             <div class="label">账号安全等级</div>
@@ -16,45 +16,36 @@
             <div class="label">绑定手机</div>
             <div class="right-box">
               <input class="input-dom" placeholder="请输入手机号">
-              <button class="change-btn">更换</button>
+              <a-button type="link" @click="handleBindMobile()">更换</a-button>
             </div>
           </div>
-          <div class="item flex-view">
-            <div class="label">绑定微信</div>
-            <div class="right-box flex-view">
-              <span class="wx-text">未绑定微信</span>
-              <span class="edit-pwd-btn">我要绑定微信</span>
-            </div>
-          </div>
-          <!---->
-          <!---->
         </div>
-        <div class="edit-pwd-box" style="display: none;">
+        <div class="edit-pwd-box" style="display;">
           <div class="pwd-edit">
             <!---->
             <div class="item flex-view">
               <div class="label">当前密码</div>
               <div class="right-box">
-                <input placeholder="输入当前密码" class="input-dom">
+                <a-input-password placeholder="输入当前密码" v-model="password" />
               </div>
             </div>
             <div class="item flex-view">
               <div class="label">新密码</div>
               <div class="right-box">
-                <input placeholder="输入新密码" class="input-dom">
+                <a-input-password placeholder="输入新密码" v-model="newPassword1" />
               </div>
             </div>
             <div class="item flex-view">
               <div class="label">确认新密码</div>
               <div class="right-box">
-                <input placeholder="重复输入密码" class="input-dom">
+                <a-input-password placeholder="重复输入密码" v-model="newPassword2" />
               </div>
             </div>
             <div class="item flex-view">
               <div class="label">
               </div>
               <div class="right-box">
-                <button class="ok-btn">修改密码</button>
+                <a-button type="primary" @click="handleUpdatePwd()">修改密码</a-button>
               </div>
             </div>
           </div>
@@ -64,6 +55,46 @@
   </div>
 </template>
 
+<script>
+import {updatePwdApi} from '@/api/index/user'
+
+export default  {
+  name: 'SecurityView',
+  data () {
+    return {
+      password: undefined,
+      newPassword1: undefined,
+      newPassword2: undefined
+    }
+  },
+  methods: {
+    handleBindMobile () {
+      this.$message.info('功能开发中')
+    },
+    handleUpdatePwd () {
+      if (!this.password || !this.newPassword1 || !this.newPassword2) {
+        this.$message.warn('不能为空')
+        return
+      }
+      if (this.newPassword1 !== this.newPassword2) {
+        this.$message.warn('密码不一致')
+        return
+      }
+
+      let id = this.$store.state.user.userId
+      updatePwdApi({id: id}, {
+        password: this.password,
+        newPassword1: this.newPassword1,
+        newPassword2: this.newPassword2
+      }).then(res => {
+        this.$message.success('修改成功')
+      }).catch(err => {
+        this.$message.error(err.msg)
+      })
+    }
+  }
+}
+</script>
 <style scoped lang="less">
 progress {
   vertical-align: baseline;
@@ -76,11 +107,6 @@ progress {
 input, textarea {
   outline: none;
   border-style: none;
-}
-
-button {
-  background: transparent;
-  padding: 0;
 }
 
 .content-list {

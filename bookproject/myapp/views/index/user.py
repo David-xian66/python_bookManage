@@ -121,3 +121,38 @@ def update(request):
         print(serializer.errors)
 
     return APIResponse(code=1, msg='更新失败')
+
+
+@api_view(['POST'])
+@authentication_classes([TokenAuthtication])
+def updatePwd(request):
+
+    try:
+        pk = request.GET.get('id', -1)
+        user = User.objects.get(pk=pk)
+    except User.DoesNotExist:
+        return APIResponse(code=1, msg='对象不存在')
+
+    password = request.data.get('password', None)
+    newPassword1 = request.data.get('newPassword1', None)
+    newPassword2 = request.data.get('newPassword2', None)
+
+    if not password or not newPassword1 or not newPassword2:
+        return APIResponse(code=1, msg='不能为空')
+
+    if user.password != utils.md5value(password):
+        return APIResponse(code=1, msg='原密码不正确')
+
+    if newPassword1 != newPassword2:
+        return APIResponse(code=1, msg='两次密码不一致')
+
+    data = request.data.copy()
+    data.update({'password': utils.md5value(newPassword1)})
+    serializer = UserSerializer(user, data=data)
+    if serializer.is_valid():
+        serializer.save()
+        return APIResponse(code=0, msg='更新成功', data=serializer.data)
+    else:
+        print(serializer.errors)
+
+    return APIResponse(code=1, msg='更新失败')

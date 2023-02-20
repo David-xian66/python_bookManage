@@ -67,6 +67,7 @@ urlpatterns = [
     path('index/user/register', views.index.user.register),
     path('index/user/info', views.index.user.info),
     path('index/user/update', views.index.user.update),
+    path('index/user/updatePwd', views.index.user.updatePwd),
     path('index/notice/list_api', views.index.notice.list_api),
     path('index/book/list', views.index.book.list_api),
     path('index/book/detail', views.index.book.detail),
