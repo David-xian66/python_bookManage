@@ -71,14 +71,14 @@ urlpatterns = [
     path('index/notice/list_api', views.index.notice.list_api),
     path('index/book/list', views.index.book.list_api),
     path('index/book/detail', views.index.book.detail),
-    # path('index/book/increaseWishCount', views.index.book.increaseWishCount),
+    path('index/book/increaseWishCount', views.index.book.increaseWishCount),
     path('index/book/addWishUser', views.index.book.addWishUser),
     path('index/book/removeWishUser', views.index.book.removeWishUser),
     path('index/book/getWishBookList', views.index.book.getWishBookList),
     path('index/book/addCollectUser', views.index.book.addCollectUser),
     path('index/book/removeCollectUser', views.index.book.removeCollectUser),
     path('index/book/getCollectBookList', views.index.book.getCollectBookList),
-    # path('index/book/increaseRecommendCount', views.index.book.increaseRecommendCount),
+    path('index/book/increaseRecommendCount', views.index.book.increaseRecommendCount),
     path('index/comment/list', views.index.comment.list_api),
     path('index/comment/listMyComments', views.index.comment.list_my_comment),
     path('index/comment/create', views.index.comment.create),
@@ -88,6 +88,10 @@ urlpatterns = [
     path('index/borrow/create', views.index.borrow.create),
     path('index/borrow/return_book', views.index.borrow.return_book),
     path('index/borrow/delay', views.index.borrow.delay),
+    path('index/address/list', views.index.address.list_api),
+    path('index/address/create', views.index.address.create),
+    path('index/address/update', views.index.address.update),
+    path('index/address/delete', views.index.address.delete),
 
 
 ]

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from myapp.models import Book, Classification, Tag, User, Comment, Record, LoginLog, Borrow, BorrowLog, OpLog, Banner, \
-    Ad, Notice, ErrorLog
+    Ad, Notice, ErrorLog, Address
 
 
 class BookSerializer(serializers.ModelSerializer):
@@ -145,4 +145,12 @@ class NoticeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Notice
+        fields = '__all__'
+
+
+class AddressSerializer(serializers.ModelSerializer):
+    create_time = serializers.DateTimeField(format='%Y-%m-%d %H:%M:%S', required=False)
+
+    class Meta:
+        model = Address
         fields = '__all__'

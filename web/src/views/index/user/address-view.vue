@@ -9,17 +9,24 @@
       <div class="address-item flex-view" v-for="item in addressData">
         <div class="infos">
           <div class="name-box">
-            <span class="name">Qingsong Xiao</span>
-            <span class="tel">+13581652222</span>
+            <span class="name">{{item.name}}</span>
+            <span class="tel">{{item.mobile}}</span>
           </div>
-          <p class="address-box">北京市 东城区 北辰西路8号</p>
+          <p class="address-box">{{item.desc}}</p>
         </div>
         <div class="do-box">
           <div class="btns">
-            <span class="edit">编辑</span>
-            <span class="delete">删除</span>
+            <span class="edit" @click="handleEdit(item)">编辑</span>
+            <a-popconfirm
+              title="确定删除？"
+              ok-text="是"
+              cancel-text="否"
+              @confirm="handleDelete(item)"
+            >
+              <span class="delete">删除</span>
+            </a-popconfirm>
           </div>
-          <div class="default-box">
+          <div class="default-box" v-if="item.default">
             <img src="@/assets/address-right-icon.svg">
             <span>默认地址</span>
           </div>
@@ -32,15 +39,34 @@
 
 <script>
 import EditAddress from '@/views/index/user/modal/edit-address'
+import {listApi, deleteApi} from '@/api/index/address'
 
 export default {
   name: 'AddressView',
   data () {
     return {
-      addressData: ['', '', '']
+      addressData: []
     }
   },
+  mounted () {
+    this.listAddressData()
+  },
   methods: {
+    listAddressData () {
+      let userId = this.$store.state.user.userId
+      listApi({userId: userId}).then(res => {
+        this.addressData = res.data
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    handleDelete (item) {
+      deleteApi({ids: item.id}).then(res => {
+        this.listAddressData()
+      }).catch(err => {
+        console.log(err)
+      })
+    },
     handleAdd () {
       this.$dialog(
         EditAddress,
@@ -48,7 +74,7 @@ export default {
           on: {
             ok: () => {
               this.page = 1
-              this.getList()
+              this.listAddressData()
             }
           }
         },
@@ -62,7 +88,31 @@ export default {
           }
         }
       )
-    }
+    },
+    handleEdit (item) {
+      this.$dialog(
+        EditAddress,
+        {
+          address: Object.assign({}, item),
+          modifyFlag: true,
+          on: {
+            ok: () => {
+              this.page = 1
+              this.listAddressData()
+            }
+          }
+        },
+        {
+          title: '编辑地址',
+          width: '480px',
+          centered: true,
+          bodyStyle: {
+            maxHeight: 'calc(100vh - 200px)',
+            overflowY: 'auto'
+          }
+        }
+      )
+    },
   }
 }
 </script>

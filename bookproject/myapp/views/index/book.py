@@ -78,7 +78,6 @@ def increaseWishCount(request):
     serializer = BookSerializer(book)
     return APIResponse(code=0, msg='操作成功', data=serializer.data)
 
-
 @api_view(['POST'])
 def increaseRecommendCount(request):
     try:

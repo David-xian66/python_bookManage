@@ -210,3 +210,16 @@ class Notice(models.Model):
 
     class Meta:
         db_table = "b_notice"
+
+
+class Address(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='user_address')
+    name = models.CharField(max_length=100, blank=True, null=True)
+    mobile = models.CharField(max_length=30, blank=True, null=True)
+    desc = models.CharField(max_length=300, blank=True, null=True)
+    default = models.BooleanField(blank=True, null=True, default=False)  # 是否默认地址
+    create_time = models.DateTimeField(auto_now_add=True, null=True)
+
+    class Meta:
+        db_table = "b_address"
