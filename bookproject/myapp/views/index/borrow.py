@@ -28,6 +28,9 @@ def create(request):
     """
 
     data = request.data.copy()
+    if data['user'] is None or data['book'] is None:
+        return APIResponse(code=1, msg='参数错误')
+
     book = Book.objects.get(pk=data['book'])
     if book.repertory <= 0:
         return APIResponse(code=1, msg='库存不足')
@@ -37,6 +40,9 @@ def create(request):
         return APIResponse(code=1, msg='您已经借过该书了')
 
     create_time = datetime.datetime.now()
+
+    data['status'] = '1'
+    data['delayed'] = False
     data['create_time'] = create_time
     data['expect_time'] = create_time + datetime.timedelta(days=60)
     serializer = BorrowSerializer(data=data)

@@ -9,27 +9,26 @@
     </div>
     <div class="right-view">
       <template v-if="$store.state.user.username">
-<!--        <span class="username">你好, {{$store.state.user.username}}</span>-->
         <a-dropdown>
           <a class="ant-dropdown-link" @click="e => e.preventDefault()">
             <img src="@/assets/avatar.jpg" class="self-img" >
           </a>
           <a-menu slot="overlay">
             <a-menu-item>
-              <a @click="goUserCenter()">订单中心</a>
+              <a @click="goUserCenter('borrowView')">借阅中心</a>
             </a-menu-item>
             <a-menu-item>
-              <a @click="goUserCenter()">个人设置</a>
+              <a @click="goUserCenter('userInfoEditView')">个人设置</a>
             </a-menu-item>
             <a-menu-item>
               <a @click="quit()">退出</a>
             </a-menu-item>
           </a-menu>
         </a-dropdown>
-        <div class="right-icon">
-          <img src="@/assets/cart-icon.svg">
-          <span>3</span>
-        </div>
+<!--        <div class="right-icon">-->
+<!--          <img src="@/assets/cart-icon.svg">-->
+<!--          <span>3</span>-->
+<!--        </div>-->
       </template>
       <template v-else>
         <button class="login btn hidden-sm" @click="goLogin()">登录</button>
@@ -48,9 +47,29 @@
           :visible="msgVisible"
           @close="onClose"
         >
-          <p>新书通知...</p>
-          <p>新书通知...</p>
-          <p>新书通知...</p>
+          <a-spin :spinning="loading" style="min-height: 200px;">
+            <div class="list-content">
+              <div class="notification-view">
+                <div class="list">
+                  <div class="notification-item flex-view" v-for="item in msgData">
+                    <!---->
+                    <div class="content-box">
+                      <div class="header">
+                        <span class="title-txt">{{item.title}}</span>
+                        <br/>
+                        <span class="time">{{ item.create_time }}</span>
+                      </div>
+                      <div class="head-text">
+                      </div>
+                      <div class="content">
+                        <p>{{ item.content }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a-spin>
         </a-drawer>
       </div>
     </div>
@@ -58,14 +77,31 @@
 </template>
 
 <script>
+import {listApi} from '@/api/index/notice'
+
 export default {
   name: 'Header',
   data () {
     return {
-      msgVisible: false
+      loading: false,
+      msgVisible: false,
+      msgData: []
     }
   },
+  mounted () {
+    this.getMessageList()
+  },
   methods: {
+    getMessageList () {
+      this.loading = true
+      listApi().then(res => {
+        this.msgData = res.data
+        this.loading = false
+      }).catch(err => {
+        console.log(err)
+        this.loading = false
+      })
+    },
     search () {
       const keyword = this.$refs.keyword.value
       if (this.$route.name === 'search') {
@@ -78,8 +114,8 @@ export default {
     goLogin () {
       this.$router.push({name: 'login'})
     },
-    goUserCenter () {
-      this.$router.push({name: 'orderView'})
+    goUserCenter (menuName) {
+      this.$router.push({name: menuName})
     },
     quit () {
       this.$store.dispatch('Logout').then(res => {
@@ -113,8 +149,8 @@ export default {
 .logo {
   margin-right: 24px;
   img {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     cursor: pointer;
   }
 }
@@ -225,6 +261,73 @@ export default {
     vertical-align: middle;
     margin-left: 32px;
   }
+}
+
+.content-list {
+  flex: 1;
+
+  .list-title {
+    color: #152844;
+    font-weight: 600;
+    font-size: 18px;
+    //line-height: 24px;
+    height: 48px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #cedce4;
+  }
+}
+
+.notification-item {
+  padding-top: 16px;
+
+  .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+
+  .content-box {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    border-bottom: 1px dashed #e9e9e9;
+    padding: 4px 0 16px;
+  }
+
+  .header {
+    margin-bottom: 12px;
+  }
+
+  .title-txt {
+    color: #315c9e;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .time {
+    color: #a1adc5;
+    font-size: 14px;
+  }
+
+  .head-text {
+    color: #152844;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+
+    .name {
+      margin-right: 8px;
+    }
+  }
+
+  .content {
+    margin-top: 4px;
+    color: #484848;
+    font-size: 14px;
+    line-height: 22px;
+  }
+
 }
 
 </style>

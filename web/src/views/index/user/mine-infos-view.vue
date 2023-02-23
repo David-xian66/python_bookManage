@@ -1,12 +1,12 @@
 <template>
-  <div data-v-1b2faf0e="" class="mine-infos-view">
+  <div class="mine-infos-view">
     <div class="info-box flex-view">
-      <img src="@/assets/avatar.jpg" alt="sdhh_3381" class="avatar-img">
+      <img src="@/assets/avatar.jpg" class="avatar-img">
       <div class="name-box">
         <h2 class="nick">{{ $store.state.user.username }}</h2>
         <div class="age">
           <span>活跃1天</span>
-          <span class="give-point">个人主页</span>
+          <span class="give-point"></span>
         </div>
       </div>
     </div>

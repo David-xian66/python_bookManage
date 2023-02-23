@@ -8,7 +8,7 @@
           <div class="book-infos-view">
             <div class="book-infos">
               <div class="book-img-box">
-                <img :src="detailData.cover" />
+                <img :src="detailData.cover"/>
               </div>
               <div class="book-info-box">
                 <div class="book-state">
@@ -57,19 +57,19 @@
                   </div>
                 </div>
               </div>
-              <div class="count-item flex-view">
-                <div class="count-img">
-                  <img src="@/assets/read-online-icon.svg">
-                </div>
-                <div class="count-box flex-view">
-                  <div class="count-text-box">
-                    <span class="count-title">借阅次数</span>
-                  </div>
-                  <div class="count-num-box">
-                    <span class="num-text">120</span>
-                  </div>
-                </div>
-              </div>
+              <!--              <div class="count-item flex-view">-->
+              <!--                <div class="count-img">-->
+              <!--                  <img src="@/assets/read-online-icon.svg">-->
+              <!--                </div>-->
+              <!--                <div class="count-box flex-view">-->
+              <!--                  <div class="count-text-box">-->
+              <!--                    <span class="count-title">次数</span>-->
+              <!--                  </div>-->
+              <!--                  <div class="count-num-box">-->
+              <!--                    <span class="num-text">120</span>-->
+              <!--                  </div>-->
+              <!--                </div>-->
+              <!--              </div>-->
               <div class="count-item flex-view" @click="share()">
                 <div class="count-img">
                   <img src="@/assets/share-icon.svg">
@@ -87,20 +87,28 @@
             </div>
           </div>
 
-          <div  data-v-04e3a7b4="" class="buy-way hidden-sm">
-            <div  class="title">借还区域</div>
-            <div  class="flex-view">
-              <div  class="buy-way-item" style="">
-                <div  class="name">
-                  <span >可借阅60天</span>
+          <div data-v-04e3a7b4="" class="buy-way hidden-sm">
+            <div class="title">借阅区域</div>
+            <div class="flex-view">
+              <div class="buy-way-item" style="">
+                <div class="name">
+                  <span>库存：{{detailData.repertory}}</span>
                 </div>
-                <div  class="price">
+                <div class="price">
                   <!--                  <span  class="price-text">¥ 34.9</span>-->
                   <!---->
-                  <button  class="buy-btn">
-                    <img  src="@/assets/add.svg">
-                    <span @click="handleBorrow()">借阅</span>
-                  </button>
+                  <a-popconfirm
+                    title="确定借阅？"
+                    ok-text="是"
+                    cancel-text="否"
+                    @confirm="handleBorrow(detailData)"
+                  >
+                    <button class="buy-btn">
+                        <img src="@/assets/add.svg" />
+                        <span>借阅</span>
+                    </button>
+
+                  </a-popconfirm>
                 </div>
               </div>
               <!--              <div  class="buy-way-item" style="">-->
@@ -136,7 +144,7 @@
 
             <!--简介-->
             <div class="book-intro" :class="selectTabIndex <= 0? '':'hide'">
-              <p class="text" style="">{{detailData.description}}</p>
+              <p class="text" style="">{{ detailData.description }}</p>
             </div>
 
             <!--评论-->
@@ -148,7 +156,7 @@
                 <button class="send-btn" @click="sendComment()">发送</button>
               </div>
               <div class="tab-view flex-view">
-                <div class="count-text">共有{{commentData.length}}条评论</div>
+                <div class="count-text">共有{{ commentData.length }}条评论</div>
                 <div class="tab-box flex-view" v-if="commentData.length > 0">
                   <span :class="sortIndex === 0? 'tab-select': ''" @click="sortCommentList('recent')">最新</span>
                   <div class="line"></div>
@@ -160,20 +168,20 @@
                   <div class="flex-item flex-view">
                     <img src="@/assets/avatar.jpg" class="avator">
                     <div class="person">
-                      <div class="name">{{item.username}}</div>
-                      <div class="time">{{item.comment_time}}</div>
+                      <div class="name">{{ item.username }}</div>
+                      <div class="time">{{ item.comment_time }}</div>
                     </div>
                     <div class="float-right">
                       <span @click="like(item.id)">推荐</span>
-                      <span class="num">{{item.like_count}}</span>
+                      <span class="num">{{ item.like_count }}</span>
                     </div>
                   </div>
-                  <p class="comment-content">{{item.content}}</p>
+                  <p class="comment-content">{{ item.content }}</p>
                 </div>
                 <div class="infinite-loading-container">
                   <div class="infinite-status-prompt" style="">
                     <div slot="no-results" class="no-results">
-                      <div> </div>
+                      <div></div>
                       <p>没有更多了</p>
                     </div>
                   </div>
@@ -214,6 +222,8 @@ import {
   addCollectUserApi
 } from '@/api/index/book'
 import {listApi as listCommentListApi, createApi as createCommentApi, likeApi} from '@/api/index/comment'
+import {createApi} from '@/api/index/borrow'
+
 export default {
   components: {
     Footer,
@@ -279,8 +289,18 @@ export default {
       let shareHref = 'http://service.weibo.com/share/share.php?title=' + content
       window.open(shareHref)
     },
-    handleBorrow () {
-      // todo
+    handleBorrow (detailData) {
+      console.log(detailData)
+      const userId = this.$store.state.user.userId
+      createApi({
+        book: detailData.id,
+        user: userId
+      }).then(res => {
+        this.$message.success('借阅成功')
+        this.getBookDetail()
+      }).catch(err => {
+        this.$message.error(err.msg || '失败')
+      })
     },
     getRecommendBook () {
       listBookList({sort: 'recommend'}).then(res => {

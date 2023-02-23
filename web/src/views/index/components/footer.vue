@@ -8,12 +8,12 @@
       <a href="" class="foot-link" target="_blank">关于我们</a>
     </div>
     <div class="footer-infos">
-      <span data-v-1c9e5d10="">
-        <a style="color: rgb(174, 174, 174);">京ICP备11039122号</a>
+      <span>
+        <a style="color: rgb(174, 174, 174);">京ICP备12345678号</a>
       </span>
-      <span>&nbsp;&nbsp;京公网安备123456&nbsp;&nbsp;新出发京零字第东XXXXXX号&nbsp;&nbsp;统一社会信用代码 XXXXXXXXXXXXXXXXX</span>
+      <span>&nbsp;&nbsp;京公网安备123456&nbsp;&nbsp;新出发京零字第东123456号&nbsp;&nbsp;统一社会信用代码 123456789</span>
     </div>
-    <div class="address">2022-2023 © 北京XX有限公司 · All Rights Reserved</div>
+    <div class="address">2022-2023 © 北京代码演示 · All Rights Reserved</div>
   </div>
 </template>
 
