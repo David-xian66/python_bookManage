@@ -119,7 +119,8 @@ def update(request):
     if serializer.is_valid():
         serializer.save()
         return APIResponse(code=0, msg='更新成功', data=serializer.data)
-
+    else:
+        print(serializer.errors)
     return APIResponse(code=1, msg='更新失败')
 
 

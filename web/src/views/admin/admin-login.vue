@@ -1,7 +1,7 @@
 <template>
   <div id="userLayout">
     <div class="user-layout-header">
-      <img class="logo" src="@/assets/logo.png" alt="">
+      <img class="logo" src="@/assets/front-logo.png" alt="">
       <span>图书后台管理系统</span>
     </div>
     <div class="container">
@@ -135,11 +135,14 @@ export default {
     height: 80px;
     padding: 0 24px;
     color: @heading-color;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: bold;
     line-height: 80px;
     .logo {
+      width: 40px;
+      height: 40px;
       margin-right: 8px;
+      margin-top: -4px;
     }
   }
   .container {
@@ -148,7 +151,6 @@ export default {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-
 
     .main {
       position: absolute;

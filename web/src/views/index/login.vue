@@ -85,7 +85,8 @@ div {
 }
 
 .container {
-  background-color: #24273a;
+  //background-color: #f1f1f1;
+  background-image: url('~@/assets/login.png');
   height: 100%;
   max-width: 100%;
   display:flex;

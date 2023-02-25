@@ -37,10 +37,10 @@
           <img src="@/assets/order-icon.svg">
           <span>我的借阅</span>
         </div>
-        <div class="mine-item flex-view" @click="clickMenu('orderView')">
-          <img src="@/assets/order-icon.svg">
-          <span>我的订单</span>
-        </div>
+<!--        <div class="mine-item flex-view" @click="clickMenu('orderView')">-->
+<!--          <img src="@/assets/order-icon.svg">-->
+<!--          <span>我的订单</span>-->
+<!--        </div>-->
         <div class="mine-item flex-view" @click="clickMenu('commentView')">
           <img src="@/assets/order-book-icon.svg">
           <span>我的评论</span>
@@ -96,7 +96,6 @@ export default {
   },
   methods: {
     clickMenu (name) {
-      console.log('mmmmm')
       this.$router.push({name: name})
     },
     getCollectBookList () {

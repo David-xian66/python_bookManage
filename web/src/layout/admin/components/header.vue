@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <img class="header-logo" src="@/assets/logo.png">
+    <img class="header-logo" src="@/assets/front-logo.png">
     <span class="header-title">图书后台管理系统</span>
     <div class="empty"></div>
     <span>管理员[{{$store.state.user.adminUserName}}]</span>
@@ -38,13 +38,13 @@ export default {
   padding-right: 24px;
 
   .header-logo {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
   }
 
   .header-title {
-    margin-left: 24px;
+    margin-left: 16px;
     font-size: 20px;
     font-weight: bold;
     text-align: center;

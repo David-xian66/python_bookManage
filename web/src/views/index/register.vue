@@ -101,7 +101,8 @@ div {
 
 .container {
   max-width: 100%;
-  background: #142131;
+  //background: #142131;
+  background-image: url('~@/assets/login.png');
   height: 100vh;
   overflow: hidden;
   display:flex;

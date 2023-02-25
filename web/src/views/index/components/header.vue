@@ -1,7 +1,7 @@
 <template>
   <div class="main-bar-view">
     <div class="logo">
-      <img src="@/assets/logo.png" class="search-icon" @click="$router.push({name:'portal'})">
+      <img src="@/assets/front-logo.png" class="search-icon" @click="$router.push({name:'portal'})">
     </div>
     <div class="search-entry">
       <img src="@/assets/search-icon.svg" class="search-icon">
@@ -149,8 +149,8 @@ export default {
 .logo {
   margin-right: 24px;
   img {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
   }
 }
