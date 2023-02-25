@@ -123,7 +123,7 @@ const constantRouterMap = [
     path: '/admin',
     name: 'admin',
     redirect: '/admin/overview',
-    component: () => import('@/layout/admin/adminLayout'),
+    component: () => import('@/views/admin/layout/adminLayout'),
     children: [
       {
         path: 'overview',

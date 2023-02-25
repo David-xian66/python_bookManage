@@ -15,7 +15,8 @@
   </a-layout>
 </template>
 <script>
-import { SiderBar, Header } from './components'
+import Header from '@/views/admin/components/header'
+import SiderBar from '@/views/admin/components/siderBar'
 export default {
   components: {
     SiderBar,
