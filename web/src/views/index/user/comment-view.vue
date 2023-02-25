@@ -10,8 +10,7 @@
               <div class="infos">
                 <div class="name flex-view">
                   <h3></h3>
-                  <!--                <div class="traingle"></div>-->
-                  <h3>《{{item.title}}》</h3>
+                  <h3 @click="handleClickTitle(item)">《{{item.title}}》</h3>
                 </div>
                 <div class="time">{{item.comment_time}}</div>
                 <div class="content">{{item.content}}</div>
@@ -39,6 +38,10 @@ export default {
     this.getCommentList()
   },
   methods: {
+    handleClickTitle (record) {
+      let text = this.$router.resolve({name: 'detail', query: {id: record.book}})
+      window.open(text.href, '_blank')
+    },
     getCommentList () {
       this.loading = true
       const userId = this.$store.state.user.userId
@@ -102,6 +105,7 @@ export default {
       -webkit-box-align: center;
       -ms-flex-align: center;
       align-items: center;
+      cursor: pointer;
     }
 
     h3 {

@@ -4,7 +4,7 @@
     <div class="my-follow-view">
       <div class="follow-list flex-view">
         <div class="follow-item-view flex-view" v-for="item in followData">
-          <img src="https://file.ituring.com.cn/SmallCover/1706a9bdac2ba60b82e2" alt="Python_C">
+          <img src="" alt="">
           <div class="infos flex-view">
             <h3 class="name">Python_C</h3>
             <button>取消关注</button>

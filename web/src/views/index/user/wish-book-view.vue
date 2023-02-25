@@ -8,7 +8,7 @@
         <div class="book-list flex-view">
           <div class="book-item item-column-3" v-for="(item,index) in wishData" :key="index">
             <div class="remove" @click="handleRemove(item)">移出</div>
-            <div class="img-view">
+            <div class="img-view" @click="handleClickItem(item)">
               <img :src="item.cover">
             </div>
             <div class="info-view">
@@ -37,6 +37,10 @@ export default {
     this.getWishBookList()
   },
   methods: {
+    handleClickItem (record) {
+      let text = this.$router.resolve({name: 'detail', query: {id: record.id}})
+      window.open(text.href, '_blank')
+    },
     handleRemove (record) {
       let username = this.$store.state.user.username
       removeWishUserApi({username: username, bookId: record.id}).then(res => {

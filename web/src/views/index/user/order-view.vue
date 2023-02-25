@@ -26,7 +26,7 @@
         <div class="content flex-view">
           <div class="left-list">
             <div class="list-item flex-view">
-              <img src="https://file.ituring.com.cn/SmallCover/2211fe41b5bea4a52191" class="book-img">
+              <img src="" class="book-img">
               <div class="detail flex-between flex-view">
                 <div class="flex-between flex-top flex-view">
                   <h2 class="name">这才是服务设计</h2>

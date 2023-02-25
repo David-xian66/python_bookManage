@@ -272,17 +272,23 @@ export default {
         }).catch(err => {
           console.log('操作失败')
         })
+      } else {
+        this.$message.warn('请先登录')
       }
     },
     collect () {
       let username = this.$store.state.user.username
-      addCollectUserApi({bookId: this.bookId, username: username}).then(res => {
-        this.$message.success('收藏成功')
-        this.detailData = res.data
-        this.detailData.cover = this.$BASE_URL + this.detailData.cover
-      }).catch(err => {
-        console.log('收藏失败')
-      })
+      if (username) {
+        addCollectUserApi({bookId: this.bookId, username: username}).then(res => {
+          this.$message.success('收藏成功')
+          this.detailData = res.data
+          this.detailData.cover = this.$BASE_URL + this.detailData.cover
+        }).catch(err => {
+          console.log('收藏失败')
+        })
+      } else {
+        this.$message.warn('请先登录')
+      }
     },
     share () {
       let content = '分享一个非常好玩的网站 ' + window.location.href
@@ -292,15 +298,19 @@ export default {
     handleBorrow (detailData) {
       console.log(detailData)
       const userId = this.$store.state.user.userId
-      createApi({
-        book: detailData.id,
-        user: userId
-      }).then(res => {
-        this.$message.success('借阅成功')
-        this.getBookDetail()
-      }).catch(err => {
-        this.$message.error(err.msg || '失败')
-      })
+      if (userId) {
+        createApi({
+          book: detailData.id,
+          user: userId
+        }).then(res => {
+          this.$message.success('借阅成功')
+          this.getBookDetail()
+        }).catch(err => {
+          this.$message.error(err.msg || '失败')
+        })
+      } else {
+        this.$message.warn('请先登录')
+      }
     },
     getRecommendBook () {
       listBookList({sort: 'recommend'}).then(res => {
