@@ -27,18 +27,7 @@
       </div>
     </div>
     <div class="content-right">
-      <!--      <div class="pc-search-view flex-view">-->
-      <!--        <img src="@/assets/searchIcon.svg"-->
-      <!--             alt="搜索" class="search-icon">-->
-      <!--        <input placeholder="搜索书名、ISBN" ref="keyword">-->
-      <!--        <img src="@/assets/clear-search.svg" alt="清空" @click="clearSearch" class="clear-search-icon">-->
-      <!--        <button @click="search">搜索</button>-->
-      <!--        <span class="float-count" style="">共有2005本图书</span>-->
-      <!--      </div>-->
       <div class="top-select-view flex-view">
-<!--        <div class="type-view">-->
-<!--          <span>全部</span>-->
-<!--        </div>-->
         <div class="order-view">
           <span class="title"></span>
           <span class="tab"
@@ -96,7 +85,7 @@ export default {
 
       page: 1,
       total: 0,
-      pageSize: 9,
+      pageSize: 12,
     }
   },
   mounted () {
@@ -309,7 +298,7 @@ li {
 
 .tag {
   background: #fff;
-  border: 1px solid #a1adc5;
+  border: 1px solid #a1adc6;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   border-radius: 16px;
@@ -319,19 +308,19 @@ li {
   margin: 8px 8px 0 0;
   cursor: pointer;
   font-size: 12px;
-  color: #152844;
+  color: #152833;
 }
 
 .tag:hover {
-  background: #4684e2;
+  background: #4684e3;
   color: #fff;
-  border: 1px solid #4684e2;
+  border: 1px solid #4684e3;
 }
 
 .tag-select {
-  background: #4684e2;
+  background: #4684e3;
   color: #fff;
-  border: 1px solid #4684e2;
+  border: 1px solid #4684e3;
 }
 
 .content-right {

@@ -191,7 +191,7 @@
 
           </div>
           <div class="recommend" style="">
-            <div class="title">大家都在读</div>
+            <div class="title">热门推荐</div>
             <div class="books">
               <div class="book-item book-item" v-for="item in recommendData">
                 <div class="img-view">
@@ -199,8 +199,8 @@
                 </div>
                 <div class="info-view">
                   <h3 class="book-name">{{ item.title }}</h3>
-                  <p class="authors">{{ item.author }}（作者）</p>
-                  <p class="translators">{{ item.translator }}（译者）</p>
+                  <p class="authors" v-if="item.author">{{ item.author }}（作者）</p>
+                  <p class="translators" v-if="item.translator">{{ item.translator }}（译者）</p>
                 </div>
               </div>
             </div>

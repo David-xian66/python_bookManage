@@ -11,7 +11,7 @@ const user = {
     username: '',
     userId: '',
 
-    /** 后台字段**/
+    /** 管理员字段**/
     adminToken: '',
     adminUserName: ''
   },
@@ -41,7 +41,7 @@ const user = {
   },
 
   actions: {
-    // 后台登录
+    // 管理员登录
     AdminLogin ({commit}, {username, password}) {
       return new Promise((resolve, reject) => {
         adminLogin({
@@ -59,7 +59,7 @@ const user = {
         })
       })
     },
-    // 后台退出
+    // 管理员退出
     AdminLogout ({ commit, state }) {
       return new Promise((resolve) => {
         commit('SET_ADMIN_TOKEN', '')

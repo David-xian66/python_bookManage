@@ -15,8 +15,6 @@
             <p class="err-view">
             </p>
           </div>
-          <img src="" class="right-icon" style="display: none;">
-          <!---->
         </div>
       </div>
       <div class="regist-padding">
@@ -27,8 +25,6 @@
             <p class="err-view">
             </p>
           </div>
-          <img src="" class="right-icon" style="display: none;">
-          <!---->
         </div>
       </div>
       <div class="regist-padding">
@@ -39,7 +35,6 @@
             <p class="err-view">
             </p>
           </div>
-          <!---->
         </div>
       </div>
       <div class="tel-login">
