@@ -33,7 +33,7 @@
             <div class="book-counts hidden-sm">
               <div class="count-item flex-view pointer" @click="addToWish()">
                 <div class="count-img">
-                  <img src="@/assets/want-read-hover.svg">
+                  <img src="@/assets/images/want-read-hover.svg">
                 </div>
                 <div class="count-box flex-view">
                   <div class="count-text-box">
@@ -46,7 +46,7 @@
               </div>
               <div class="count-item flex-view pointer" @click="collect()">
                 <div class="count-img">
-                  <img src="@/assets/recommend-hover.svg">
+                  <img src="@/assets/images/recommend-hover.svg">
                 </div>
                 <div class="count-box flex-view">
                   <div class="count-text-box">
@@ -72,7 +72,7 @@
               <!--              </div>-->
               <div class="count-item flex-view" @click="share()">
                 <div class="count-img">
-                  <img src="@/assets/share-icon.svg">
+                  <img src="@/assets/images/share-icon.svg">
                 </div>
                 <div class="count-box flex-view">
                   <div class="count-text-box">
@@ -80,7 +80,7 @@
                   </div>
                   <div class="count-num-box">
                     <span class="num-text"></span>
-                    <img src="@/assets/wb-share.svg" class="mg-l">
+                    <img src="@/assets/images/wb-share.svg" class="mg-l">
                   </div>
                 </div>
               </div>
@@ -104,7 +104,7 @@
                     @confirm="handleBorrow(detailData)"
                   >
                     <button class="buy-btn">
-                        <img src="@/assets/add.svg" />
+                        <img src="@/assets/images/add.svg" />
                         <span>借阅</span>
                     </button>
 
@@ -151,7 +151,7 @@
             <div class="book-comment" :class="selectTabIndex > 0? '':'hide'">
               <div class="title">发表新的评论</div>
               <div class="publish flex-view">
-                <img src="@/assets/avatar.jpg" class="mine-img">
+                <img src="@/assets/images/avatar.jpg" class="mine-img">
                 <input placeholder="说点什么..." class="content-input" ref="comment">
                 <button class="send-btn" @click="sendComment()">发送</button>
               </div>
@@ -166,7 +166,7 @@
               <div class="comments-list">
                 <div class="comment-item" v-for="item in commentData">
                   <div class="flex-item flex-view">
-                    <img src="@/assets/avatar.jpg" class="avator">
+                    <img src="@/assets/images/avatar.jpg" class="avator">
                     <div class="person">
                       <div class="name">{{ item.username }}</div>
                       <div class="time">{{ item.comment_time }}</div>

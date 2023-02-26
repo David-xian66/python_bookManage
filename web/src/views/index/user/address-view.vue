@@ -27,7 +27,7 @@
             </a-popconfirm>
           </div>
           <div class="default-box" v-if="item.default">
-            <img src="@/assets/address-right-icon.svg">
+            <img src="@/assets/images/address-right-icon.svg">
             <span>默认地址</span>
           </div>
         </div>

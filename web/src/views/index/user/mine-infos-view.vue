@@ -1,7 +1,7 @@
 <template>
   <div class="mine-infos-view">
     <div class="info-box flex-view">
-      <img src="@/assets/avatar.jpg" class="avatar-img">
+      <img src="@/assets/images/avatar.jpg" class="avatar-img">
       <div class="name-box">
         <h2 class="nick">{{ $store.state.user.username }}</h2>
         <div class="age">
@@ -34,7 +34,7 @@
       <div class="title">借阅中心</div>
       <div class="list">
         <div class="mine-item flex-view" @click="clickMenu('borrowView')">
-          <img src="@/assets/order-icon.svg">
+          <img src="@/assets/images/order-icon.svg">
           <span>我的借阅</span>
         </div>
 <!--        <div class="mine-item flex-view" @click="clickMenu('orderView')">-->
@@ -42,15 +42,15 @@
 <!--          <span>我的订单</span>-->
 <!--        </div>-->
         <div class="mine-item flex-view" @click="clickMenu('commentView')">
-          <img src="@/assets/order-book-icon.svg">
+          <img src="@/assets/images/order-book-icon.svg">
           <span>我的评论</span>
         </div>
         <div class="mine-item flex-view" @click="clickMenu('addressView')">
-          <img src="@/assets/order-address-icon.svg">
+          <img src="@/assets/images/order-address-icon.svg">
           <span>地址管理</span>
         </div>
         <div class="mine-item flex-view" @click="clickMenu('scoreView')">
-          <img src="@/assets/order-point-icon.svg">
+          <img src="@/assets/images/order-point-icon.svg">
           <span>我的积分</span>
         </div>
       </div>
@@ -59,19 +59,19 @@
       <div class="title">个人设置</div>
       <div class="list">
         <div class="mine-item flex-view" @click="clickMenu('userInfoEditView')">
-          <img src="@/assets/setting-icon.svg" alt="编辑资料">
+          <img src="@/assets/images/setting-icon.svg" alt="编辑资料">
           <span>编辑资料</span>
         </div>
         <div class="mine-item flex-view" @click="clickMenu('securityView')">
-          <img src="@/assets/setting-safe-icon.svg" alt="账号安全">
+          <img src="@/assets/images/setting-safe-icon.svg" alt="账号安全">
           <span>账号安全</span>
         </div>
         <div class="mine-item flex-view" @click="clickMenu('pushView')">
-          <img src="@/assets/setting-push-icon.svg" alt="推送设置">
+          <img src="@/assets/images/setting-push-icon.svg" alt="推送设置">
           <span>推送设置</span>
         </div>
         <div class="mine-item flex-view" @click="clickMenu('messageView')">
-          <img src="@/assets/setting-msg-icon.svg" alt="消息管理">
+          <img src="@/assets/images/setting-msg-icon.svg" alt="消息管理">
           <span>消息管理</span>
         </div>
       </div>

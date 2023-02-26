@@ -1,6 +1,6 @@
 # demo
 
-> A Vue.js project
+> 前端代码，前端风格借鉴了豆瓣、图灵、亚马逊、ant等多种网站风格。
 
 # 学习jsconfig.json
 # 学习vue.config.js

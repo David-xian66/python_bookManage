@@ -1,7 +1,7 @@
 <template>
   <div id="userLayout">
     <div class="user-layout-header">
-      <img class="logo" src="@/assets/front-logo.png" alt="">
+      <img class="logo" src="@/assets/images/front-logo.png" alt="">
       <span>图书后台管理系统</span>
     </div>
     <div class="container">
@@ -147,7 +147,7 @@ export default {
   }
   .container {
     height: calc(100vh - 160px);
-    background-image: url('~@/assets/login.png');
+    background-image: url('~@/assets/images/login.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

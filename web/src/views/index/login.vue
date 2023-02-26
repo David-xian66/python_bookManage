@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="login-page pc-style">
-      <img src="@/assets/front-logo.png" alt="logo" class="logo-icon">
+      <img src="@/assets/images/front-logo.png" alt="logo" class="logo-icon">
       <div class="login-tab">
         <div class="tab-selected">
           <span>邮箱登录</span>
@@ -10,7 +10,7 @@
       </div>
       <div class="mail-login" type="login">
         <div class="common-input">
-          <img src="@/assets/mail-icon.svg" class="left-icon">
+          <img src="@/assets/images/mail-icon.svg" class="left-icon">
           <div class="input-view">
             <input placeholder="请输入注册邮箱" v-model="loginForm.username" type="text" class="input">
             <p class="err-view">
@@ -19,7 +19,7 @@
           <!---->
         </div>
         <div class="common-input">
-          <img src="@/assets/pwd-icon.svg" class="left-icon">
+          <img src="@/assets/images/pwd-icon.svg" class="left-icon">
           <div class="input-view">
             <input placeholder="请输入密码" v-model="loginForm.password" type="password" class="input">
             <p class="err-view">
@@ -86,7 +86,7 @@ div {
 
 .container {
   //background-color: #f1f1f1;
-  background-image: url('~@/assets/login.png');
+  background-image: url('~@/assets/images/login.png');
   height: 100%;
   max-width: 100%;
   display:flex;

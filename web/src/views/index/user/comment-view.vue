@@ -6,7 +6,7 @@
         <a-spin :spinning="loading" style="min-height: 200px;">
           <div class="comment-list">
             <div class="comment-item flex-view" v-for="item in commentData">
-              <img src="@/assets/avatar.jpg" class="avatar">
+              <img src="@/assets/images/avatar.jpg" class="avatar">
               <div class="infos">
                 <div class="name flex-view">
                   <h3></h3>

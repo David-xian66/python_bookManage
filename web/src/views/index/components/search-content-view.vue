@@ -12,7 +12,7 @@
       <div class="book-list">
 
         <div class="books flex-view">
-          <div class="book-item item-column-4" v-for="item in pageData">
+          <div class="book-item item-column-4" v-for="item in pageData" @click="handleDetail(item)">
             <div class="img-view">
               <img :src="item.cover" lazy="loaded">
             </div>
@@ -44,7 +44,7 @@ export default {
 
       page: 1,
       total: 0,
-      pageSize: 2,
+      pageSize: 20,
     }
   },
   watch: {
@@ -68,6 +68,11 @@ export default {
       let start = (this.page - 1) * this.pageSize
       this.pageData = this.bookData.slice(start, start + this.pageSize)
       console.log('第' + this.page + '页')
+    },
+    handleDetail (item) {
+      // 跳转新页面
+      let text = this.$router.resolve({name: 'detail', query: {id: item.id}})
+      window.open(text.href, '_blank')
     },
     getBookList (data) {
       listBookList(data).then(res => {

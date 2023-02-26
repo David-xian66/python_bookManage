@@ -9,7 +9,7 @@
 
       <div class="regist-padding">
         <div class="common-input">
-          <img src="@/assets/mail-icon.svg" class="left-icon">
+          <img src="@/assets/images/mail-icon.svg" class="left-icon">
           <div class="input-view">
             <input placeholder="请输入邮箱" v-model="loginForm.username" type="text" class="input">
             <p class="err-view">
@@ -21,7 +21,7 @@
       </div>
       <div class="regist-padding">
         <div class="common-input">
-          <img src="@/assets/pwd-icon.svg" class="left-icon">
+          <img src="@/assets/images/pwd-icon.svg" class="left-icon">
           <div class="input-view">
             <input placeholder="请输入密码" v-model="loginForm.password" type="password" class="input">
             <p class="err-view">
@@ -33,7 +33,7 @@
       </div>
       <div class="regist-padding">
         <div class="common-input">
-          <img src="@/assets/pwd-icon.svg" class="left-icon">
+          <img src="@/assets/images/pwd-icon.svg" class="left-icon">
           <div class="input-view">
             <input placeholder="请再次输入密码" v-model="loginForm.repassword" type="password" class="input">
             <p class="err-view">
@@ -102,7 +102,7 @@ div {
 .container {
   max-width: 100%;
   //background: #142131;
-  background-image: url('~@/assets/login.png');
+  background-image: url('~@/assets/images/login.png');
   height: 100vh;
   overflow: hidden;
   display:flex;

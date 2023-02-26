@@ -1,17 +1,17 @@
 <template>
   <div class="main-bar-view">
     <div class="logo">
-      <img src="@/assets/front-logo.png" class="search-icon" @click="$router.push({name:'portal'})">
+      <img src="@/assets/images/front-logo.png" class="search-icon" @click="$router.push({name:'portal'})">
     </div>
     <div class="search-entry">
-      <img src="@/assets/search-icon.svg" class="search-icon">
+      <img src="@/assets/images/search-icon.svg" class="search-icon">
       <input placeholder="输入关键词" ref="keyword" @keyup.enter="search" />
     </div>
     <div class="right-view">
       <template v-if="$store.state.user.username">
         <a-dropdown>
           <a class="ant-dropdown-link" @click="e => e.preventDefault()">
-            <img src="@/assets/avatar.jpg" class="self-img" >
+            <img src="@/assets/images/avatar.jpg" class="self-img" >
           </a>
           <a-menu slot="overlay">
             <a-menu-item>
@@ -35,7 +35,7 @@
       </template>
 
       <div class="right-icon" @click="msgVisible=true">
-        <img src="@/assets/message-icon.svg">
+        <img src="@/assets/images/message-icon.svg">
         <span class="msg-point" style=""></span>
       </div>
       <div>
