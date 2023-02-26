@@ -21,7 +21,7 @@
       </a-col>
       <a-col span="24">
         <a-form-model-item label="角色" prop="role">
-          <a-select placeholder="请选择" allowClear v-model="form.role" allowClear>
+          <a-select placeholder="请选择" allowClear v-model="form.role">
             <template v-for="item in roleData">
               <a-select-option :key="item.id" :value="item.id">{{ item.title }}</a-select-option>
             </template>
@@ -114,6 +114,10 @@ export default {
           if (valid) {
             if (this.modifyFlag) {
               // 修改接口
+              if (this.form.avatar) {
+                // 头像不修改
+                delete this.form['avatar']
+              }
               updateApi({
                 id: this.user.id
               }, this.form).then(res => {

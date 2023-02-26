@@ -47,9 +47,6 @@ router.beforeEach((to, from, next) => {
       } else {
         next({ path: loginRoutePath, query: { redirect: to.fullPath } })
       }
-
-      // todo mock
-      // next()
     }
   }
 })
