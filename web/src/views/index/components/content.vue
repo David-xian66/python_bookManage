@@ -1,8 +1,9 @@
 <template>
   <div class="content">
     <div class="content-left">
-      <div class="left-search-item"><h4>图书分类</h4>
-        <a-tree :tree-data="cData" :selected-keys="selectedKeys" @select="onSelect">
+      <div class="left-search-item">
+        <h4>图书分类</h4>
+        <a-tree :tree-data="cData" :selected-keys="selectedKeys" @select="onSelect" style="min-height: 220px;">
         </a-tree>
       </div>
       <!--      <div class="left-search-item"><h4>书籍状态</h4>-->
@@ -40,16 +41,18 @@
           <span :style="{left: tabUnderLeft + 'px'}" class="tab-underline"></span>
         </div>
       </div>
-      <div class="pc-book-list flex-view">
-        <div v-for="item in pageData" :key="item.id" @click="handleDetail(item)" class="book-item item-column-3"><!---->
-          <div class="img-view">
-            <img :src="item.cover"></div>
-          <div class="info-view"><h3 class="book-name">{{ item.title }}</h3>
-            <p class="authors">{{ item.author }}</p>
-            <p class="translators" v-if="item.translator">{{ item.translator }}（译者）</p></div>
+      <a-spin :spinning="loading" style="min-height: 200px;">
+        <div class="pc-book-list flex-view">
+          <div v-for="item in pageData" :key="item.id" @click="handleDetail(item)" class="book-item item-column-3"><!---->
+            <div class="img-view">
+              <img :src="item.cover"></div>
+            <div class="info-view"><h3 class="book-name">{{ item.title }}</h3>
+              <p class="authors">{{ item.author }}</p>
+              <p class="translators" v-if="item.translator">{{ item.translator }}（译者）</p></div>
+          </div>
+          <div v-if="pageData.length <= 0 && !loading" class="no-data" style="">暂无数据</div>
         </div>
-        <div v-if="pageData.length <= 0" class="no-data" style="">暂无数据</div>
-      </div>
+      </a-spin>
       <div class="page-view" style="">
         <a-pagination v-model="page" size="small" @change="changePage" :hideOnSinglePage="true"
                       :defaultPageSize="pageSize" :total="total"/>
@@ -157,7 +160,9 @@ export default {
       console.log('第' + this.page + '页')
     },
     getBookList (data) {
+      this.loading = true
       listBookList(data).then(res => {
+        this.loading = false
         res.data.forEach((item, index) => {
           if (item.cover) {
             item.cover = this.$BASE_URL + item.cover
@@ -169,6 +174,7 @@ export default {
         this.changePage(1)
       }).catch(err => {
         console.log(err)
+        this.loading = false
       })
     }
   }

@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import {listApi, deleteApi} from '@/api/admin/book'
+import {listApi, deleteApi, createApi} from '@/api/admin/book'
 import EditBook from '@/views/admin/model/edit-book'
 
 const columns = [
@@ -180,6 +180,28 @@ export default {
         }
       }
     },
+    // async handleMockAdd () {
+    //    // 模拟新增
+    //   for (let i = 0; i < 30; i++) {
+    //     const desc = '他既到了北京、上海等繁华都市，也抵达了黑龙江朗乡、新疆吐鲁番等疆界边陲。他走到中国大地上，与各种各样的人聊天，在上海人民公园英语角里练习口语的年轻人、想去做进出口生意的学生、刚刚经历过浩劫的知识分子……他用犀利幽默的口吻，一路吐槽不断，但也用冷静、理智的眼光，剖析中国人的性格，发现时代变迁下中国人的生活日常与思想变化。'
+    //     const formData = new FormData()
+    //     formData.append('title', '生活图书' + i)
+    //     formData.append('description', desc)
+    //     formData.append('author', '马丽丽'+i)
+    //     formData.append('translator', '')
+    //     formData.append('isbn', '97875327617' + i)
+    //     formData.append('price', Math.floor(Math.random() * 100).toString())
+    //     formData.append('press', '现代出版社')
+    //     formData.append('layout', '平装')
+    //     formData.append('page_count', Math.floor(Math.random() * 500).toString())
+    //     formData.append('repertory', Math.floor(Math.random() * 100).toString())
+    //     formData.append('status', '0')
+    //     formData.append('pub_date', '2011-09-28')
+    //
+    //     await createApi(formData)
+    //     console.log('finish '+i)
+    //   }
+    // },
     handleAdd () {
       this.$dialog(
         EditBook,

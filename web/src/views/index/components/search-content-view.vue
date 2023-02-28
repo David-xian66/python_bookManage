@@ -11,18 +11,20 @@
     <div class="content-list">
       <div class="book-list">
 
+        <a-spin :spinning="loading" style="min-height: 200px;">
         <div class="books flex-view">
-          <div class="book-item item-column-4" v-for="item in pageData" @click="handleDetail(item)">
-            <div class="img-view">
-              <img :src="item.cover" lazy="loaded">
+            <div class="book-item item-column-4" v-for="item in pageData" @click="handleDetail(item)">
+              <div class="img-view">
+                <img :src="item.cover" lazy="loaded">
+              </div>
+              <div class="info-view">
+                <h3 class="book-name">{{item.title}}</h3>
+                <p class="authors" v-if="item.author">{{item.author}}（作者）</p>
+                <p class="translators" v-if="item.translator">{{item.translator}}（译者）</p>
+              </div>
             </div>
-            <div class="info-view">
-              <h3 class="book-name">{{item.title}}</h3>
-              <p class="authors" v-if="item.author">{{item.author}}（作者）</p>
-              <p class="translators" v-if="item.translator">{{item.translator}}（译者）</p>
-            </div>
-          </div>
         </div>
+        </a-spin>
         <div class="page-view" style="">
           <a-pagination v-model="page" size="small" @change="changePage" :hideOnSinglePage="true" :defaultPageSize="pageSize" :total="total"/>
         </div>
@@ -38,6 +40,7 @@ export default {
   name: 'SearchContentView',
   data () {
     return {
+      loading: false,
       keyword: '',
       bookData: [],
       pageData: [],
@@ -75,6 +78,7 @@ export default {
       window.open(text.href, '_blank')
     },
     getBookList (data) {
+      this.loading = true
       listBookList(data).then(res => {
         res.data.forEach((item, index) => {
           if (item.cover) {
@@ -84,8 +88,10 @@ export default {
         this.bookData = res.data
         this.total = this.bookData.length
         this.changePage(1)
+        this.loading = false
       }).catch(err => {
         console.log(err)
+        this.loading = false
       })
     }
   }

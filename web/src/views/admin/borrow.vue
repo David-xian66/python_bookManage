@@ -2,7 +2,7 @@
   <div class="page-view">
     <div class="table-operation">
       <a-space>
-        <a-button type="primary" @click="handleAdd">模拟借书</a-button>
+<!--        <a-button type="primary" @click="handleAdd">模拟借书</a-button>-->
       </a-space>
     </div>
     <div class="table-wrap" ref="tableWrap">
@@ -127,19 +127,6 @@ export default {
           this.selectedRowKeys = selectedRowKeys
         }
       }
-    },
-    // 模拟新增
-    handleAdd() {
-      createApi({
-        book: '3',
-        user: '17',
-        status: '1',
-        delayed: false
-      }).then(res => {
-        this.getList()
-      }).catch(err => {
-        this.$message.error(err.msg || '新增失败')
-      })
     },
     // 还书
     handleReturn(record) {

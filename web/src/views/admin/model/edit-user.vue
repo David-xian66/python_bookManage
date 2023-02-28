@@ -86,7 +86,9 @@ export default {
       form: {
         username: undefined,
         role: undefined,
-        status: undefined
+        nickname: undefined,
+        email: undefined,
+        mobile: undefined,
       },
       rules: {
         username: [{required: true, message: '请输入用户名', trigger: 'change'}],
