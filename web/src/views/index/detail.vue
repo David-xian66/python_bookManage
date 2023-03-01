@@ -193,7 +193,7 @@
           <div class="recommend" style="">
             <div class="title">热门推荐</div>
             <div class="books">
-              <div class="book-item book-item" v-for="item in recommendData">
+              <div class="book-item book-item" v-for="item in recommendData" @click="handleDetail(item)">
                 <div class="img-view">
                   <img :src="item.cover">
                 </div>
@@ -324,6 +324,11 @@ export default {
       }).catch(err => {
         console.log(err)
       })
+    },
+    handleDetail (item) {
+      // 跳转新页面
+      let text = this.$router.resolve({name: 'detail', query: {id: item.id}})
+      window.open(text.href, '_blank')
     },
     sendComment () {
       let text = this.$refs.comment.value.trim()

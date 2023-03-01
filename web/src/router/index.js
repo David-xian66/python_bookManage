@@ -13,6 +13,10 @@ Vue.use(Router)
 const constantRouterMap = [
   // ************* 前台路由 **************
   {
+    path: '/',
+    redirect: '/index'
+  },
+  {
     path: '/index',
     name: 'index',
     redirect: '/index/portal',
