@@ -1,3 +1,26 @@
+### 部署步骤
+
+1. 安装mysql数据库，启动服务
+2. 打开cmd命令行，进入mysql，并新建数据库
+```
+mysql -u root -p
+CREATE DATABASE IF NOT EXISTS book DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+```
+3. 恢复sql数据
+```
+use book
+source xxxx.sql
+```
+4. 复制资源，将upload文件夹复制到bookproject目录下
+5. 安装python 3.8
+6. 安装依赖包
+```
+pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple
+```
+6运行项目
+```
+python manage.py runserver 0.0.0.0:9001
+```
 
 
 ### 删除数据库
