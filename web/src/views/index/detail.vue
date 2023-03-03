@@ -461,8 +461,6 @@ export default {
       height: 339px;
       display: block;
       margin: 0 auto;
-      -webkit-box-shadow: 0 2px 32px rgb(0 0 0 / 20%);
-      box-shadow: 0 2px 32px rgb(0 0 0 / 20%);
       border: 1px solid #eee;
       border-radius: 4px;
     }
