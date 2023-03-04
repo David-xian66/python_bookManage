@@ -41,37 +41,13 @@ server {
 
 ## 参考链接
 
-https://blog.csdn.net/C_ZhangSir/article/details/100989902
-https://blog.csdn.net/weixin_45748897/article/details/103701003
-https://blog.csdn.net/itzhongzi/article/details/73330681
-https://www.jianshu.com/p/ef348d1c8f2b
-https://juejin.cn/post/7013325675129995272
-http://idea.94goo.com/key
+- https://blog.csdn.net/C_ZhangSir/article/details/100989902
+- https://blog.csdn.net/weixin_45748897/article/details/103701003
+- https://blog.csdn.net/itzhongzi/article/details/73330681
+- https://www.jianshu.com/p/ef348d1c8f2b
+- https://juejin.cn/post/7013325675129995272
+- http://idea.94goo.com/key
 
-#### node
 
-node版本：15.14.0
-node版本切换命令： n x.x.x
 
-## 开发常用命令
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run all tests
-npm test
-```
 

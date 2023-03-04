@@ -17,7 +17,7 @@ source xxxx.sql
 ```
 pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple
 ```
-6运行项目
+运行项目
 ```
 python manage.py runserver 0.0.0.0:9001
 ```
@@ -48,12 +48,11 @@ python manage.py migrate myapp;
 
 django-cors-headers
 
-
-### 多对多
+### 多对多技术参考
 
 https://www.cnblogs.com/SunshineKimi/p/14140900.html
 
-二级分类设计：
+### 二级分类设计
 https://blog.csdn.net/weixin_47971206/article/details/124199978
 
 ### 常见问题
@@ -80,24 +79,6 @@ insert into b_user(username,password,role,status) values('admin111',md5('admin11
 ### 注意
 
 update接口的时候，如果model里面存在多对多字段，则需要设置explode
-
-### 字典设计
-
-```
-角色字典role
-管理员: 1
-普通用户: 2
-演示帐号: 3
-
-认证
-后台认证失败: AUTH_FAIL_END
-前台认证失败: AUTH_FAIL_FRONT
-
-```
-
-### 认证
-
-接口添加 @authentication_classes注解
 
 
 
