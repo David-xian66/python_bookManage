@@ -66,3 +66,27 @@ npm run serve
 
 
 ### 界面预览
+
+首页
+
+![首页](https://gitee.com/geeeeeeeek/book/raw/master/bookproject/upload/img/a.png)
+
+后台首页
+
+![后台首页](https://gitee.com/geeeeeeeek/book/raw/master/bookproject/upload/img/a.png)
+
+后台借阅管理
+
+![后台借阅管理](https://gitee.com/geeeeeeeek/book/raw/master/bookproject/upload/img/a.png)
+
+
+### 问题咨询
+
+微信：lengqin1024
+
+
+### 打赏作者
+
+![](https://gitee.com/geeeeeeeek/book/raw/master/bookproject/upload/img/Wechat.jpeg)
+
+
