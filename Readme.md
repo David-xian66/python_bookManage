@@ -8,6 +8,9 @@
 - 前台功能包括：首页、图书详情页、用户中心模块。
 - 后台功能包括：总览、借阅管理、图书管理、分类管理、标签管理、评论管理、用户管理、运营管理、日志管理、系统信息模块。
 
+### 源码下载
+
+https://github.com/geeeeeeeek/book
 
 ### 演示地址
 
@@ -73,11 +76,11 @@ npm run serve
 
 后台首页
 
-![后台首页](https://gitee.com/geeeeeeeek/book/raw/master/bookproject/upload/img/a.png)
+![后台首页](https://gitee.com/geeeeeeeek/book/raw/master/bookproject/upload/img/b.png)
 
 后台借阅管理
 
-![后台借阅管理](https://gitee.com/geeeeeeeek/book/raw/master/bookproject/upload/img/a.png)
+![后台借阅管理](https://gitee.com/geeeeeeeek/book/raw/master/bookproject/upload/img/c.png)
 
 
 ### 问题咨询
