@@ -21,7 +21,9 @@ pip install -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple
 ```
 python manage.py runserver 0.0.0.0:9001
 ```
+7. 后期维护改动
 
+将修改的py文件覆盖服务器的py文件即可，重启django
 
 ### 删除数据库
 
