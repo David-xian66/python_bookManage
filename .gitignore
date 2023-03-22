@@ -6,3 +6,5 @@
 /web/node_modules
 /bookproject/.idea/
 /.idea/
+.DS_Store
+bookproject/.DS_Store
