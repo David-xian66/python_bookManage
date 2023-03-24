@@ -1,3 +1,7 @@
+### 作者微信（lengqin1024）
+
+![](https://raw.githubusercontent.com/geeeeeeeek/book/master/bookproject/upload/img/weixin.png)
+
 
 ### 功能介绍
 
@@ -72,15 +76,15 @@ npm run serve
 
 首页
 
-![首页](https://gitee.com/geeeeeeeek/book/raw/master/bookproject/upload/img/a.png)
+![首页](https://raw.githubusercontent.com/geeeeeeeek/book/master/bookproject/upload/img/a.png)
 
 后台首页
 
-![后台首页](https://gitee.com/geeeeeeeek/book/raw/master/bookproject/upload/img/b.png)
+![后台首页](https://raw.githubusercontent.com/geeeeeeeek/book/master/bookproject/upload/img/b.png)
 
 后台借阅管理
 
-![后台借阅管理](https://gitee.com/geeeeeeeek/book/raw/master/bookproject/upload/img/c.png)
+![后台借阅管理](https://raw.githubusercontent.com/geeeeeeeek/book/master/bookproject/upload/img/c.png)
 
 
 ### 待完善功能
@@ -89,13 +93,10 @@ npm run serve
 - 手机号绑定功能
 - 粉丝关注功能
 
-### 问题咨询
-
-微信：lengqin1024
 
 
 ### 打赏作者
 
-![](https://gitee.com/geeeeeeeek/book/raw/master/bookproject/upload/img/Wechat.jpeg)
+![](https://raw.githubusercontent.com/geeeeeeeek/book/master/bookproject/upload/img/Wechat.jpeg)
 
 
