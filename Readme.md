@@ -1,6 +1,3 @@
-### 作者微信（lengqin1024）
-
-![](https://raw.githubusercontent.com/geeeeeeeek/book/master/bookproject/upload/img/weixin.png)
 
 
 ### 功能介绍
@@ -93,7 +90,9 @@ npm run serve
 - 手机号绑定功能
 - 粉丝关注功能
 
+### 问题咨询
 
+微信：lengqin1024
 
 ### 打赏作者
 
