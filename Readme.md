@@ -90,12 +90,9 @@ npm run serve
 - 手机号绑定功能
 - 粉丝关注功能
 
-### 问题咨询
+### 付费咨询
 
 微信：lengqin1024
 
-### 打赏作者
-
-![](https://raw.githubusercontent.com/geeeeeeeek/book/master/bookproject/upload/img/Wechat.jpeg)
 
 
