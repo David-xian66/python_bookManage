@@ -63,10 +63,6 @@ export default {
           title: '总览'
         },
         {
-          key: '/admin/borrow',
-          title: '借阅管理'
-        },
-        {
           key: '/admin/book',
           title: '图书管理'
         },
@@ -79,52 +75,8 @@ export default {
           title: '标签管理'
         },
         {
-          key: '/admin/comment',
-          title: '评论管理'
-        },
-        {
           key: '/admin/user',
           title: '用户管理'
-        },
-        {
-          key: '/admin/banner',
-          title: '运营管理',
-          children: [
-            {
-              key: '/admin/banner',
-              title: '横幅管理'
-            },
-            {
-              key: '/admin/ad',
-              title: '广告管理'
-            },
-            {
-              key: '/admin/notice',
-              title: '通知公告'
-            }
-          ]
-        },
-        {
-          key: '/admin/loginLog',
-          title: '日志管理',
-          children: [
-            {
-              key: '/admin/loginLog',
-              title: '登录日志'
-            },
-            {
-              key: '/admin/opLog',
-              title: '操作日志'
-            },
-            {
-              key: '/admin/errorLog',
-              title: '异常日志'
-            }
-          ]
-        },
-        {
-          key: '/admin/sysInfo',
-          title: '系统信息'
         }
       ]
     }

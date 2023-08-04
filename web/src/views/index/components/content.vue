@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="content-right">
-      <div class="top-select-view flex-view">
+      <!-- <div class="top-select-view flex-view">
         <div class="order-view">
           <span class="title"></span>
           <span class="tab"
@@ -40,7 +40,7 @@
           </span>
           <span :style="{left: tabUnderLeft + 'px'}" class="tab-underline"></span>
         </div>
-      </div>
+      </div> -->
       <a-spin :spinning="loading" style="min-height: 200px;">
         <div class="pc-book-list flex-view">
           <div v-for="item in pageData" :key="item.id" @click="handleDetail(item)" class="book-item item-column-3"><!---->
@@ -79,7 +79,7 @@ export default {
       tagData: [],
       loading: false,
 
-      tabData: ['最新', '最热', '推荐'],
+      // tabData: ['最新', '最热', '推荐'],
       selectTabIndex: 0,
       tabUnderLeft: 12,
 

@@ -4,15 +4,15 @@
 import axios from '@/utils/request.js'
 
 const api = {
-  listApi: '/myapp/index/book/list',
-  detailApi: '/myapp/index/book/detail',
-  addWishUserApi: '/myapp/index/book/addWishUser',
-  removeWishUserApi: '/myapp/index/book/removeWishUser',
-  getWishBookListApi: '/myapp/index/book/getWishBookList',
-  addCollectUserApi: '/myapp/index/book/addCollectUser',
-  removeCollectUserApi: '/myapp/index/book/removeCollectUser',
-  getCollectBookListApi: '/myapp/index/book/getCollectBookList',
-  // increaseRecommendCountApi: '/myapp/index/book/increaseRecommendCount',
+  listApi: '/api/index/book/list',
+  detailApi: '/api/index/book/detail',
+  addWishUserApi: '/api/index/book/addWishUser',
+  removeWishUserApi: '/api/index/book/removeWishUser',
+  getWishBookListApi: '/api/index/book/getWishBookList',
+  addCollectUserApi: '/api/index/book/addCollectUser',
+  removeCollectUserApi: '/api/index/book/removeCollectUser',
+  getCollectBookListApi: '/api/index/book/getCollectBookList',
+  // increaseRecommendCountApi: '/api/index/book/increaseRecommendCount',
 }
 
 /**

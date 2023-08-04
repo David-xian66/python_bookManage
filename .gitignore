@@ -8,3 +8,6 @@
 /.idea/
 .DS_Store
 bookproject/.DS_Store
+__pycache__
+/venv
+/Front/node_modules

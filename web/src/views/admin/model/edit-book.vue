@@ -158,8 +158,6 @@ export default {
       rules: {
         title: [{ required: true, message: '请输入书名', trigger: 'change' }],
         classification: [{ required: true, message: '请选择分类', trigger: 'change' }],
-        page_count: [{ required: true, message: '请输入页数', trigger: 'change' }],
-        repertory: [{ required: true, message: '请输入库存', trigger: 'change' }]
       },
       cData: [],
       tagData: []

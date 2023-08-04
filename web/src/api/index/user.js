@@ -4,11 +4,11 @@
 import axios from '@/utils/request.js'
 
 const api = {
-  registerApi: '/myapp/index/user/register',
-  loginApi: '/myapp/index/user/login',
-  infoApi: '/myapp/index/user/info',
-  updateApi: '/myapp/index/user/update',
-  updatePwdApi: '/myapp/index/user/updatePwd',
+  registerApi: '/api/index/user/register',
+  loginApi: '/api/index/user/login',
+  infoApi: '/api/index/user/info',
+  updateApi: '/api/index/user/update',
+  updatePwdApi: '/api/index/user/updatePwd',
 }
 
 export const registerApi = function (data) {

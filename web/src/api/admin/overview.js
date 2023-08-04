@@ -4,8 +4,8 @@
 import axios from '@/utils/request.js'
 
 const api = {
-  listApi: '/myapp/admin/overview/count',
-  sysInfoApi: '/myapp/admin/overview/sysInfo'
+  listApi: '/api/admin/overview/count',
+  sysInfoApi: '/api/admin/overview/sysInfo'
 }
 
 /**

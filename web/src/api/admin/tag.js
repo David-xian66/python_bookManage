@@ -4,10 +4,10 @@
 import axios from '@/utils/request.js'
 
 const api = {
-  listApi: '/myapp/admin/tag/list',
-  createApi: '/myapp/admin/tag/create',
-  deleteApi: '/myapp/admin/tag/delete',
-  updateApi: '/myapp/admin/tag/update'
+  listApi: '/api/admin/tag/list',
+  createApi: '/api/admin/tag/create',
+  deleteApi: '/api/admin/tag/delete',
+  updateApi: '/api/admin/tag/update'
 }
 
 /**

@@ -11,14 +11,14 @@
                 <span class="box-value">{{ data.book_count }}<span class="v-e">本</span></span>
                 <a-icon type="profile" theme="twoTone" style="font-size: 24px;"/>
               </div>
-              <div class="box-bottom">
+              <div class="box-bottom hide">
                 <span>本周新增 {{ data.book_week_count }} 本</span>
               </div>
             </div>
           </a-card>
         </a-col>
 
-        <a-col :sm="24" :md="12" :lg="6">
+        <a-col :sm="24" :md="12" :lg="6" class="hide">
           <a-card size="small" title="在借书籍">
             <a-tag color="green" slot="extra">借</a-tag>
             <div class="box">
@@ -33,7 +33,7 @@
           </a-card>
         </a-col>
 
-        <a-col :sm="24" :md="12" :lg="6">
+        <a-col :sm="24" :md="12" :lg="6" class="hide">
           <a-card size="small" title="已还书籍">
             <a-tag color="blue" slot="extra">还</a-tag>
             <div class="box">
@@ -48,7 +48,7 @@
           </a-card>
         </a-col>
 
-        <a-col :sm="24" :md="12" :lg="6">
+        <a-col :sm="24" :md="12" :lg="6" class="hide">
           <a-card size="small" title="逾期未还">
             <a-tag color="green" slot="extra">逾</a-tag>
 
@@ -65,11 +65,11 @@
         </a-col>
       </a-row>
 
-      <a-card title="最近一周访问量">
+      <a-card title="最近一周访问量" class="hide">
         <div style="height: 300px;" ref="visitChart"></div>
       </a-card>
 
-      <a-row :gutter="[20,20]">
+      <a-row :gutter="[20,20]" class="hide">
         <a-col :sm="24" :md="24" :lg="12">
           <a-card title="热门借阅排名" style="flex:1;">
             <div style="height: 300px;" ref="barChart"></div>
@@ -373,6 +373,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
+.hide {
+  // 隐藏
+  display:none !important;
+}
+
 
 .main {
   height: 100%;

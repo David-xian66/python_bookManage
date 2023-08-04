@@ -1,0 +1,33 @@
+{
+    "BookID": 18,
+    "Class": [
+        {
+            "children": [],
+            "isParent": true,
+            "key": 12,
+            "name": "112",
+            "title": "112"
+        },
+        {
+            "children": [],
+            "isParent": true,
+            "key": 13,
+            "name": "133",
+            "title": "133"
+        }
+    ],
+    "ClassID": 13,
+    "Tag": [
+        {
+            "create_time": "2023-07-12 20:09:47",
+            "id": 4,
+            "title": "1111111"
+        },
+        {
+            "create_time": "2023-07-12 20:09:51",
+            "id": 5,
+            "title": "22222222"
+        }
+    ],
+    "TagID": 5
+}

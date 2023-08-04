@@ -4,13 +4,13 @@
 import axios from '@/utils/request.js'
 
 const api = {
-  adminLogin: '/myapp/admin/adminLogin',
-  listApi: '/myapp/admin/user/list',
-  createApi: '/myapp/admin/user/create',
-  deleteApi: '/myapp/admin/user/delete',
-  updateApi: '/myapp/admin/user/update',
-  updatePwdApi: '/myapp/admin/user/updatePwd',
-  infoApi: '/myapp/admin/user/info'
+  adminLogin: '/api/admin/adminLogin',
+  listApi: '/api/admin/user/list',
+  createApi: '/api/admin/user/create',
+  deleteApi: '/api/admin/user/delete',
+  updateApi: '/api/admin/user/update',
+  updatePwdApi: '/api/admin/user/updatePwd',
+  infoApi: '/api/admin/user/info'
 }
 
 /**

@@ -13,7 +13,7 @@
               <div class="book-info-box">
                 <div class="book-state">
                   <span class="state hidden-sm">书籍状态</span>
-                  <span>可借</span>
+                  <span>正常</span>
                 </div>
                 <h1 class="book-name">{{ detailData.title }}</h1>
                 <div class="authors flex-view">
@@ -31,7 +31,7 @@
               </div>
             </div>
             <div class="book-counts hidden-sm">
-              <div class="count-item flex-view pointer" @click="addToWish()">
+              <!-- <div class="count-item flex-view pointer" @click="addToWish()">
                 <div class="count-img">
                   <img src="@/assets/images/want-read-hover.svg">
                 </div>
@@ -43,7 +43,7 @@
                     <span class="num-text">{{ detailData.wish_count }}</span>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="count-item flex-view pointer" @click="collect()">
                 <div class="count-img">
                   <img src="@/assets/images/recommend-hover.svg">
@@ -70,7 +70,7 @@
               <!--                  </div>-->
               <!--                </div>-->
               <!--              </div>-->
-              <div class="count-item flex-view" @click="share()">
+              <!-- <div class="count-item flex-view" @click="share()">
                 <div class="count-img">
                   <img src="@/assets/images/share-icon.svg">
                 </div>
@@ -83,47 +83,7 @@
                     <img src="@/assets/images/wb-share.svg" class="mg-l">
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div data-v-04e3a7b4="" class="buy-way hidden-sm">
-            <div class="title">借阅区域</div>
-            <div class="flex-view">
-              <div class="buy-way-item" style="">
-                <div class="name">
-                  <span>库存：{{detailData.repertory}}</span>
-                </div>
-                <div class="price">
-                  <!--                  <span  class="price-text">¥ 34.9</span>-->
-                  <!---->
-                  <a-popconfirm
-                    title="确定借阅？"
-                    ok-text="是"
-                    cancel-text="否"
-                    @confirm="handleBorrow(detailData)"
-                  >
-                    <button class="buy-btn">
-                        <img src="@/assets/images/add.svg" />
-                        <span>借阅</span>
-                    </button>
-
-                  </a-popconfirm>
-                </div>
-              </div>
-              <!--              <div  class="buy-way-item" style="">-->
-              <!--                <div  class="name">-->
-              <!--                  <span >电子书</span>-->
-              <!--                </div>-->
-              <!--                <div  class="price">-->
-              <!--                  <span  class="price-text">¥ 34.9</span>-->
-              <!--                  &lt;!&ndash;&ndash;&gt;-->
-              <!--                  <button  class="buy-btn">-->
-              <!--                    <img  src="@/assets/add.svg">-->
-              <!--                    <span >购书袋</span>-->
-              <!--                  </button>-->
-              <!--                </div>-->
-              <!--              </div>-->
+              </div> -->
             </div>
           </div>
         </div>
@@ -147,50 +107,8 @@
               <p class="text" style="">{{ detailData.description }}</p>
             </div>
 
-            <!--评论-->
-            <div class="book-comment" :class="selectTabIndex > 0? '':'hide'">
-              <div class="title">发表新的评论</div>
-              <div class="publish flex-view">
-                <img src="@/assets/images/avatar.jpg" class="mine-img">
-                <input placeholder="说点什么..." class="content-input" ref="comment">
-                <button class="send-btn" @click="sendComment()">发送</button>
-              </div>
-              <div class="tab-view flex-view">
-                <div class="count-text">共有{{ commentData.length }}条评论</div>
-                <div class="tab-box flex-view" v-if="commentData.length > 0">
-                  <span :class="sortIndex === 0? 'tab-select': ''" @click="sortCommentList('recent')">最新</span>
-                  <div class="line"></div>
-                  <span :class="sortIndex === 1? 'tab-select': ''" @click="sortCommentList('hot')">热门</span>
-                </div>
-              </div>
-              <div class="comments-list">
-                <div class="comment-item" v-for="item in commentData">
-                  <div class="flex-item flex-view">
-                    <img src="@/assets/images/avatar.jpg" class="avator">
-                    <div class="person">
-                      <div class="name">{{ item.username }}</div>
-                      <div class="time">{{ item.comment_time }}</div>
-                    </div>
-                    <div class="float-right">
-                      <span @click="like(item.id)">推荐</span>
-                      <span class="num">{{ item.like_count }}</span>
-                    </div>
-                  </div>
-                  <p class="comment-content">{{ item.content }}</p>
-                </div>
-                <div class="infinite-loading-container">
-                  <div class="infinite-status-prompt" style="">
-                    <div slot="no-results" class="no-results">
-                      <div></div>
-                      <p>没有更多了</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
           </div>
-          <div class="recommend" style="">
+          <!-- <div class="recommend" style="">
             <div class="title">热门推荐</div>
             <div class="books">
               <div class="book-item book-item" v-for="item in recommendData" @click="handleDetail(item)">
@@ -204,7 +122,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -234,7 +152,7 @@ export default {
       bookId: '',
       detailData: undefined,
       tabUnderLeft: 6,
-      tabData: ['简介', '评论'],
+      tabData: ['简介'],
       selectTabIndex: 0,
       commentData: [],
       recommendData: [],

@@ -83,16 +83,6 @@ const columns = [
     key: 'press'
   },
   {
-    title: '页数',
-    dataIndex: 'page_count',
-    key: 'page_count'
-  },
-  {
-    title: '价格',
-    dataIndex: 'price',
-    key: 'price'
-  },
-  {
     title: 'ISBN',
     dataIndex: 'isbn',
     key: 'isbn'
@@ -107,11 +97,6 @@ const columns = [
     dataIndex: 'status',
     key: 'status',
     customRender: (text) => text === '0' ? '上架' : '下架'
-  },
-  {
-    title: '库存',
-    dataIndex: 'repertory',
-    key: 'repertory'
   },
   {
     title: '装饰',

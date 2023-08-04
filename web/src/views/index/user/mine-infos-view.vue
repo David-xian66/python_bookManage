@@ -22,37 +22,6 @@
           <div class="text">心愿单</div>
           <div class="num">{{wishCount}}</div>
         </div>
-<!--        <div class="split-line">-->
-<!--        </div>-->
-<!--        <div class="points-box flex-item">-->
-<!--          <div class="text">积分</div>-->
-<!--          <div class="num">0</div>-->
-<!--        </div>-->
-      </div>
-    </div>
-    <div class="order-box">
-      <div class="title">借阅中心</div>
-      <div class="list">
-        <div class="mine-item flex-view" @click="clickMenu('borrowView')">
-          <img src="@/assets/images/order-icon.svg">
-          <span>我的借阅</span>
-        </div>
-<!--        <div class="mine-item flex-view" @click="clickMenu('orderView')">-->
-<!--          <img src="@/assets/order-icon.svg">-->
-<!--          <span>我的订单</span>-->
-<!--        </div>-->
-        <div class="mine-item flex-view" @click="clickMenu('commentView')">
-          <img src="@/assets/images/order-book-icon.svg">
-          <span>我的评论</span>
-        </div>
-        <div class="mine-item flex-view" @click="clickMenu('addressView')">
-          <img src="@/assets/images/order-address-icon.svg">
-          <span>地址管理</span>
-        </div>
-        <div class="mine-item flex-view" @click="clickMenu('scoreView')">
-          <img src="@/assets/images/order-point-icon.svg">
-          <span>我的积分</span>
-        </div>
       </div>
     </div>
     <div class="setting-box">

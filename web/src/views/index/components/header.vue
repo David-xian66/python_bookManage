@@ -34,10 +34,10 @@
         <button class="login btn hidden-sm" @click="goLogin()">登录</button>
       </template>
 
-      <div class="right-icon" @click="msgVisible=true">
+      <!-- <div class="right-icon" @click="msgVisible=true">
         <img src="@/assets/images/message-icon.svg">
         <span class="msg-point" style=""></span>
-      </div>
+      </div> -->
       <div>
         <a-drawer
           title="我的消息"

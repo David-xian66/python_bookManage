@@ -4,7 +4,7 @@
 import axios from '@/utils/request.js'
 
 const api = {
-  listApi: '/myapp/index/tag/list'
+  listApi: '/api/index/tag/list'
 }
 
 /**
